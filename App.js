@@ -1,20 +1,77 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+import { GlobalStyles } from './styles/styles';
+import {useFonts} from 'expo-font'; 
+import AppLoading from 'expo-app-loading';
+
+import Home from './screens/Home'; 
+import SignUpForm from './screens/SignUpForm';
+import LoginForm from './screens/LoginForm';
+import { StyleSheet, View } from 'react-native';
+
+const Stack = createNativeStackNavigator();
+const BottomTabs = createBottomTabNavigator(); 
 
 export default function App() {
+ const [fontsLoaded] = useFonts({
+    'K2D-Regular': require('./assets/fonts/K2D-Regular.ttf'),
+    'K2D-Bold': require('./assets/fonts/K2D-Bold.ttf'), 
+  }); 
+
+  if(!fontsLoaded) {
+    return <AppLoading/>
+  }
+   
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <>
+    <View style={styles.rootBackground}>
       <StatusBar style="auto" />
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: { backgroundColor: GlobalStyles.colors.primary500 },
+            headerTintColor: "white",
+            headerTitleAlign:'center'
+          }}
+        >
+          <Stack.Screen
+            name="Home"
+            component={Home}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="SignUp"
+            component={SignUpForm}
+            options={{
+              title: "Get Started",
+            }}
+          />
+          <Stack.Screen
+            name="Login"
+            component={LoginForm}
+            options={{
+              headerShown: false,
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+
     </View>
+    </>
   );
+    
+  
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  rootBackground: {
+    flex:1,
+    backgroundColor: "#353948",
   },
 });
+
