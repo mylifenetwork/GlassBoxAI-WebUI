@@ -1,10 +1,13 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Alert } from "react-native";
 import { useState } from "react";
 import RadioButton from "../UI/RadioButton";
 import Input from "./Input";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import Button from "../UI/Button";
 
-function SignUpUserForm() {
+import SignUpFormValidation from "../../util/SignUpFormValidation";
+
+function SignUpUserForm({ signUpOTPAuth }) {
   const [userName, setUserName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
@@ -13,6 +16,48 @@ function SignUpUserForm() {
   const [privateUser, setPrivateUser] = useState(false);
   const [commercialOwner, setCommercialOwner] = useState(false);
   const [commercialDriver, setCommercialDriver] = useState(false);
+
+  function signUpFormSubmissionHandler() {
+    const userData = {
+      name: userName,
+      phoneNumber: phoneNumber,
+      email: email,
+      vehicleLicense: vehicleLicense,
+      role: checkUserRole(),
+    };
+
+    const formInputsAreValid = SignUpFormValidation(userData);
+
+    if (!formInputsAreValid) {
+      Alert.alert("Inavlid Inputs", "Please check your inputs");
+      return;
+    }
+
+    resetInputs();
+    signUpOTPAuth();
+  }
+
+  function resetInputs() {
+    setUserName('');
+    setPhoneNumber('');
+    setEmail('');
+    setvehicleLicense('');
+    setPrivateUser(false);
+    setCommercialDriver(false);
+    setCommercialOwner(false);
+  }
+
+  function checkUserRole() {
+    if (privateUser) {
+      return "Private";
+    } else {
+      if (commercialDriver) {
+        return "Commercial Driver";
+      } else {
+        return "Commercial Owner";
+      }
+    }
+  }
 
   function privateOwnerbutton() {
     setPrivateUser(true);
@@ -102,12 +147,25 @@ function SignUpUserForm() {
         <View style={styles.container}>
           <Text style={styles.roleContainer}>Select your role</Text>
           <View style={styles.buttonContainers}>
-            <RadioButton checkOption={privateUser} onPress={privateOwnerbutton} title="Private" />
-            <RadioButton checkOption={commercialDriver} onPress={commercialDriverButton} title="Commercial Driver" />
-            <RadioButton checkOption={commercialOwner} onPress={commercialOwnerButton} title="Commercial Owner" />
+            <RadioButton
+              checkOption={privateUser}
+              onPress={privateOwnerbutton}
+              title="Private"
+            />
+            <RadioButton
+              checkOption={commercialDriver}
+              onPress={commercialDriverButton}
+              title="Commercial Driver"
+            />
+            <RadioButton
+              checkOption={commercialOwner}
+              onPress={commercialOwnerButton}
+              title="Commercial Owner"
+            />
           </View>
         </View>
       </View>
+      <Button onPress={signUpFormSubmissionHandler}>Next</Button>
     </KeyboardAwareScrollView>
   );
 }

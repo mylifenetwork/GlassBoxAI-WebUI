@@ -2,7 +2,14 @@ import { StatusBar, StyleSheet, Text, View } from "react-native";
 import SignUpUserForm from "../components/ManageUsers/SignUpUserForm";
 import { GlobalStyles } from "../styles/styles";
 
-function SignUpForm() {
+function SignUpForm({navigation}) {
+
+    function signUpOTPAuthHandler() {
+        navigation.navigate("signUp-OTP-Auth");
+
+    }
+
+
   return (
     <>
       <StatusBar barStyle="light-content" />
@@ -18,7 +25,7 @@ function SignUpForm() {
         
         <View style={styles.form}>
           {/* <Text style={styles.formInfo}>User Information</Text> */}
-          <SignUpUserForm/>
+          <SignUpUserForm signUpOTPAuth={signUpOTPAuthHandler}/>
         </View>
       </View>
     </>
