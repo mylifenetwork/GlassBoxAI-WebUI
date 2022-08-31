@@ -2,11 +2,31 @@ import { StatusBar, StyleSheet, Text, View, TextInput, Pressable, Keyboard } fro
 import { GlobalStyles } from "../styles/styles";
 import {useState, useRef, useEffect} from 'react'
 import OTPInputField from "../components/OTPInput.js/OTPInputField";
+import Button from "../components/UI/Button";
+import { storeUser } from "../http/http";
 
-function SignUpOTPAuthScreen({ navigation }) {
+function SignUpOTPAuthScreen({route, navigation }) {
 const [code, setCode] = useState("");
 const [pinReady, setPinReady] = useState(false);
 const MAX_CODE_LENGTH = 4;
+
+
+// this function will authenticate OTP that is generated from the backend 
+function authenticateOTP() {
+  console.log('Code authenticated');
+
+}; 
+
+
+// function for addijng a new user to the database. 
+function addNewUserHandler() {
+  // if authentication is successful then add the user to the database 
+  authenticateOTP(); 
+  console.log(route.params);
+  storeUser(route.params);
+  
+
+}
 
  
   return (
@@ -30,6 +50,8 @@ const MAX_CODE_LENGTH = 4;
             />
           
         </Pressable>
+
+        <Button onPress={addNewUserHandler} customStyle={styles.buttonStyle}>Done</Button>
       </View>
     </>
   );
@@ -101,4 +123,9 @@ const styles = StyleSheet.create({
     fontSize: 28,
     textAlign: "center",
   },
+
+  buttonStyle: {
+    width:100, 
+    height:40,
+  }
 });

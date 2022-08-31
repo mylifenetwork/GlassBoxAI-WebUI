@@ -4,8 +4,8 @@ import { GlobalStyles } from "../styles/styles";
 
 function SignUpForm({navigation}) {
 
-    function signUpOTPAuthHandler() {
-        navigation.navigate("signUp-OTP-Auth");
+    function signUpOTPAuthHandler(userData) {
+        navigation.navigate("signUp-OTP-Auth", userData);
 
     }
 

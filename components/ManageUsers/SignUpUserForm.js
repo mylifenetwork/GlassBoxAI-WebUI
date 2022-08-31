@@ -34,7 +34,7 @@ function SignUpUserForm({ signUpOTPAuth }) {
     }
 
     resetInputs();
-    signUpOTPAuth();
+    signUpOTPAuth(userData);
   }
 
   function resetInputs() {
