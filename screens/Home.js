@@ -9,6 +9,7 @@ function Home({ navigation }) {
 
   function showLoginFormHandler() {
     navigation.navigate("Login");
+    //navigation.navigate("Overall");
   }
 
   return (

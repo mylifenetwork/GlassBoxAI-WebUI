@@ -11,6 +11,7 @@ import Home from "./screens/Home";
 import SignUpForm from "./screens/SignUpForm";
 import LoginForm from "./screens/LoginForm";
 import SignUpOTPAuth from "./screens/SignUpOTPAuthScreen";
+import OverallPage from "./screens/OverallPage";
 import { StyleSheet, View } from "react-native";
 
 const Stack = createNativeStackNavigator();
@@ -64,6 +65,13 @@ export default function App() {
               component={SignUpOTPAuth}
               options={{
                 title: "Get Started",
+              }}
+            />
+            <Stack.Screen
+              name="Overall"
+              component={OverallPage}
+              options={{
+                title:"Overall score",
               }}
             />
           </Stack.Navigator>
