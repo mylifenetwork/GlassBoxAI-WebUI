@@ -1,8 +1,25 @@
 import { StatusBar, StyleSheet, Text, View,Image,TouchableOpacity } from "react-native";
 import Button from "../components/UI/Button";
 import { GlobalStyles } from "../styles/styles";
+import Donut from "../components/UI/Donut";
+
+import {
+  LineChart,
+  BarChart,
+  PieChart,
+  ProgressChart,
+  ContributionGraph,
+  StackedBarChart
+} from "react-native-chart-kit";
+import { ScrollableComponent } from "react-native-keyboard-aware-scroll-view";
 
 function OverallPage({navigation}) {
+
+  const data = [{
+    percentage: 80,
+    color: 'tomato',
+    max: 100
+  }]
   
 
   function showOverallPageHandler() {
@@ -23,23 +40,25 @@ function OverallPage({navigation}) {
 
       <View style={styles.container}>
         <View style={styles.formHeader}>
+        <View style={styles.chart}>
+        {data.map((p, i) => {
+          return <Donut key={i} percentage={p.percentage} color={p.color} max={p.max}/>
+        })}
+      </View>
         </View>
 
       <View style={styles.footerContainer}>
-
-      <View style={styles.buttonContainer}>
-      <TouchableOpacity style={styles.homeContainer}  onPress={showOverallPageHandler} >
-        <Image source={require("../assets/home.png")}/>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.homeContainer} onPress={showOverallPageHandler} >
-        <Image source={require("../assets/journey1.png")}/>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.homeContainer} onPress={showOverallPageHandler} >
-        <Image source={require("../assets/user1.png")}/>
-        </TouchableOpacity>
-        
-      </View>
-
+        <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.homeContainer}  onPress={showOverallPageHandler} >
+          <Image source={require("../assets/home.png")}/>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.homeContainer} onPress={showOverallPageHandler} >
+          <Image source={require("../assets/journey1.png")}/>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.homeContainer} onPress={showOverallPageHandler} >
+          <Image source={require("../assets/user1.png")}/>
+          </TouchableOpacity> 
+        </View>
       </View>
         
 
@@ -113,4 +132,10 @@ const styles = StyleSheet.create({
     color: "white",
     fontFamily: "K2D-Regular",
   },
+  chart:{
+    flexDirection: 'row', 
+    justifyContent: 'space-evenly', 
+    flexWrap: 'wrap', 
+    alignItems: 'center',   
+  }
 });
