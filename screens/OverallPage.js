@@ -39,13 +39,39 @@ function OverallPage({navigation}) {
       <StatusBar barStyle="light-content" />
 
       <View style={styles.container}>
-        <View style={styles.formHeader}>
+        {/* <View style={styles.formHeader}> */}
+        
         <View style={styles.chart}>
         {data.map((p, i) => {
           return <Donut key={i} percentage={p.percentage} color={p.color} max={p.max}/>
         })}
-      </View>
         </View>
+
+        <View>
+          <Text style={styles.text}>Current Location</Text>
+          <Text style={styles.location}>2km Wah · Chai Car Park</Text>
+        </View>
+
+        <View>
+        <Text style={styles.text}>Total journey: 10</Text>
+        </View>
+
+        <View style={styles.signContainer}>
+          <View>
+            <Image
+              style={styles.imageContainer}
+              source={require("../assets/Images/time-left.png")}
+            />
+          </View>
+          <View>
+            <Image
+              style={styles.imageContainer}
+              source={require("../assets/Images/time-left.png")}
+            />
+          </View>
+        </View>
+
+        {/* </View> */}
 
       <View style={styles.footerContainer}>
         <View style={styles.buttonContainer}>
@@ -129,8 +155,34 @@ const styles = StyleSheet.create({
   },
 
   text: {
+    flexDirection: 'row', 
     color: "white",
     fontFamily: "K2D-Regular",
+    textAlign:"left",
+    marginLeft:"5%",
+    marginTop:"5%",
+    fontWeight:"700",
+    fontSize:18,
+  },
+  location: {
+    flexDirection: 'row', 
+    color: "white",
+    fontFamily: "K2D-Regular",
+    textAlign:"left",
+    marginLeft:"5%",
+    fontSize:14,
+  },
+  signContainer:{
+    felx: 1,
+    flexDirection: "row",
+    justifyContent: 'space-between',
+    alignItems: "center",
+  },
+  imageContainer:{
+    felx: 0.4,
+    flexDirection: "row",
+    justifyContent: 'space-between',
+    alignItems: "center",
   },
   chart:{
     flexDirection: 'row', 

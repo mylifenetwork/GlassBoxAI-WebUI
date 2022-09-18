@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
   scores:{
     textAlign:'center',
     color:'white',
-    fontFamily: 'K2D',
+    fontFamily: "K2D-Regular",
     fontWeight:'700',
   },
 });
