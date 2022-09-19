@@ -1,6 +1,8 @@
 import { StatusBar, StyleSheet, Text, View,Image,TouchableOpacity } from "react-native";
 import Button from "../components/UI/Button";
 import { GlobalStyles } from "../styles/styles";
+import TotalTime from "../components/UI/TotalTime";
+import LastJourney from "../components/UI/LastJourney";
 import Donut from "../components/UI/Donut";
 
 import {
@@ -39,39 +41,26 @@ function OverallPage({navigation}) {
       <StatusBar barStyle="light-content" />
 
       <View style={styles.container}>
-        {/* <View style={styles.formHeader}> */}
+        <View style={styles.formHeader}>
         
         <View style={styles.chart}>
         {data.map((p, i) => {
           return <Donut key={i} percentage={p.percentage} color={p.color} max={p.max}/>
         })}
         </View>
+        </View>
 
-        <View>
+        <View style={styles.form}>
           <Text style={styles.text}>Current Location</Text>
           <Text style={styles.location}>2km Wah · Chai Car Park</Text>
-        </View>
-
-        <View>
-        <Text style={styles.text}>Total journey: 10</Text>
-        </View>
-
-        <View style={styles.signContainer}>
           <View>
-            <Image
-              style={styles.imageContainer}
-              source={require("../assets/Images/time-left.png")}
-            />
+            <Text style={styles.text}>Total journey: 10</Text>
+            <TotalTime></TotalTime>
+            <LastJourney></LastJourney>
           </View>
-          <View>
-            <Image
-              style={styles.imageContainer}
-              source={require("../assets/Images/time-left.png")}
-            />
-          </View>
-        </View>
 
-        {/* </View> */}
+
+        </View>
 
       <View style={styles.footerContainer}>
         <View style={styles.buttonContainer}>
@@ -158,9 +147,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row', 
     color: "white",
     fontFamily: "K2D-Regular",
-    textAlign:"left",
-    marginLeft:"5%",
-    marginTop:"5%",
+    // textAlign:"left",
+    // marginLeft:"5%",
+    // marginTop:"5%",
     fontWeight:"700",
     fontSize:18,
   },
@@ -168,8 +157,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row', 
     color: "white",
     fontFamily: "K2D-Regular",
-    textAlign:"left",
-    marginLeft:"5%",
+    // textAlign:"left",
+    // marginLeft:"5%",
     fontSize:14,
   },
   signContainer:{
