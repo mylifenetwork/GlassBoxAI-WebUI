@@ -25,3 +25,8 @@ Need to do:
 Need to do/ Questions:
 1.CSS formating? Since different screen size will display differently if use pixel.
 But in figma, it only gives my pixel information.
+
+9.20/9.21 working around 3 hours
+1. Adding component - ScoreCard
+2. Spending much time on CSS and drawing Circle and Line
+(Since react native has no circle and line components)
