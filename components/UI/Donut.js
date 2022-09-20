@@ -102,7 +102,7 @@ export default function Donut({
         defaultValue="0"
         style={[
           StyleSheet.absoluteFillObject,
-          { fontSize: radius / 2, color: textColor ?? color },
+          { fontSize: radius / 2, color:"white"},
           styles.text,
         ]}
       />
@@ -130,7 +130,7 @@ export default function Donut({
           {marginBottom:"-50%"},
         ]}
       /> */}
-      <Text style={styles.scores}>Scores</Text>
+      <Text style={[styles.scores,{fontSize:radius/2},]}>Scores</Text>
     </View>
   );
 }
