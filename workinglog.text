@@ -35,3 +35,7 @@ svg packages:
 npm install --save react-native-svg
 animated node error: 
 expo upgrade
+
+9.22 working 1 hour
+1. adding dropdown box
+    npm install react-native-element-dropdown --save
