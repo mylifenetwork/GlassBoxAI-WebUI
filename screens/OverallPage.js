@@ -4,15 +4,6 @@ import { GlobalStyles } from "../styles/styles";
 import TotalTime from "../components/UI/TotalTime";
 import LastJourney from "../components/UI/LastJourney";
 import Donut from "../components/UI/Donut";
-
-import {
-  LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph,
-  StackedBarChart
-} from "react-native-chart-kit";
 import { ScrollableComponent } from "react-native-keyboard-aware-scroll-view";
 
 function OverallPage({navigation}) {
@@ -25,7 +16,7 @@ function OverallPage({navigation}) {
   
 
   function showOverallPageHandler() {
-    navigation.navigate("Login");
+    navigation.navigate("Journey");
   }
   function showMiddleButtonHandler() {
     //navigation.navigate("Overall");

@@ -30,3 +30,8 @@ But in figma, it only gives my pixel information.
 1. Adding component - ScoreCard
 2. Spending much time on CSS and drawing Circle and Line
 (Since react native has no circle and line components)
+
+svg packages:
+npm install --save react-native-svg
+animated node error: 
+expo upgrade

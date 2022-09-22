@@ -8,8 +8,9 @@ function Home({ navigation }) {
   }
 
   function showLoginFormHandler() {
-    navigation.navigate("Login");
+    //navigation.navigate("Login");
     //navigation.navigate("Overall");
+    navigation.navigate("Journey");
   }
 
   return (

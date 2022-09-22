@@ -4,15 +4,6 @@ import { GlobalStyles } from "../styles/styles";
 import TotalTime from "../components/UI/TotalTime";
 import LastJourney from "../components/UI/LastJourney";
 import ScoreCard from "../components/UI/ScoreCard";
-
-import {
-  LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph,
-  StackedBarChart
-} from "react-native-chart-kit";
 import { ScrollableComponent } from "react-native-keyboard-aware-scroll-view";
 
 function Journey({navigation}) {
