@@ -4,6 +4,7 @@ import { GlobalStyles } from "../styles/styles";
 import TotalTime from "../components/UI/TotalTime";
 import LastJourney from "../components/UI/LastJourney";
 import ScoreCard from "../components/UI/ScoreCard";
+import DropdownBox from "../components/UI/DropdownBox";
 import { ScrollableComponent } from "react-native-keyboard-aware-scroll-view";
 
 function Journey({navigation}) {
@@ -13,6 +14,11 @@ function Journey({navigation}) {
     color: 'tomato',
     max: 100
   }]
+
+  const data2 = [
+    { label: 'TC7391', value: '1' },
+    { label: 'BV9203333', value: '2' },
+  ];
   
 
   function showOverallPageHandler() {
@@ -33,6 +39,9 @@ function Journey({navigation}) {
 
       <View style={styles.container}>
         <View style={styles.formHeader}>
+        <DropdownBox data={data2}></DropdownBox>
+
+        
         <ScoreCard style={styles.card}></ScoreCard>
         
         </View>
