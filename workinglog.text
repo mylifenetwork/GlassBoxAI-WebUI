@@ -40,3 +40,12 @@ expo upgrade
 1. adding dropdown box
     npm install react-native-element-dropdown --save
     https://reactnativeelements.com/docs/2.3.2/getting_started
+
+9.23/9.24 working 3 hours
+1. adding alert card 
+2. Spending much time on how to use library resources to draw progress line
+    Finally find just draw two rectangle is the fast and more customizable 
+    in our project.
+3. Adding day/week/month button group.
+4. Adding rough google map in OverallPage/Home page after signed-in
+(Need to obtain google api key to draw route and customizable sign)
