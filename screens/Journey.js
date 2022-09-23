@@ -5,9 +5,16 @@ import TotalTime from "../components/UI/TotalTime";
 import LastJourney from "../components/UI/LastJourney";
 import ScoreCard from "../components/UI/ScoreCard";
 import DropdownBox from "../components/UI/DropdownBox";
+import MapComponent from "../components/UI/MapComponent";
+import { ButtonGroup } from "@rneui/base";
+import { useState,React } from "react";
+import AlertCard from "../components/UI/AlertCard";
 import { ScrollableComponent } from "react-native-keyboard-aware-scroll-view";
 
 function Journey({navigation}) {
+
+  const buttons = ['Day', 'Week', 'Month'];
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const data = [{
     percentage: 80,
@@ -40,7 +47,16 @@ function Journey({navigation}) {
       <View style={styles.container}>
         <View style={styles.formHeader}>
         <DropdownBox data={data2}></DropdownBox>
-
+        <ButtonGroup
+            containerStyle={styles.buttonGroupContainer}
+            buttonStyle ={styles.button}
+            buttons = {buttons}
+            selectedIndex={selectedIndex}
+            onPress={(value) => {
+              setSelectedIndex(value);
+            }}
+          />
+        <AlertCard style={styles.card}></AlertCard>
         
         <ScoreCard style={styles.card}></ScoreCard>
         
@@ -69,6 +85,15 @@ function Journey({navigation}) {
 export default Journey;
 
 const styles = StyleSheet.create({
+  buttonGroupContainer:{
+    flexWrap: 'wrap',
+    backgroundColor:"white",
+    borderRadius: 6,
+    width:317,
+    marginBottom:"5%"
+
+
+  },
   container: {
     flex: 1,
     backgroundColor: "#353948",

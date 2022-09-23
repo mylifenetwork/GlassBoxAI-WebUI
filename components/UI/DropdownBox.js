@@ -4,6 +4,7 @@ import { Dropdown } from 'react-native-element-dropdown';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 export default function DropdownBox({data}) {
+  
 
   const [value, setValue] = useState(null);
   const renderItem = (item) => {
@@ -14,7 +15,7 @@ export default function DropdownBox({data}) {
           <AntDesign
             style={styles.icon}
             color="black"
-            name="check"
+            name="down"
             size={20}
           />
         )
@@ -28,28 +29,22 @@ export default function DropdownBox({data}) {
       style={styles.dropdown}
       placeholderStyle={styles.placeholderStyle}
       selectedTextStyle={styles.selectedTextStyle}
-    //   inputSearchStyle={styles.inputSearchStyle}
       iconStyle={styles.iconStyle}
       data={data}
-    //   search
-    //   maxHeight={300}
       labelField="label"
       valueField="value"
       placeholder={data[0]['label']}
-    //   searchPlaceholder="Search..."
       value={value}
       onChange={item => {
         setValue(item.value);
       }}
       renderRightIcon={() => (
-        <AntDesign style={styles.icon} color="black" name="check" size={20} />
+        <AntDesign style={styles.icon} color="black" name="down" size={20} />
       )}
       renderItem={renderItem}
     />
   );
 };
-
-// export default DropdownBox;
 
 const styles = StyleSheet.create({
   dropdown: {

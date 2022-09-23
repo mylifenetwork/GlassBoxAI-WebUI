@@ -1,9 +1,11 @@
-import { StatusBar, StyleSheet, Text, View,Image,TouchableOpacity } from "react-native";
+import { StatusBar, StyleSheet, Text, View,Image,TouchableOpacity, ScrollView } from "react-native";
 import Button from "../components/UI/Button";
 import { GlobalStyles } from "../styles/styles";
 import TotalTime from "../components/UI/TotalTime";
 import LastJourney from "../components/UI/LastJourney";
 import Donut from "../components/UI/Donut";
+import MapComponent from "../components/UI/MapComponent";
+import MapView, { PROVIDER_GOOGLE,Polyline } from 'react-native-maps';
 import { ScrollableComponent } from "react-native-keyboard-aware-scroll-view";
 
 function OverallPage({navigation}) {
@@ -39,11 +41,15 @@ function OverallPage({navigation}) {
           return <Donut key={i} percentage={p.percentage} color={p.color} max={p.max}/>
         })}
         </View>
+        
         </View>
-
         <View style={styles.form}>
           <Text style={styles.text}>Current Location</Text>
           <Text style={styles.location}>2km Wah · Chai Car Park</Text>
+          <MapView
+            provider={PROVIDER_GOOGLE} // remove if not using Google Maps
+            style={styles.mapContainer}
+          ></MapView>
           <View>
             <Text style={styles.text}>Total journey: 10</Text>
             <TotalTime></TotalTime>
@@ -76,6 +82,15 @@ function OverallPage({navigation}) {
 export default OverallPage;
 
 const styles = StyleSheet.create({
+  mapContainer:{
+    //width:317,
+    transform:[{scaleX:0.9},{scaleY:0.6}],
+    borderRadius:12,
+    justifyContent: 'center',
+    alignItems: 'center',
+    ...StyleSheet.absoluteFillObject,
+
+  },
   container: {
     flex: 1,
     backgroundColor: "#353948",
@@ -85,13 +100,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "center",
-    marginHorizontal:7,
-    marginBottom:12,
-    marginTop:2,
+    // marginHorizontal:7,
+    // marginBottom:12,
+    // marginTop:2,
   },
   form: {
     flex: 5,
     margin:7,
+    transform:[{scale:0.9}]
   },
   accountText: {
     fontFamily: "K2D-Regular",
@@ -169,5 +185,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly', 
     flexWrap: 'wrap', 
     alignItems: 'center',   
+    // transform:[{scale:1.5}]
   }
 });
