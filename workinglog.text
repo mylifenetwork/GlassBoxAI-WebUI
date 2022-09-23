@@ -47,5 +47,7 @@ expo upgrade
     Finally find just draw two rectangle is the fast and more customizable 
     in our project.
 3. Adding day/week/month button group.
-4. Adding rough google map in OverallPage/Home page after signed-in
+4. Adding rough google map in OverallPage/Home page after signed-
+5. Adding Image
+6. Searching how to customize the pop out window
 (Need to obtain google api key to draw route and customizable sign)
