@@ -13,6 +13,7 @@ import LoginForm from "./screens/LoginForm";
 import SignUpOTPAuth from "./screens/SignUpOTPAuthScreen";
 import OverallPage from "./screens/OverallPage";
 import Journey from "./screens/Journey";
+import DetailedJourney from "./screens/DetailedJourney";
 import { StyleSheet, View } from "react-native";
 
 const Stack = createNativeStackNavigator();
@@ -78,6 +79,13 @@ export default function App() {
             <Stack.Screen
               name = "Journey"
               component={Journey}
+              options={{
+                title:"Journey",
+              }}
+            />
+             <Stack.Screen
+              name = "DetailedJourney"
+              component={DetailedJourney}
               options={{
                 title:"Journey",
               }}
