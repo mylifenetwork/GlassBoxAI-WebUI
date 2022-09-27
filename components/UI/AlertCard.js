@@ -1,4 +1,4 @@
-import { View, StyleSheet, Alert,Image,Text, Pressable} from "react-native";
+import { View, StyleSheet, Alert,Image,Text, Pressable, ImageBackground} from "react-native";
 import { useState,React } from "react";
 import { StatusBar } from "expo-status-bar";
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -57,6 +57,14 @@ function ScoreCard(
             </View>
             <View style={styles.bottomContainers}>
                 <Text style={[styles.bottomText,{marginRight:"2.5%"}]}>Take it easy</Text>
+                <Text style={[styles.bottomText,{marginLeft:"65%"}]}>Excellent</Text>
+            </View>
+            <View style={styles.bottomContainers}>
+                <ImageBackground style={{width: 20, height: 30}} source={require("../../assets/Images/Group.png")}>
+                    <Image style={{width: 10, height: 15,marginLeft:"25%"}}source={require("../../assets/Images/speedometer1.png")}>
+
+                    </Image>
+                </ImageBackground>
                 <Text style={[styles.bottomText,{marginLeft:"65%"}]}>Excellent</Text>
             </View>
                 

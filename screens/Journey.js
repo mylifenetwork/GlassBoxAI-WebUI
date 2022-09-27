@@ -1,15 +1,16 @@
-import { StatusBar, StyleSheet, Text, View,Image,TouchableOpacity } from "react-native";
+import { StatusBar, StyleSheet, Text, View,Image,TouchableOpacity,ImageBackground } from "react-native";
 import Button from "../components/UI/Button";
 import { GlobalStyles } from "../styles/styles";
 import TotalTime from "../components/UI/TotalTime";
 import LastJourney from "../components/UI/LastJourney";
 import ScoreCard from "../components/UI/ScoreCard";
 import DropdownBox from "../components/UI/DropdownBox";
-import MapComponent from "../components/UI/MapComponent";
+import Calendar from "../components/UI/Calendar";
 import { ButtonGroup } from "@rneui/base";
 import { useState,React } from "react";
 import AlertCard from "../components/UI/AlertCard";
 import { ScrollableComponent } from "react-native-keyboard-aware-scroll-view";
+import { ScrollView } from "react-native-gesture-handler";
 
 function Journey({navigation}) {
 
@@ -22,10 +23,21 @@ function Journey({navigation}) {
     max: 100
   }]
 
+  const [pressed,setPressed] = useState(0);
+
   const data2 = [
     { label: 'TC7391', value: '1' },
     { label: 'BV9203333', value: '2' },
   ];
+
+  function showCalendarHandler(){
+    if(pressed){
+      setPressed(0);
+    }else{
+      setPressed(1);
+    }
+    
+  }
   
 
   function showOverallPageHandler() {
@@ -56,11 +68,51 @@ function Journey({navigation}) {
               setSelectedIndex(value);
             }}
           />
-        <AlertCard style={styles.card}></AlertCard>
-        
-        <ScoreCard style={styles.card}></ScoreCard>
-        
+        <View style={styles.CalendarConatiner}>
+          <View style={styles.dateCintainer}>
+            <Text style={styles.formInfo}> 
+              Friday
+            </Text>
+            <Text style={styles.dateText}>July 15, 2022</Text>
+          </View>
+          <TouchableOpacity onPress={showCalendarHandler} style={[{transform:[{scale:0.7}]}]}>
+          <Image source={require("../assets/Images/calendar.png")}></Image>
+        </TouchableOpacity>
+          <TouchableOpacity style={styles.leftContainer}>
+          <Image source={require("../assets/Images/left.png")}/>
+          </TouchableOpacity>
+        <TouchableOpacity style={styles.leftContainer}>
+          <Image source={require("../assets/Images/right.png")}></Image>
+        </TouchableOpacity>
         </View>
+        <ScrollView>
+        <AlertCard></AlertCard>
+
+        </ScrollView>
+        {/* <View style={styles.rectangleContainer}>        
+        <View style={styles.SummaryText}>
+          <Text>
+            Daily Summary        
+          </Text>
+          </View>
+            </View> */}
+
+
+        
+        {/* <View style={[{ opacity: pressed ? 1 : 0 },{}]}>
+          <Calendar></Calendar>
+        </View>
+                <ScrollView>
+          <View style={styles.middleContainer}>
+             <AlertCard style={styles.card}></AlertCard>
+        
+          <ScoreCard style={styles.card}></ScoreCard>
+          </View>
+         
+        </ScrollView>*/}
+        </View>
+
+        
 
       <View style={styles.footerContainer}>
         <View style={styles.buttonContainer}>
@@ -85,6 +137,34 @@ function Journey({navigation}) {
 export default Journey;
 
 const styles = StyleSheet.create({
+  SummaryText:{
+    backgroundColor:"#353948",
+    borderColor:"white",
+    paddingBottom:"15%"
+    
+
+  },
+  rectangleContainer:{
+    width:317,
+    borderColor:"white",
+    height:"20%",
+    borderWidth: 2,
+
+  },
+  leftContainer:{
+    margin:"2.5%",
+    backgroundColor:"white",
+    width:32,
+    height:32,
+  },
+  dateCintainer:{
+    marginRight:"15%"
+
+  },
+  CalendarConatiner:{
+    flexDirection:"row",
+    //alignItems:"flex-start"
+  },
   buttonGroupContainer:{
     flexWrap: 'wrap',
     backgroundColor:"white",
@@ -99,6 +179,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#353948",
     justifyContent:'flex-start'
   },
+  // middleContainer:{
+  //   flex: 2,
+  //   justifyContent: "flex-start",
+  //   alignItems: "center",
+  //   marginHorizontal:7,
+  //   marginBottom:12,
+  //   marginTop:2,
+
+  // },
   formHeader: {
     flex: 1,
     justifyContent: "flex-start",
@@ -116,10 +205,10 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 17,
   },
-  welcomeText: {
+  dateText: {
     fontFamily: "K2D-Regular",
-    color: GlobalStyles.colors.primary50,
-    fontSize: 19,
+    color:"white",
+    fontSize: 18,
   },
   descriptionText: {
     fontFamily: "K2D-Regular",
