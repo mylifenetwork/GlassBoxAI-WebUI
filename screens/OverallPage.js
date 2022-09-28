@@ -5,7 +5,7 @@ import TotalTime from "../components/UI/TotalTime";
 import LastJourney from "../components/UI/LastJourney";
 import Donut from "../components/UI/Donut";
 import MapComponent from "../components/UI/MapComponent";
-import MapView, { PROVIDER_GOOGLE,Polyline } from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE,Polyline,Marker } from 'react-native-maps';
 import { ScrollableComponent } from "react-native-keyboard-aware-scroll-view";
 
 function OverallPage({navigation}) {
@@ -34,6 +34,7 @@ function OverallPage({navigation}) {
       <StatusBar barStyle="light-content" />
 
       <View style={styles.container}>
+        <ScrollView>
         <View style={styles.formHeader}>
         
         <View style={styles.chart}>
@@ -43,21 +44,43 @@ function OverallPage({navigation}) {
         </View>
         
         </View>
-        <View style={styles.form}>
+        <View style={styles.locationContainer}>
           <Text style={styles.text}>Current Location</Text>
           <Text style={styles.location}>2km Wah · Chai Car Park</Text>
           <MapView
             provider={PROVIDER_GOOGLE} // remove if not using Google Maps
             style={styles.mapContainer}
-          ></MapView>
-          <View>
-            <Text style={styles.text}>Total journey: 10</Text>
+            initialRegion={{
+                latitude:22.279909,
+                longitude:114.173729}}
+          >
+            <Marker coordinate = {{latitude: 22.279909,longitude: 114.173729}}
+
+            //pinColor = {"black"} // any color
+            // title={"title"}
+            // description={"description"}
+            >
+              <Image style={styles.marker} source={require("../assets/Images/location-pin.png")}></Image>
+
+            </Marker>
+            
+
+
+          
+          </MapView>
+
+            <View style={styles.totalContainer}>
+           <Text style={styles.text}>Total journey: 10</Text>
             <TotalTime></TotalTime>
             <LastJourney></LastJourney>
-          </View>
+           </View>
+           
+          {/* <View>
+          </View> */}
 
 
         </View>
+        </ScrollView>
 
       <View style={styles.footerContainer}>
         <View style={styles.buttonContainer}>
@@ -82,12 +105,18 @@ function OverallPage({navigation}) {
 export default OverallPage;
 
 const styles = StyleSheet.create({
+  marker:{
+      //shadowColor: '#353948',
+        // shadowOpacity: 0.8,
+        // shadowRadius: 0.1, 
+        //transform:[{scale:0.6}]
+
+  },
   mapContainer:{
     //width:317,
-    transform:[{scaleX:0.9},{scaleY:0.6}],
+    marginBottom:"85%",
+    transform:[{scaleX:0.9},{scaleY:0.5}],
     borderRadius:12,
-    justifyContent: 'center',
-    alignItems: 'center',
     ...StyleSheet.absoluteFillObject,
 
   },
@@ -103,6 +132,17 @@ const styles = StyleSheet.create({
     // marginHorizontal:7,
     // marginBottom:12,
     // marginTop:2,
+  },
+  locationContainer:{
+    marginTop:"5%",
+    flex:4,
+    justifyContent:"flex-start",
+    // alignItems:"center"
+  },
+  totalContainer:{
+    flex:1,
+    justifyContent:"flex-start",
+    marginTop:"45%"
   },
   form: {
     flex: 5,
@@ -155,8 +195,8 @@ const styles = StyleSheet.create({
     color: "white",
     fontFamily: "K2D-Regular",
     // textAlign:"left",
-    // marginLeft:"5%",
-    // marginTop:"5%",
+    marginLeft:"5%",
+    marginBottom:"2.5%",
     fontWeight:"700",
     fontSize:18,
   },
@@ -165,7 +205,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontFamily: "K2D-Regular",
     // textAlign:"left",
-    // marginLeft:"5%",
+    marginLeft:"5%",
     fontSize:14,
   },
   signContainer:{
@@ -185,6 +225,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly', 
     flexWrap: 'wrap', 
     alignItems: 'center',   
-    // transform:[{scale:1.5}]
+    //transform:[{scale:1.5}]
   }
 });

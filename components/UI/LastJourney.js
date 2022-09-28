@@ -22,17 +22,43 @@ function TotalTime(
         <View style={styles.boxContainer}>
             <Text style={styles.titleContainer}>Last journey</Text>
             <View style={styles.rowContainer}>
-            <View style={styles.colContainer}>
+            {/* <View style={styles.colContainer}>
                 <Text style={styles.text}>Start</Text>
                 <Text style={styles.text}>End</Text>
                 <Text style={styles.text}>Duration</Text>
                 <Text style={styles.text}>Distance</Text>
+            </View> */}
+            <View style={styles.colContainer}>
+                <View style={styles.rowContainer}>
+                    <Text style={styles.text}>Start</Text>
+                    <Text style={styles.detailText}>{startDate} | {startTime}</Text>
+                </View>
+                <View style={styles.rowContainer}>
+                    <Text style={styles.text}>End</Text>
+                    <Text style={styles.detailText}>{endDate} | {endTime}</Text> 
+                </View>
+
+                <View style={styles.rowContainer}>
+                    <Text style={styles.text}>Duration</Text>
+                    <Text style={styles.detailText}>{duration}</Text>
+                </View>
+
+                <View style={styles.rowContainer}>
+                    <Text style={styles.text}>Distance</Text>
+                    <Text style={styles.detailText}>{distance}</Text>
+                </View>
             </View>
             <View style={styles.colContainer}>
-                <Text style={styles.text}>{startDate} | {startTime}</Text>
-                <Text style={styles.text}>{endDate} | {endTime}</Text> 
-                <Text style={styles.text}>{duration}</Text>
-                <Text style={styles.text}>{distance}</Text>
+                <Text style={styles.text}></Text>
+                <Text style={styles.text}></Text> 
+            </View>
+            <View style={styles.colContainer}>
+                <Text style={styles.text}></Text>
+                <Text style={styles.text}></Text> 
+            </View>
+            <View style={styles.colContainer}>
+                <Text style={styles.text}></Text>
+                <Text style={styles.text}></Text> 
             </View>
             <View style={styles.colContainer}>
                 <Text style={styles.text}></Text>
@@ -56,11 +82,16 @@ export default TotalTime;
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 8,
+        marginTop:"5%",
         felx: 1,
         flexDirection: "row",
-        justifyContent: 'space-evenly',
-        alignItems: "center",
+        //justifyContent: "space-evenly",
+        alignItems: "flex-start",
+        marginLeft:"5%",
+        width:"120%",
+        position:"relative",
+        // marginLeft:"10%",
+        // marginRight:"10%",
     },
     boxContainer:{
         // felx: 1,
@@ -70,10 +101,10 @@ const styles = StyleSheet.create({
         borderRadius:"8"
     },
     titleContainer:{
-        marginBottom:"5%",
-        marginTop:"5%",
-        marginLeft:"5%",
-        marginRight:"5%",
+        marginBottom:"2.5%",
+        marginTop:"2.5%",
+        marginLeft:"2.5%",
+        marginRight:"2.5%",
         fontFamily: "K2D-Regular",
         color: "white",
         fontWeight: 700,
@@ -88,19 +119,26 @@ const styles = StyleSheet.create({
         color: "white",
         fontWeight: 300,
         fontSize: 14,
-
+    },
+    detailText:{
+        fontFamily: "K2D-Regular",
+        marginTop:"5%",
+        color: "white",
+        marginLeft:"5%",
+        fontWeight: 300,
+        fontSize: 14,
+        left:"100%",
+        position:"absolute",
     },
     rowContainer: {
         felx: 1,
         flexDirection: "row",
-        //alignContent:"stretch",
-        color: "white",
+        // justifyContent:"space-",
+        alignContent:"stretch",
     },
     colContainer: {
-        felx: 1,
         flexDirection: "column",
-        // alignContent:"stretch",
-        color: "white",
+        marginBottom:"2.5%",
     },
     buttonContainers: {
     flexWrap: "wrap",

@@ -32,10 +32,12 @@ export default TotalTime;
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 8,
-        felx: 1,
+        marginTop:"2.5%",
+        marginLeft:"5%",
+        marginRight:"5%",
+        flex: 1,
         flexDirection: "row",
-        justifyContent: 'space-evenly',
+        justifyContent: "space-between",
         alignItems: "center",
     },
     boxContainer:{

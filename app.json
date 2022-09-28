@@ -19,7 +19,12 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier":"com.example.GlassboxAIWeb-UI",
+      "config":{
+        "googleMapsApiKey":"AIzaSyBQS9yHLvLPhOyNTLQ179LkCci5XlZ-RS4"
+      }
+
     },
     "android": {
       "adaptiveIcon": {
