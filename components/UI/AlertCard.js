@@ -1,4 +1,5 @@
 import { View, StyleSheet, Alert,Image,Text, Pressable, ImageBackground} from "react-native";
+import ModalCard from "./ModalCard";
 import { useState,React } from "react";
 import { StatusBar } from "expo-status-bar";
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -14,11 +15,6 @@ function ScoreCard(
         noAlert = 2,
         height = 10,
     }) {
-    // const createTwoButtonAlert = () =>
-    // Alert.alert(
-    //     "Notice",
-    //     "<View><Image style={styles.footerImage} source={require('../assets/Images/GlassboxAIIcon.png')}/>",
-    // );
     const data = [{
         percentage: 80,
         color: 'tomato',
@@ -36,7 +32,8 @@ function ScoreCard(
                 <View style={styles.signContainer}>
                     <Image source={require("../../assets/Images/speedometer.png")}/>
                     <Text style={styles.topText}>{alertname}</Text>
-                    <AntDesign style={styles.icon} color="white" name="infocirlceo" size={20} />
+                    <ModalCard name="braking"></ModalCard>
+                    {/* <AntDesign style={styles.icon} color="white" name="infocirlceo" size={20} /> */}
                 </View>
                 <View style={styles.topContainersB}>
                     <Image source={require("../../assets/Images/alertSmall.png")}/>
@@ -186,6 +183,7 @@ const styles = StyleSheet.create({
         color: "white",
         fontWeight: 300,
         fontSize: 14,
+        // alignContent:"center"
 
     },
 });
