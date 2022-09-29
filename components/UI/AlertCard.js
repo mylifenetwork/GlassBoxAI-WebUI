@@ -184,6 +184,5 @@ const styles = StyleSheet.create({
         fontWeight: 300,
         fontSize: 14,
         // alignContent:"center"
-
     },
 });

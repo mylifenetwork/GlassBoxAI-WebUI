@@ -9,7 +9,7 @@ function ModalCard({name="speeding"}) {
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
-    console.log("test modal",isModalVisible);
+    // console.log("test modal",isModalVisible);
   };
 
   const dic={

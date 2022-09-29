@@ -1,4 +1,4 @@
-import { StatusBar, StyleSheet, Text, View,Image,TouchableOpacity,ImageBackground } from "react-native";
+import { StatusBar, StyleSheet, Text, View,Image,TouchableOpacity,ScrollView} from "react-native";
 import Button from "../components/UI/Button";
 import { GlobalStyles } from "../styles/styles";
 import TotalTime from "../components/UI/TotalTime";
@@ -9,8 +9,6 @@ import Calendar from "../components/UI/Calendar";
 import { ButtonGroup } from "@rneui/base";
 import { useState,React } from "react";
 import AlertCard from "../components/UI/AlertCard";
-import { ScrollableComponent } from "react-native-keyboard-aware-scroll-view";
-import { ScrollView } from "react-native-gesture-handler";
 
 function Journey({navigation}) {
 
@@ -29,6 +27,13 @@ function Journey({navigation}) {
     { label: 'TC7391', value: '1' },
     { label: 'BV9203333', value: '2' },
   ];
+
+  const summarydata=[{
+    trips:3,
+    distances:38,
+    time:"1h 13m",
+    alert:2
+  }]
 
   function showCalendarHandler(){
     if(pressed){
@@ -75,7 +80,7 @@ function Journey({navigation}) {
             </Text>
             <Text style={styles.dateText}>July 15, 2022</Text>
           </View>
-          <TouchableOpacity onPress={showCalendarHandler} style={[{transform:[{scale:0.7}]}]}>
+          <TouchableOpacity onPress={showCalendarHandler} style={styles.calendarIcon}>
           <Image source={require("../assets/Images/calendar.png")}></Image>
         </TouchableOpacity>
           <TouchableOpacity style={styles.leftContainer}>
@@ -85,33 +90,60 @@ function Journey({navigation}) {
           <Image source={require("../assets/Images/right.png")}></Image>
         </TouchableOpacity>
         </View>
-        <ScrollView>
-        <AlertCard></AlertCard>
-
-        </ScrollView>
-        {/* <View style={styles.rectangleContainer}>        
-        <View style={styles.SummaryText}>
-          <Text>
+        <View style={styles.Summary}>
+          <Text style={styles.SummaryText}>
             Daily Summary        
           </Text>
           </View>
-            </View> */}
+        <View style={styles.rectangleContainer}>
+          <View style={styles.verticalContainer}>
+            <Text style={styles.title}>
+              Trips
+            </Text>
+            <Text style={styles.SummaryText}>
+              {summarydata[0].trips}
+            </Text>
+          </View> 
 
+          <View style={styles.verticalContainer}>
+            <Text style={styles.title}>
+              Distances
+            </Text>
+            <Text style={styles.SummaryText}>
+              {summarydata[0].distances} km
+            </Text>
+          </View>  
 
-        
-        {/* <View style={[{ opacity: pressed ? 1 : 0 },{}]}>
-          <Calendar></Calendar>
+          <View style={styles.verticalContainer}>
+            <Text style={styles.title}>
+              Time
+            </Text>
+            <Text style={styles.SummaryText}>
+              {summarydata[0].time}
+            </Text>
+          </View>
+
+          <View style={styles.verticalContainer}>
+            <Text style={styles.title}>
+              Alert
+            </Text>
+            <Text style={styles.SummaryText}>
+              {summarydata[0].alert}
+            </Text>
+          </View>      
         </View>
-                <ScrollView>
+
+        <ScrollView>
           <View style={styles.middleContainer}>
-             <AlertCard style={styles.card}></AlertCard>
-        
+          <ScoreCard style={styles.card}></ScoreCard>
+          <ScoreCard style={styles.card}></ScoreCard>
           <ScoreCard style={styles.card}></ScoreCard>
           </View>
-         
-        </ScrollView>*/}
+        </ScrollView>
         </View>
-
+        <View style={[{ opacity: pressed ? 1 : 0 },{marginBottom:"50%"}]}>
+          <Calendar></Calendar>
+        </View>
         
 
       <View style={styles.footerContainer}>
@@ -137,22 +169,57 @@ function Journey({navigation}) {
 export default Journey;
 
 const styles = StyleSheet.create({
-  SummaryText:{
-    backgroundColor:"#353948",
-    borderColor:"white",
-    paddingBottom:"15%"
-    
+  middleContainer:{
+    // flex:-15,
+  },
+  verticalContainer:{
+    flexDirection:"col",
+    alignItems:"center",
+    marginTop:"5%",
+    marginBottom:"5%",
+    marginHorizontal:"5%"
+  },
+  title:{
+    color:"white",
+    fontFamily: "K2D-Regular",
+    fontSize:14,
+    textAlign:"center",
+    fontWeight:300,
+    marginBottom:"5%"
+  },
+  calendarIcon:{
+    transform:[{scale:0.7}],
+    // marginLeft:"2.5%"
 
   },
+  Summary:{
+    backgroundColor:"#353948", 
+    right:"25%",
+    zIndex:100
+  },
+  SummaryText:{
+    color:"white",
+    fontFamily: "K2D-Regular",
+    //position:"absolute",
+    fontSize:18,
+    fontWeight:700,
+    zIndex:100
+  },
   rectangleContainer:{
+    flex:-15,
     width:317,
     borderColor:"white",
-    height:"20%",
+    borderRadius:8,
+    height:"auto",
     borderWidth: 2,
+    transform:[{translateY:-10}],
+    flexWrap: 'wrap',
+    flexDirection:"row"
 
   },
   leftContainer:{
     margin:"2.5%",
+
     backgroundColor:"white",
     width:32,
     height:32,
@@ -163,6 +230,7 @@ const styles = StyleSheet.create({
   },
   CalendarConatiner:{
     flexDirection:"row",
+    flex:2.5
     //alignItems:"flex-start"
   },
   buttonGroupContainer:{
@@ -280,7 +348,8 @@ const styles = StyleSheet.create({
   card:{
     width:"70%",
     height:"50",
-    alignItems:"center"
+    alignItems:"center",
+    marginTop:"5%"
 
   }
 });
