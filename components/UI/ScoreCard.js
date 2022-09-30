@@ -14,10 +14,12 @@ function ScoreCard(
     distance="8",
     location="Sha Tin",
     noAlert=2,
+    color = "tomato",
+    scores = 80
     }) {
     const navigation = useNavigation();
     const data = [{
-        percentage: 80,
+        percentage: scores,
         color: 'tomato',
         max: 100,
         radius:37.25/2,
@@ -35,7 +37,7 @@ function ScoreCard(
                 <View style={styles.chart}>
                 {data.map((p, i) => {
                 return <Donut key={i} percentage={p.percentage} 
-                color={p.color} max={p.max} radius={p.radius}
+                color={color} max={p.max} radius={p.radius}
                 strokeWidth={p.strokewidth}/>
                 })}
                 </View>
@@ -167,7 +169,8 @@ const styles = StyleSheet.create({
 
         alignItems: "center",
         backgroundColor:"#5F616B",
-        borderRadius:"8"
+        borderRadius:"8",
+        marginBottom:"2.5%"
     },
     text:{
         // alignContent:"stretch",

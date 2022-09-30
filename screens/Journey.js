@@ -62,6 +62,7 @@ function Journey({navigation}) {
       <StatusBar barStyle="light-content" />
 
       <View style={styles.container}>
+        <ScrollView>
         <View style={styles.formHeader}>
         <DropdownBox data={data2}></DropdownBox>
         <ButtonGroup
@@ -133,14 +134,15 @@ function Journey({navigation}) {
           </View>      
         </View>
 
-        <ScrollView>
           <View style={styles.middleContainer}>
+          <ScoreCard style={styles.card} color="green" scores={90}></ScoreCard>
           <ScoreCard style={styles.card}></ScoreCard>
+          <ScoreCard style={styles.card} color="yellow" scores={70} noAlert={4}></ScoreCard>
           <ScoreCard style={styles.card}></ScoreCard>
           </View>
-        </ScrollView>
         </View>
-        <View style={[{ opacity: pressed ? 1 : 0 },{marginBottom:"50%"}]}>
+        </ScrollView>
+        <View style={[{ opacity: pressed ? 1 : 0 },{marginBottom:pressed ? "100%":0},{zIndex:100}]}>
           <Calendar></Calendar>
         </View>
         
@@ -188,7 +190,7 @@ const styles = StyleSheet.create({
   },
   calendarIcon:{
     transform:[{scale:0.7}],
-    // marginLeft:"2.5%"
+    //marginLeft:"2.5%"
 
   },
   Summary:{
@@ -205,7 +207,7 @@ const styles = StyleSheet.create({
     zIndex:100
   },
   rectangleContainer:{
-    flex:-10,
+    // flex:-10,
     width:317,
     borderColor:"white",
     borderRadius:8,
@@ -229,8 +231,8 @@ const styles = StyleSheet.create({
   },
   CalendarConatiner:{
     flexDirection:"row",
-    flex:2.5
-    //alignItems:"flex-start"
+    flex:2.5,
+    alignItems:"flex-start",
   },
   buttonGroupContainer:{
     flexWrap: 'wrap',
@@ -294,6 +296,7 @@ const styles = StyleSheet.create({
     align: "center",
     alignContent:"center",
     marginBottom:"5%",
+    zIndex:0,
   },
   buttonContainer:{
     flex: 0.8,
