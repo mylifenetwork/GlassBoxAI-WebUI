@@ -137,7 +137,6 @@ function Journey({navigation}) {
           <View style={styles.middleContainer}>
           <ScoreCard style={styles.card}></ScoreCard>
           <ScoreCard style={styles.card}></ScoreCard>
-          <ScoreCard style={styles.card}></ScoreCard>
           </View>
         </ScrollView>
         </View>
@@ -206,7 +205,7 @@ const styles = StyleSheet.create({
     zIndex:100
   },
   rectangleContainer:{
-    flex:-15,
+    flex:-10,
     width:317,
     borderColor:"white",
     borderRadius:8,
@@ -348,8 +347,7 @@ const styles = StyleSheet.create({
   card:{
     width:"70%",
     height:"50",
-    alignItems:"center",
-    marginTop:"5%"
+    alignItems:"center"
 
   }
 });

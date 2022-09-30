@@ -32,8 +32,7 @@ function ScoreCard(
                 <View style={styles.signContainer}>
                     <Image source={require("../../assets/Images/speedometer.png")}/>
                     <Text style={styles.topText}>{alertname}</Text>
-                    <ModalCard name="braking"></ModalCard>
-                    {/* <AntDesign style={styles.icon} color="white" name="infocirlceo" size={20} /> */}
+                    <ModalCard name="speeding"></ModalCard>
                 </View>
                 <View style={styles.topContainersB}>
                     <Image source={require("../../assets/Images/alertSmall.png")}/>
@@ -56,13 +55,12 @@ function ScoreCard(
                 <Text style={[styles.bottomText,{marginRight:"2.5%"}]}>Take it easy</Text>
                 <Text style={[styles.bottomText,{marginLeft:"65%"}]}>Excellent</Text>
             </View>
-            <View style={styles.bottomContainers}>
+            <View style={[styles.bottomContainers,{margin:"1%"}]}>
                 <ImageBackground style={{width: 20, height: 30}} source={require("../../assets/Images/Group.png")}>
                     <Image style={{width: 10, height: 15,marginLeft:"25%"}}source={require("../../assets/Images/speedometer1.png")}>
-
                     </Image>
                 </ImageBackground>
-                <Text style={[styles.bottomText,{marginLeft:"65%"}]}>Excellent</Text>
+                <Text style={styles.bottomTextB}>Click the icon on the map to view the detail of the alert</Text>
             </View>
                 
                         
@@ -120,6 +118,13 @@ const styles = StyleSheet.create({
         color:"#979797",
         marginTop:"2.5%"
     },
+    bottomTextB:{
+        textAlign:"center",
+        fontSize:12,
+        color:"#979797",
+        marginTop:"2.5%",
+        marginLeft:"1%"
+    },
     topText:{
         marginLeft:"5%",
         color:"white",
@@ -172,9 +177,10 @@ const styles = StyleSheet.create({
         width:345,
         height:156,
         flexDirection:"col",
-        alignContent:"center",
+        // alignContent:"center",
         backgroundColor:"#5F616B",
-        borderRadius:"8"
+        borderRadius:"8",
+        marginBottom:"2.5%"
     },
     text:{
         marginLeft:"2.5%",
