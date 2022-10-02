@@ -14,7 +14,7 @@ function TotalTime(
     }) {
     const navigation = useNavigation();
     function showDetailsHandler() {
-        navigation.navigate("SignUp");
+        navigation.navigate("Journey");
     }
 
   return (

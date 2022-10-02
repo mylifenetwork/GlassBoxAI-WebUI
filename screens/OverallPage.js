@@ -18,10 +18,10 @@ function OverallPage({navigation}) {
   
 
   function showOverallPageHandler() {
-    navigation.navigate("Journey");
+    navigation.navigate("Overall");
   }
   function showMiddleButtonHandler() {
-    //navigation.navigate("Overall");
+    navigation.navigate("Journey");
   }
   function showPersonalPageHandler() {
     //navigation.navigate("Overall");
@@ -32,6 +32,7 @@ function OverallPage({navigation}) {
   return (
     <>
       <StatusBar barStyle="light-content" />
+      
 
       <View style={styles.container}>
         <ScrollView>
@@ -87,10 +88,10 @@ function OverallPage({navigation}) {
         <TouchableOpacity style={styles.homeContainer}  onPress={showOverallPageHandler} >
           <Image source={require("../assets/home.png")}/>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.homeContainer} onPress={showOverallPageHandler} >
+          <TouchableOpacity style={styles.homeContainer} onPress={showMiddleButtonHandler} >
           <Image source={require("../assets/journey1.png")}/>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.homeContainer} onPress={showOverallPageHandler} >
+          <TouchableOpacity style={styles.homeContainer} onPress={showPersonalPageHandler} >
           <Image source={require("../assets/user1.png")}/>
           </TouchableOpacity> 
         </View>

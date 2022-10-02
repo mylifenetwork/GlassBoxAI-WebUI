@@ -6,29 +6,35 @@ import DropdownBox from "../components/UI/DropdownBox";
 import MapView, { PROVIDER_GOOGLE,Polyline,Marker } from 'react-native-maps';
 import { useState,React } from "react";
 import AlertCard from "../components/UI/AlertCard";
+import { useNavigation } from "@react-navigation/native";
+import MapViewDirections from "react-native-maps-directions";
 import { ScrollableComponent } from "react-native-keyboard-aware-scroll-view";
 
-function DetailedJourney({navigation}) {
+function DetailedJourney() {
   const data = [{
     percentage: 80,
     color: 'tomato',
     max: 100
   }]
 
+  const origin = {latitude: 37.3318456, longitude: -122.0296002};
+  const destination = {latitude: 37.771707, longitude: -122.4053769};
+  // const GOOGLE_MAPS_APIKEY = "AIzaSyBQS9yHLvLPhOyNTLQ179LkCci5XlZ-RS4";
+
   const data2 = [
     { label: 'TC7391', value: '1' },
     { label: 'BV9203333', value: '2' },
   ];
   
-
+  const navigation = useNavigation();
   function showOverallPageHandler() {
-    navigation.navigate("Login");
+    navigation.navigate("Overall");
   }
   function showMiddleButtonHandler() {
-    navigation.navigate("Overall");
+    navigation.navigate("Journey");
   }
   function showPersonalPageHandler() {
-    navigation.navigate("Overall");
+    // navigation.navigate("Overall");
   }
   
   
@@ -45,19 +51,19 @@ function DetailedJourney({navigation}) {
         <MapView
             provider={PROVIDER_GOOGLE} // remove if not using Google Maps
             style={styles.mapContainer}
-            initialRegion={{
-              lattitude:22.279909,longitude: 114.173729}}>
-            <Marker coordinate = {{lattitude:22.279909,longitude: 114.173729}}
-              >
+            initialRegion={origin}>
+            <Marker coordinate = {origin}>
             <Image style={styles.marker} source={require("../assets/Images/locationStart.png")}></Image>
             </Marker>
-            <Marker coordinate = {{lattitude: 22.28408117,longitude: 114.15884825}}
-              >
+            <Marker coordinate = {destination}>
             <Image style={styles.marker} source={require("../assets/Images/locationEnd.png")}></Image>
             </Marker>
-            <MapViewDirections origin={{lattitude:22.279909,longitude: 114.173729}} 
-            destination = {{lattitude: 22.28408117,longitude: 114.15884825}}
-            ></MapViewDirections>
+            {/* <MapViewDirections origin={origin} 
+            destination = {destination}
+            strokeColor="red"
+            strokeWidth={3}
+            apikey = {GOOGLE_MAPS_APIKEY}
+            ></MapViewDirections> */}
 
 
           </MapView>
@@ -73,12 +79,12 @@ function DetailedJourney({navigation}) {
       <View style={styles.footerContainer}>
         <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.homeContainer}  onPress={showOverallPageHandler} >
-          <Image source={require("../assets/home.png")}/>
+          <Image source={require("../assets/home2.png")}/>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.homeContainer} onPress={showOverallPageHandler} >
+          <TouchableOpacity style={styles.homeContainer} onPress={showMiddleButtonHandler} >
           <Image source={require("../assets/journey1.png")}/>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.homeContainer} onPress={showOverallPageHandler} >
+          <TouchableOpacity style={styles.homeContainer} onPress={showPersonalPageHandler} >
           <Image source={require("../assets/user1.png")}/>
           </TouchableOpacity> 
         </View>
@@ -112,14 +118,14 @@ const styles = StyleSheet.create({
     height:"300%"
   },
   formHeader: {
-    flexGrow: 100,
+    // flexGrow: 100,
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "center",
-    height:"300%"
-    // marginHorizontal:7,
-    // marginBottom:12,
-    // marginTop:2,
+    // height:"300%"
+    marginHorizontal:7,
+    marginBottom:12,
+    marginTop:2,
   },
   bottomContainer:{
     height:"100%",

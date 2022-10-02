@@ -34,7 +34,6 @@ export default function Calendar() {
     container:{
       borderRadius:12,
       flex:1,
-
     },
     dropdown: {
       margin: "5%",

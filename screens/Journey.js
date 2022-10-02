@@ -8,9 +8,10 @@ import DropdownBox from "../components/UI/DropdownBox";
 import Calendar from "../components/UI/Calendar";
 import { ButtonGroup } from "@rneui/base";
 import { useState,React } from "react";
+import { useNavigation } from "@react-navigation/native";
 import AlertCard from "../components/UI/AlertCard";
 
-function Journey({navigation}) {
+function Journey() {
 
   const buttons = ['Day', 'Week', 'Month'];
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -20,7 +21,11 @@ function Journey({navigation}) {
     color: 'tomato',
     max: 100
   }]
-
+  const navigation = useNavigation();
+  function showDetailedJourneyPageHandler() {
+    navigation.navigate("DetailedJourney");
+    console.log("debug")
+  }
   const [pressed,setPressed] = useState(0);
 
   const data2 = [
@@ -29,7 +34,7 @@ function Journey({navigation}) {
   ];
 
   const summarydata=[{
-    trips:3,
+    trips:4,
     distances:38,
     time:"1h 13m",
     alert:2
@@ -46,10 +51,10 @@ function Journey({navigation}) {
   
 
   function showOverallPageHandler() {
-    navigation.navigate("Login");
+    navigation.navigate("Overall");
   }
   function showMiddleButtonHandler() {
-    //navigation.navigate("Overall");
+    navigation.navigate("Journey");
   }
   function showPersonalPageHandler() {
     //navigation.navigate("Overall");
@@ -135,7 +140,10 @@ function Journey({navigation}) {
         </View>
 
           <View style={styles.middleContainer}>
-          <ScoreCard style={styles.card} color="green" scores={90}></ScoreCard>
+          <TouchableOpacity onPress={showDetailedJourneyPageHandler}>
+             <ScoreCard style={styles.card} color="green" scores={90}></ScoreCard>
+          </TouchableOpacity>
+         
           <ScoreCard style={styles.card}></ScoreCard>
           <ScoreCard style={styles.card} color="yellow" scores={70} noAlert={4}></ScoreCard>
           <ScoreCard style={styles.card}></ScoreCard>
@@ -150,12 +158,12 @@ function Journey({navigation}) {
       <View style={styles.footerContainer}>
         <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.homeContainer}  onPress={showOverallPageHandler} >
-          <Image source={require("../assets/home.png")}/>
+          <Image source={require("../assets/home2.png")}/>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.homeContainer} onPress={showOverallPageHandler} >
+          <TouchableOpacity style={styles.homeContainer} onPress={showMiddleButtonHandler} >
           <Image source={require("../assets/journey1.png")}/>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.homeContainer} onPress={showOverallPageHandler} >
+          <TouchableOpacity style={styles.homeContainer} onPress={showPersonalPageHandler} >
           <Image source={require("../assets/user1.png")}/>
           </TouchableOpacity> 
         </View>
