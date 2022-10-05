@@ -1,4 +1,4 @@
-import { StatusBar, StyleSheet, Text, View,Image,TouchableOpacity, ScrollView } from "react-native";
+import { StatusBar, StyleSheet, Text, View,Image,TouchableOpacity, ScrollView, Dimensions } from "react-native";
 import Button from "../components/UI/Button";
 import { GlobalStyles } from "../styles/styles";
 import ScoreBoard from "../components/UI/ScoreBoard";
@@ -9,6 +9,7 @@ import AlertCard from "../components/UI/AlertCard";
 import { useNavigation } from "@react-navigation/native";
 import MapViewDirections from "react-native-maps-directions";
 import { ScrollableComponent } from "react-native-keyboard-aware-scroll-view";
+import { proc } from "react-native-reanimated";
 
 function DetailedJourney() {
   const data = [{
@@ -19,7 +20,13 @@ function DetailedJourney() {
 
   const origin = {latitude: 37.3318456, longitude: -122.0296002};
   const destination = {latitude: 37.771707, longitude: -122.4053769};
-  // const GOOGLE_MAPS_APIKEY = "AIzaSyBQS9yHLvLPhOyNTLQ179LkCci5XlZ-RS4";
+  const {w,h} = Dimensions.get("window");
+  const ratio = Dimensions.get("window")["width"]/Dimensions.get("window")["height"];
+  const delta1 = origin.latitude - destination.latitude;
+  const delta2 = origin.longitude-origin.longitude;
+  console.log(ratio)
+  const initial_position={latitude:(origin.latitude+destination.latitude)/2, longitude: (origin.longitude+destination.longitude)/2,latitudeDelta:delta1*0.1,longitudeDelta:delta2*0.1}
+  const GOOGLE_MAPS_APIKEY = 'AIzaSyBQS9yHLvLPhOyNTLQ179LkCci5XlZ-RS4';
 
   const data2 = [
     { label: 'TC7391', value: '1' },
@@ -51,23 +58,23 @@ function DetailedJourney() {
         <MapView
             provider={PROVIDER_GOOGLE} // remove if not using Google Maps
             style={styles.mapContainer}
-            initialRegion={origin}>
-            <Marker coordinate = {origin}>
-            <Image style={styles.marker} source={require("../assets/Images/locationStart.png")}></Image>
-            </Marker>
+            initialRegion={initial_position}
+            >
             <Marker coordinate = {destination}>
             <Image style={styles.marker} source={require("../assets/Images/locationEnd.png")}></Image>
             </Marker>
-            {/* <MapViewDirections origin={origin} 
+            <Marker coordinate = {origin}>
+            <Image style={styles.marker} source={require("../assets/Images/locationStart.png")}></Image>
+            </Marker>
+            <MapViewDirections origin={origin} 
             destination = {destination}
             strokeColor="red"
             strokeWidth={3}
             apikey = {GOOGLE_MAPS_APIKEY}
-            ></MapViewDirections> */}
+            ></MapViewDirections>
 
 
           </MapView>
-
         <View style={styles.bottomContainer}>
         <AlertCard style={styles.card}></AlertCard>
         <AlertCard style={styles.card}></AlertCard>
