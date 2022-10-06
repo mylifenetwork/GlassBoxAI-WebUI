@@ -1,13 +1,29 @@
 import { addDays } from 'date-fns';
-import * as React from 'react';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import React, { useState } from "react";
+import { SafeAreaView, StyleSheet, Text, View,TouchableOpacity,Image} from 'react-native';
 import { DatePicker } from 'react-native-week-month-date-picker';
+import Modal from "react-native-modal";
+import Button from './Button';
 
 export default function Calendar() {
+  const [isModalVisible, setModalVisible] = useState(false);
+  //console.log("test modal",isModalVisible);
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+    // console.log("test modal",isModalVisible);
+  };
     const minDate = new Date();
     const [selectedDate, setSelectedDate] = React.useState(new Date());
   
     return (
+      <View>
+        <TouchableOpacity onPress={toggleModal}>
+        <Image source={require("../../assets/Images/calendar.png")}></Image>
+
+      </TouchableOpacity>
+      
+      <Modal isVisible={isModalVisible}>
       <SafeAreaView style={styles.container}>
         <DatePicker
           minDate={minDate}
@@ -18,22 +34,48 @@ export default function Calendar() {
           disabledDates={[addDays(new Date(), 1), addDays(new Date(), 3)]}
           allowsPastDates={false}
           locale="en"
+          style={styles.calendar}
           theme={{
             primaryColor: 'black',
           }}
         >
-          {/* <View> */}
-            {/* <Text>{selectedDate.toString()}</Text> */}
-          {/* </View> */}
+          {/* <View style={styles.buttonContainer}>
+        <Button style={styles.button} bgcolor={"#353948"} onPress={toggleModal} textColor={"white"}>
+          Confirm
+        </Button>
+        <Button style={styles.button} bgcolor={"white"} onPress={toggleModal}>
+          Cancel
+        </Button>
+      </View> */}
+          
         </DatePicker>
+<View style={styles.buttonContainer}>
+        <Button style={styles.button} bgcolor={"#353948"} onPress={toggleModal} textColor={"white"}>
+          Confirm
+        </Button>
+        <Button style={styles.button} bgcolor={"white"} onPress={toggleModal}>
+          Cancel
+        </Button>
+      </View>
       </SafeAreaView>
+      
+      </Modal>
+      </View>
     );
   }
 
   const styles = StyleSheet.create({
+    canlendar:{
+      marginBottom:"20%"
+    },
+    button:{
+      marginBottom:"5%"
+
+    },
     container:{
-      borderRadius:12,
+      borderRadius:100,
       flex:1,
+      bottom:"-50%"
     },
     dropdown: {
       margin: "5%",
@@ -76,5 +118,11 @@ export default function Calendar() {
       textAlign:'center'
     },
     iconStyle: {
+    },
+    buttonContainer: {
+      flex: 1,
+      alignItems:"center",
+      flexDirection:'col',
+      // justifyContent: "flex-end"
     },
   });

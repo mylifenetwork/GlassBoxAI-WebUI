@@ -5,11 +5,11 @@ import TotalTime from "../components/UI/TotalTime";
 import LastJourney from "../components/UI/LastJourney";
 import Donut from "../components/UI/Donut";
 import MapComponent from "../components/UI/MapComponent";
-import MapView, { PROVIDER_GOOGLE,Polyline,Marker } from 'react-native-maps';
+import DonutPie from "../components/UI/DonutPie";
+import MapView,{PROVIDER_GOOGLE,Polyline,Marker } from 'react-native-maps';
 import { ScrollableComponent } from "react-native-keyboard-aware-scroll-view";
 
-function OverallPage({navigation}) {
-
+function OverallPage({navigation}){
   const data = [{
     percentage: 80,
     color: 'tomato',
@@ -27,22 +27,25 @@ function OverallPage({navigation}) {
     //navigation.navigate("Overall");
   }
   
+    // const location = Geolocation.getCurrentPosition();
   
   
   return (
-    <>
+    <> 
       <StatusBar barStyle="light-content" />
-      
-
-      <View style={styles.container}>
+       
+      <View style={styles.container}>        
+        
         <ScrollView>
+<View style={styles.chart}>
+          <DonutPie></DonutPie>
+        </View>
         <View style={styles.formHeader}>
         
-        <View style={styles.chart}>
-        {data.map((p, i) => {
-          return <Donut key={i} percentage={p.percentage} color={p.color} max={p.max}/>
-        })}
-        </View>
+        
+        
+
+        
         
         </View>
         <View style={styles.locationContainer}>
@@ -57,15 +60,13 @@ function OverallPage({navigation}) {
           >
             <Marker coordinate = {{latitude: 22.279909,longitude: 114.173729}}
 
-            //pinColor = {"black"} // any color
-            // title={"title"}
-            // description={"description"}
+            pinColor = {"black"} // any color
+            title={"title"}
+            description={"description"}
             >
               <Image style={styles.marker} source={require("../assets/Images/location-pin.png")}></Image>
 
             </Marker>
-            
-
 
           
           </MapView>
@@ -75,9 +76,6 @@ function OverallPage({navigation}) {
             <TotalTime></TotalTime>
             <LastJourney></LastJourney>
            </View>
-           
-          {/* <View>
-          </View> */}
 
 
         </View>
@@ -133,6 +131,7 @@ const styles = StyleSheet.create({
     // marginHorizontal:7,
     // marginBottom:12,
     // marginTop:2,
+    margintop:"-100%"
   },
   locationContainer:{
     marginTop:"5%",
@@ -222,10 +221,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   chart:{
-    flexDirection: 'row', 
-    justifyContent: 'space-evenly', 
-    flexWrap: 'wrap', 
-    alignItems: 'center',   
-    //transform:[{scale:1.5}]
+    marginTop:"-25%",
+    height:"50%",
+    transform:[{scale:0.8}],
+    marginBottom:"-25%"
   }
 });

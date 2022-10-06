@@ -5,7 +5,7 @@ import Modal from "react-native-modal";
 
 function ModalCard({name="speeding"}) {
   const [isModalVisible, setModalVisible] = useState(false);
-  console.log("test modal",isModalVisible);
+  //console.log("test modal",isModalVisible);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);

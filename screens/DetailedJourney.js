@@ -24,8 +24,8 @@ function DetailedJourney() {
   const ratio = Dimensions.get("window")["width"]/Dimensions.get("window")["height"];
   const delta1 = origin.latitude - destination.latitude;
   const delta2 = origin.longitude-origin.longitude;
-  console.log(ratio)
-  const initial_position={latitude:(origin.latitude+destination.latitude)/2, longitude: (origin.longitude+destination.longitude)/2,latitudeDelta:delta1*0.1,longitudeDelta:delta2*0.1}
+  console.log(ratio*0.9)
+  const initial_position={latitude:(origin.latitude+destination.latitude)/2, longitude: (origin.longitude+destination.longitude)/2,latitudeDelta:delta1*0.08,longitudeDelta:delta2*0.08}
   const GOOGLE_MAPS_APIKEY = 'AIzaSyBQS9yHLvLPhOyNTLQ179LkCci5XlZ-RS4';
 
   const data2 = [

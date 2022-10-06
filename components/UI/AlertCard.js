@@ -23,7 +23,7 @@ function ScoreCard(
         strokewidth:5,
         font:14,
       }];
-      console.log(scores);
+     // console.log(scores);
 
   return (
     <View style={styles.boxContainer}>

@@ -86,9 +86,7 @@ function Journey() {
             </Text>
             <Text style={styles.dateText}>July 15, 2022</Text>
           </View>
-          <TouchableOpacity onPress={showCalendarHandler} style={styles.calendarIcon}>
-          <Image source={require("../assets/Images/calendar.png")}></Image>
-        </TouchableOpacity>
+          <Calendar></Calendar>
           <TouchableOpacity style={styles.leftContainer}>
           <Image source={require("../assets/Images/left.png")}/>
           </TouchableOpacity>
@@ -150,9 +148,9 @@ function Journey() {
           </View>
         </View>
         </ScrollView>
-        <View style={[{ opacity: pressed ? 1 : 0 },{marginBottom:pressed ? "100%":0},{zIndex:100}]}>
+        {/* <View style={[{ opacity: pressed ? 1 : 0 },{marginBottom:pressed ? "100%":0},{zIndex:100}]}>
           <Calendar></Calendar>
-        </View>
+        </View> */}
         
 
       <View style={styles.footerContainer}>
