@@ -101,3 +101,11 @@ Oct.3-5 3.5 hrs
 3. Start setting the .env
 4. Status Report
 5. debugging for the MapViewsDirection error
+
+Oct.6 4 hrs
+1. Find and trying which donut pie chart is best
+2. implementing donut pie chart
+3. fixing css on OverallPage
+4. continuing on calendar view (start changing to modal)
+Issue:
+Donut pie chart color does not look same as Figma shows.
