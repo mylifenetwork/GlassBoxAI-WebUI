@@ -109,3 +109,13 @@ Oct.6 4 hrs
 4. continuing on calendar view (start changing to modal)
 Issue:
 Donut pie chart color does not look same as Figma shows.
+
+Oct.9 1.5 hrs
+
+
+Issues:
+1. https://docs.expo.dev/guides/environment-variables/
+(Dotenv issue)
+2. calendar issue
+(https://github.com/noona-hq/react-native-week-month-date-picker)
+(https://github.com/lchenfox/react-native-common-date-picker)
