@@ -17,15 +17,23 @@ function DetailedJourney() {
     color: 'tomato',
     max: 100
   }]
-
   const origin = {latitude: 37.3318456, longitude: -122.0296002};
   const destination = {latitude: 37.771707, longitude: -122.4053769};
-  const {w,h} = Dimensions.get("window");
-  const ratio = Dimensions.get("window")["width"]/Dimensions.get("window")["height"];
-  const delta1 = origin.latitude - destination.latitude;
-  const delta2 = origin.longitude-origin.longitude;
-  console.log(ratio*0.9)
-  const initial_position={latitude:(origin.latitude+destination.latitude)/2, longitude: (origin.longitude+destination.longitude)/2,latitudeDelta:delta1*0.08,longitudeDelta:delta2*0.08}
+  // const origin = {latitude: 22.3375, longitude: 114.2630};
+  // const destination = {latitude: 22.2843, longitude: 114.1555};
+  const w = Dimensions.get("window")["width"];
+  const h = Dimensions.get("window")["height"];
+  const ratio = w/h; 
+  const delta1 = Math.abs(origin.latitude - destination.latitude)/2;
+  const delta2 = Math.abs(origin.longitude-destination.longitude)/2;
+  //delta1/delta2;
+  console.log(delta1,delta2)
+  const initial_position={
+    latitude:(origin.latitude+destination.latitude)/2, 
+    longitude: (origin.longitude+destination.longitude)/2,
+    latitudeDelta:delta1*1.1/ratio,
+    longitudeDelta:delta2*1.1/(ratio),
+  }
   const GOOGLE_MAPS_APIKEY = 'AIzaSyBQS9yHLvLPhOyNTLQ179LkCci5XlZ-RS4';
 
   const data2 = [
@@ -58,7 +66,9 @@ function DetailedJourney() {
         <MapView
             provider={PROVIDER_GOOGLE} // remove if not using Google Maps
             style={styles.mapContainer}
-            initialRegion={initial_position}
+            //initialRegion={initial_position}
+            region={initial_position
+            }
             >
             <Marker coordinate = {destination}>
             <Image style={styles.marker} source={require("../assets/Images/locationEnd.png")}></Image>
