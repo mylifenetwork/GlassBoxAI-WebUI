@@ -1,12 +1,12 @@
 import { StatusBar, StyleSheet, Text, View,Image,TouchableOpacity, ScrollView, Dimensions } from "react-native";
-import Button from "../components/UI/Button";
 import { GlobalStyles } from "../styles/styles";
 import ScoreBoard from "../components/UI/ScoreBoard";
 import DropdownBox from "../components/UI/DropdownBox";
-import MapView, { PROVIDER_GOOGLE,Polyline,Marker } from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE,Polyline,Marker, Callout } from 'react-native-maps';
 import { useState,React } from "react";
 import AlertCard from "../components/UI/AlertCard";
 import { useNavigation } from "@react-navigation/native";
+import Button from "../components/UI/Button";
 import MapViewDirections from "react-native-maps-directions";
 import { ScrollableComponent } from "react-native-keyboard-aware-scroll-view";
 import { proc } from "react-native-reanimated";
@@ -17,10 +17,23 @@ function DetailedJourney() {
     color: 'tomato',
     max: 100
   }]
-  const origin = {latitude: 37.3318456, longitude: -122.0296002};
-  const destination = {latitude: 37.771707, longitude: -122.4053769};
-  // const origin = {latitude: 22.3375, longitude: 114.2630};
-  // const destination = {latitude: 22.2843, longitude: 114.1555};
+
+  const alertInfo={braking:["Braking","08:35:10"],speeding:["Speeding","08:35:10"]}  
+  const alertPoints={braking:{
+    latitude:22.279461,
+    longitude:114.181240,
+  },speeding:{
+    latitude:22.296852, 
+    longitude:114.242031,
+  }}
+  const alertImage={
+    braking:[require("../assets/Images/brakingPin.png")],
+    speeding:[require("../assets/Images/speedingPin.png")]
+  }
+  // const origin = {latitude: 37.3318456, longitude: -122.0296002};
+  // const destination = {latitude: 37.771707, longitude: -122.4053769};
+  const origin = {latitude: 22.3375, longitude: 114.2630};
+  const destination = {latitude: 22.2843, longitude: 114.1555};
   const w = Dimensions.get("window")["width"];
   const h = Dimensions.get("window")["height"];
   const ratio = w/h; 
@@ -76,6 +89,35 @@ function DetailedJourney() {
             <Marker coordinate = {origin}>
             <Image style={styles.marker} source={require("../assets/Images/locationStart.png")}></Image>
             </Marker>
+
+              {Object.keys(alertPoints).map(k=>
+              <Marker coordinate = {alertPoints[k]} 
+              // image = {alertImage[k][0]}
+              >
+              <Image style={styles.markerPin} source={alertImage[k][0]}></Image>
+              <Callout tooltip>
+                <View>
+                  <View style={styles.bubble}>
+                    <Text>{alertInfo[k][0]} | {alertInfo[k][1]}</Text>
+                    <Image source={require("../assets/Images/alertInfoImage.png")}></Image>
+                    <View style={styles.rowConatiner}>
+                      <Button customStyle={styles.button}>
+                      Image
+                    </Button>
+                    <Button customStyle={styles.button}>
+                      Video
+                    </Button>
+                    </View>
+                    
+                  </View>
+                  <View style={styles.arrowBorder}></View>
+                  <View style={styles.arrow}></View>
+                </View>
+
+              </Callout>
+              </Marker>
+              )}
+
             <MapViewDirections origin={origin} 
             destination = {destination}
             strokeColor="red"
@@ -116,6 +158,47 @@ function DetailedJourney() {
 export default DetailedJourney;
 
 const styles = StyleSheet.create({
+  rowConatiner:{
+    flexDirection:"row",
+    alignContent:"space-around"
+
+  },
+  titleText:{
+    textAlign:"center",
+    fontFamily: "K2D-Regular",
+    fontWeight:"300",
+    fontSize:12,
+
+  },
+  arrow:{
+    backgroundColor:"transparent",
+    borderColor:"transparent",
+    borderTopColor:"#fff",
+    borderWidth:16,
+    alignSelf:"center",
+    marginTop:-32
+
+  },
+  arrowBorder:{
+    backgroundColor:"transparent",
+    borderColor:"transparent",
+    borderTopColor:"#007a87",
+    borderWidth:16,
+    alignSelf:"center",
+    marginTop:-0.5
+  },
+  bubble:{
+    flexDirection:"col",
+    alignSelf:"flex-start",
+    backgroundColor:"#fff",
+    borderRadius:6,
+    borderColor:"#ccc",
+    borderWidth:0.5,
+    padding:10,
+    width:"100%",
+    marginTop:"120%"
+
+  },
   mapContainer:{
     // flex:5,
     //width:317,
@@ -183,5 +266,8 @@ const styles = StyleSheet.create({
     height:"50",
     alignItems:"center",
     // marginTop:"200%"
+  },
+  markerPin:{
+
   }
 });
