@@ -16,7 +16,7 @@ import Journey from "./screens/Journey";
 import DetailedJourney from "./screens/DetailedJourney";
 import { StyleSheet, View } from "react-native";
 import testPage from "./screens/testPage";
-
+import CapturedImage from "./screens/CapturedImage";
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
@@ -84,18 +84,25 @@ export default function App() {
                 title:"Journey",
               }}
             />
-             <Stack.Screen
+            <Stack.Screen
               name = "DetailedJourney"
               component={DetailedJourney}
               options={{
                 title:"Journey",
               }}
             />
-              <Stack.Screen
+            <Stack.Screen
               name = "testPage"
               component={testPage}
               options={{
                 title:"testPage",
+              }}
+            />
+            <Stack.Screen
+              name = "CapturedImage"
+              component={CapturedImage}
+              options={{
+                title:"Captured image",
               }}
             />
           </Stack.Navigator>
