@@ -23,6 +23,18 @@ function CapturedImage() {
     { label: 'BV9203333', value: '2' },
   ];
 
+  const info={alert:"Braking",
+  happen:"08:35:10",
+  start:"08:35:00",
+  end:"08:35:20",
+  position:"Price Edward",
+  speedBefore: "73 km/h",
+  speedAfter:"23 km/h",
+  timeDelta:"2",
+  alertTime:"10s"
+
+};
+
  
   const navigation = useNavigation();
   function showOverallPageHandler() {
@@ -48,10 +60,52 @@ function CapturedImage() {
         <ScoreBoard></ScoreBoard>
         <View style={styles.line}></View>
 
-        <View style={styles.bottomContainer}>
-        <AlertCard style={styles.card}></AlertCard>
-        <AlertCard style={styles.card}></AlertCard>
+        <View style={styles.infoContainer}>
+          <View style={styles.rowContainer}>
+            <Text style={styles.title}>Alert: </Text>
+            <Text style={styles.content}>{info["alert"]}</Text>
+          </View>
+
+          <View style={styles.rowContainer}>
+            <Text style={styles.title}>Alert happen</Text>
+            <Text style={styles.content}>{info["happen"]}</Text>
+          </View>
+
+          <View style={styles.rowContainer}>
+            <Text style={styles.title}>Start: </Text>
+            <Text style={styles.content}>{info["start"]}</Text>
+            <Text style={styles.title}> - End: </Text>
+            <Text style={styles.content}>{info["end"]}</Text>
+          </View>
+
+          <View style={styles.rowContainer}>
+            <Image source={require("../assets/Images/Exclude.png")}></Image>
+            <Text style={styles.content}>{info["position"]}</Text>
+          </View>
+          
         </View>
+        <View style={styles.lineB}></View>
+
+        <View>
+          <View style={styles.rowContainer}>
+            <Image source={require("../assets/Images/alertSmall.png")}></Image>
+            <Text style={[styles.title,{alignSelf:"center", marginLeft:"2.5%"}]}>
+              {info["alert"]}
+            </Text>
+          </View>
+          <Text style={[styles.content,{marginLeft:"10%"}]} numberOfLines={2}>
+          Your speed was greatly reduced from {info["speedBefore"]} to {info["speedAfter"]} in {info["timeDelta"]} seconds
+          </Text>
+        </View>
+
+        <View>
+          <Text style={[styles.title,{marginRight:"60%"}]}>Before the alert - {info["alertTime"]}</Text>
+        </View>
+
+        {/* <View style={styles.bottomContainer}>
+        <AlertCard style={styles.card}></AlertCard>
+        <AlertCard style={styles.card}></AlertCard>
+        </View> */}
         </View>
         </ScrollView>
 
@@ -79,6 +133,28 @@ function CapturedImage() {
 export default CapturedImage;
 
 const styles = StyleSheet.create({
+  infoContainer:{
+    marginRight:"42.5%"
+  },
+  content:{
+    color: "white",
+    fontFamily: "K2D-Regular",
+    fontWeight:"300",
+    fontSize:14,
+    marginLeft:"2.5%"
+  },
+  title:{
+    color: "white",
+    fontFamily: "K2D-Regular",
+    fontWeight:"700",
+    fontSize:14,
+    // marginLeft:"2.5%"
+  },
+    rowContainer:{
+      flexDirection:"row",
+      marginTop:"5%"
+      // alignItems:"flex-start",
+  },
     line:{
         borderWidth: 0.7,
         borderColor:'#EBEBEB',
