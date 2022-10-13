@@ -2,6 +2,12 @@ import { StyleSheet, Text, View, Image } from "react-native";
 import Button from "../components/UI/Button";
 import { GlobalStyles } from "../styles/styles";
 import DonutPie from "../components/UI/DonutPie";
+// import Slider from "../components/UI/Slider";
+import React, { useState,useRef} from "react";
+import { setStatusBarHidden } from 'expo-status-bar'
+import { ResizeMode } from 'expo-av'
+import VideoPlayer from 'expo-video-player'
+import { Circle } from "react-native-svg";
 
 function Home({ navigation }) {
   function showSignUpFormHandler() {
@@ -14,10 +20,33 @@ function Home({ navigation }) {
     //navigation.navigate("Journey");
   }
 
+  const [status, setStatus] = React.useState({});
+
   return (
     <View style={styles.container}>
-        <DonutPie></DonutPie>
-     
+        {/* <Slider></Slider> */}
+        <VideoPlayer
+        style={{ height: 160,videoBackgroundColor: 'transparent'}}
+        timeVisible={true}
+        textStyle={{color:"#A1DADC"}}
+        activityIndicator={{size:"large"}}
+        icon={{
+         color:"#A1DADC",
+          play:
+          <View style={styles.Circle}></View>,
+      }}
+      onPlaybackStatusUpdate={status => setStatus(() => status)}
+  videoProps={{
+
+    
+    shouldPlay: false,
+    resizeMode: ResizeMode.CONTAIN,
+    // ❗ source is required https://docs.expo.io/versions/latest/sdk/video/#props
+    source: {
+      uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    },
+  }}>
+    </VideoPlayer>
     </View>
   );
 }
@@ -25,6 +54,14 @@ function Home({ navigation }) {
 export default Home;
 
 const styles = StyleSheet.create({
+  Circle:{
+    height : 50,
+    width :50,
+    position:"absolute",
+    backgroundColor:'white',
+    borderRadius: 50/2,
+    // marginLeft:-7.5,
+},
   container: {
     flex: 1,
     backgroundColor: GlobalStyles.colors.primary500,

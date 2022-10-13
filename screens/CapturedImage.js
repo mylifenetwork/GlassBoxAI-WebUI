@@ -2,8 +2,8 @@ import { StatusBar, StyleSheet, Text, View,Image,TouchableOpacity, ScrollView, D
 import { GlobalStyles } from "../styles/styles";
 import ScoreBoard from "../components/UI/ScoreBoard";
 import DropdownBox from "../components/UI/DropdownBox";
-import MapView, { PROVIDER_GOOGLE,Polyline,Marker, Callout } from 'react-native-maps';
-import { useState,React } from "react";
+// import { SliderBox } from "react-native-image-slider-box";
+import { useState,React,Component } from "react";
 import AlertCard from "../components/UI/AlertCard";
 import { useNavigation } from "@react-navigation/native";
 import Button from "../components/UI/Button";
