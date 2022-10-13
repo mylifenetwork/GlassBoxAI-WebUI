@@ -17,6 +17,7 @@ import DetailedJourney from "./screens/DetailedJourney";
 import { StyleSheet, View } from "react-native";
 import testPage from "./screens/testPage";
 import CapturedImage from "./screens/CapturedImage";
+import VideoPlayback from "./screens/VideoPlayback";
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
@@ -103,6 +104,13 @@ export default function App() {
               component={CapturedImage}
               options={{
                 title:"Captured image",
+              }}
+            />
+            <Stack.Screen
+              name = "VideoPlayback"
+              component={VideoPlayback}
+              options={{
+                title:"Video playback",
               }}
             />
           </Stack.Navigator>
