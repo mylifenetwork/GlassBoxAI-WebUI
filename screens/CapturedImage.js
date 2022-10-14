@@ -4,12 +4,9 @@ import ScoreBoard from "../components/UI/ScoreBoard";
 import DropdownBox from "../components/UI/DropdownBox";
 // import { SliderBox } from "react-native-image-slider-box";
 import { useState,React,Component } from "react";
-import AlertCard from "../components/UI/AlertCard";
 import { useNavigation } from "@react-navigation/native";
 import Button from "../components/UI/Button";
-import MapViewDirections from "react-native-maps-directions";
 import { ScrollableComponent } from "react-native-keyboard-aware-scroll-view";
-import { proc } from "react-native-reanimated";
 
 function CapturedImage() {
   const data = [{

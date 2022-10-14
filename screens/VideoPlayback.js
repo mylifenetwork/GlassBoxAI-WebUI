@@ -2,7 +2,7 @@ import { StatusBar, StyleSheet, Text, View,Image,TouchableOpacity, ScrollView, D
 import { GlobalStyles } from "../styles/styles";
 import ScoreBoard from "../components/UI/ScoreBoard";
 import DropdownBox from "../components/UI/DropdownBox";
-// import { SliderBox } from "react-native-image-slider-box";
+import ModalAlert from "../components/UI/ModalAlert";
 import { useState,React,Component } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { ResizeMode } from 'expo-av'
@@ -117,6 +117,11 @@ function VideoPlayback() {
                 }}>
             </VideoPlayer>
         </View>
+        
+        <View style={styles.alertButton}>
+          <ModalAlert></ModalAlert>
+        </View>
+
         {/* <View style={styles.bottomContainer}>
         <AlertCard style={styles.card}></AlertCard>
         <AlertCard style={styles.card}></AlertCard>
@@ -151,8 +156,10 @@ const styles = StyleSheet.create({
   videoContainer:{
     width:"95%",
     marginTop:"5%"
-
-
+  },
+  alertButton:{
+    marginTop:"5%",
+    alignSelf:"center"
   },
   infoContainer:{
     marginRight:"42.5%"
