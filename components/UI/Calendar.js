@@ -1,63 +1,56 @@
 import { addDays } from 'date-fns';
 import React, { useState } from "react";
-import { SafeAreaView, StyleSheet, Text, View,TouchableOpacity,Image} from 'react-native';
-import { DatePicker } from 'react-native-week-month-date-picker';
+import { SafeAreaView, StyleSheet, Text, View,TouchableOpacity,Image,Dimensions} from 'react-native';
+import DatePicker from 'react-native-modern-datepicker';
 import Modal from "react-native-modal";
+
 import Button from './Button';
 
-export default function Calendar() {
+export default function Calendar({type = "date", change=true}) {
+  const w = Dimensions.get("window")["width"];
   const [isModalVisible, setModalVisible] = useState(false);
   //console.log("test modal",isModalVisible);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
-    // console.log("test modal",isModalVisible);
   };
     const minDate = new Date();
     const [selectedDate, setSelectedDate] = React.useState(new Date());
+    const [pressed,setPressed] = useState(0);
   
     return (
       <View>
         <TouchableOpacity onPress={toggleModal}>
-        <Image source={require("../../assets/Images/calendar.png")}></Image>
-
-      </TouchableOpacity>
+        <Image style={styles.image}source={require("../../assets/Images/calendar.png")}></Image>
+        </TouchableOpacity>
       
       <Modal isVisible={isModalVisible}>
-      <SafeAreaView style={styles.container}>
-        <DatePicker
-          minDate={minDate}
-          maxDate={addDays(minDate, 120)}
-          markedDates={[minDate, addDays(new Date(), 2)]}
-          selectedDate={selectedDate}
-          onDateChange={(date) => setSelectedDate(date)}
-          disabledDates={[addDays(new Date(), 1), addDays(new Date(), 3)]}
-          allowsPastDates={false}
-          locale="en"
-          style={styles.calendar}
-          theme={{
-            primaryColor: 'black',
-          }}
-        >
-          {/* <View style={styles.buttonContainer}>
-        <Button style={styles.button} bgcolor={"#353948"} onPress={toggleModal} textColor={"white"}>
-          Confirm
-        </Button>
-        <Button style={styles.button} bgcolor={"white"} onPress={toggleModal}>
-          Cancel
-        </Button>
-      </View> */}
-          
-        </DatePicker>
-<View style={styles.buttonContainer}>
-        <Button style={styles.button} bgcolor={"#353948"} onPress={toggleModal} textColor={"white"}>
-          Confirm
-        </Button>
-        <Button style={styles.button} bgcolor={"white"} onPress={toggleModal}>
-          Cancel
-        </Button>
-      </View>
-      </SafeAreaView>
+        <View style={[styles.Container,type==="date"&&styles.fullScreen]}>
+          <DatePicker
+            disableDateChange={change}
+            style={[type==="date"&&styles.date,styles.monthYear]}
+            options={{
+              mainColor:"#A1DADC",
+              selectedTextColor:"black",
+              defaultFont:"K2D-Regular",
+              textHeaderFontSize:20,
+
+            }}
+            mode={type}
+            onSelectedChange={date => setSelectedDate(date)}
+          >
+          </DatePicker>
+          <View style={ [type==="monthYear"&&styles.colContainer,type==="date"&&styles.rowContainer]}>          
+            <Button customStyle={styles.button} onPress={toggleModal} mode={"flatReverse"}>
+              Cancel
+            </Button>
+            <Button customStyle={styles.button} onPress={toggleModal} backgroundColor={"dark"} textColor={"white"}>
+            Confirm
+            </Button>
+          </View>
+        </View>
+
+      
       
       </Modal>
       </View>
@@ -65,11 +58,49 @@ export default function Calendar() {
   }
 
   const styles = StyleSheet.create({
+    image:{
+      transform:[{scale:0.9}],
+    },
+    fullScreen:{
+      flexDirection:"col",
+      width:Dimensions.get("window")["width"],
+      marginLeft:"-5%"
+
+    },
+    Container:{
+      flexDirection:"col",
+      //height:0
+
+    },
+    colContainer:{
+      flexDirection:"row",
+      zIndex:100,
+      justifyContent:"space-evenly",
+      transform:[{translateY:-55}],
+    },
+    rowContainer:{
+      flexDirection:"col",
+      zIndex:100,
+      alignItems:"center",
+      // justifyContent:"center",
+      transform:[{translateY:-95}],
+    },
+    monthYear:{
+      borderRadius:15,
+    },
+    date:{
+      borderRadius:15,
+      height:"97.5%",
+      bottom:"-30%"
+    },
     canlendar:{
-      marginBottom:"20%"
+      marginBottom:"20%",
     },
     button:{
-      marginBottom:"5%"
+      // zIndex:100,
+      // width:"30%",
+      // marginBottom:"5%"
+      width:"30%"
 
     },
     container:{

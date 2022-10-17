@@ -15,6 +15,7 @@ function Journey() {
 
   const buttons = ['Day', 'Week', 'Month'];
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const calendarType = {2:"monthYear",0:"date",1:"date"}
 
   const data = [{
     percentage: 80,
@@ -77,6 +78,7 @@ function Journey() {
             selectedIndex={selectedIndex}
             onPress={(value) => {
               setSelectedIndex(value);
+              console.log(calendarType[value]);
             }}
           />
         <View style={styles.CalendarConatiner}>
@@ -86,7 +88,7 @@ function Journey() {
             </Text>
             <Text style={styles.dateText}>July 15, 2022</Text>
           </View>
-          <Calendar></Calendar>
+          <Calendar type={calendarType[selectedIndex]}></Calendar>
           <TouchableOpacity style={styles.leftContainer}>
           <Image source={require("../assets/Images/left.png")}/>
           </TouchableOpacity>
