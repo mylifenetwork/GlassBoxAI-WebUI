@@ -83,7 +83,7 @@ function ModalAlert({case_number="121",name="braking"}) {
                 No
               </Button>
               <TouchableOpacity onPress={close}>
-                <ModalPending name={name} case_number={case_number}></ModalPending>
+                <ModalPending name={name} case_number={case_number} close={toggleModal}></ModalPending>
               </TouchableOpacity>
               
             </View>
@@ -101,11 +101,11 @@ export default ModalAlert;
     ButtonText:{
       fontSize:20,
       alignSelf:"center",
-      marginLeft:"25%"
+      marginLeft:"37.5%"
     },
     rowContainer:{
       flexDirection:"row",
-      justifyContent:"space-around"
+      justifyContent:"space-between"
     },
     infoIcon:{
         marginLeft:"15%",

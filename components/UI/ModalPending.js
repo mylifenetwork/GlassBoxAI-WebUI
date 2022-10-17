@@ -4,13 +4,15 @@ import Button from "../../components/UI/Button";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Modal from "react-native-modal";
 
-function ModalPending({case_number="121",name="braking"}) {
+function ModalPending({case_number="121",name="braking",close}) {
   const [isModalVisible, setModalVisible] = useState(false);
   //console.log("test modal",isModalVisible);
 
   const toggleModal = () => {
+    if (isModalVisible){
+       close();
+    }
     setModalVisible(!isModalVisible);
-    // console.log("test modal",isModalVisible);
   };
 
 
