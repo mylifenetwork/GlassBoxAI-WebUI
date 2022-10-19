@@ -169,3 +169,8 @@ firebase authentication
 https://www.npmjs.com/package/react-native-month-picker
 https://hosseinshabani.github.io/react-native-modern-datepicker/·
 https://hosseinshabani.github.io/react-native-modern-datepicker/
+
+Oct.18/19 1.7 hrs
+1. go to calendar deep library files to change arrow color.
+2. Find and implement the date range pickers.
+Issue date range pickers color of selected dates.
