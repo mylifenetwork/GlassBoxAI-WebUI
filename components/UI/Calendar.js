@@ -2,11 +2,13 @@ import { addDays } from 'date-fns';
 import React, { useState } from "react";
 import { SafeAreaView, StyleSheet, Text, View,TouchableOpacity,Image,Dimensions} from 'react-native';
 import DatePicker from 'react-native-modern-datepicker';
+import moment from "moment";
+import DateRangePicker from "react-native-daterange-picker";
 import Modal from "react-native-modal";
 
 import Button from './Button';
 
-export default function Calendar({type = "date", change=true}) {
+export default function Calendar({type = "monthYear", change=true}) {
   const w = Dimensions.get("window")["width"];
   const [isModalVisible, setModalVisible] = useState(false);
   //console.log("test modal",isModalVisible);
@@ -21,19 +23,21 @@ export default function Calendar({type = "date", change=true}) {
     return (
       <View>
         <TouchableOpacity onPress={toggleModal}>
-        <Image style={styles.image}source={require("../../assets/Images/calendar.png")}></Image>
+        <Image style={styles.image} source={require("../../assets/Images/calendar.png")}></Image>
         </TouchableOpacity>
       
       <Modal isVisible={isModalVisible}>
         <View style={[styles.Container,type==="date"&&styles.fullScreen]}>
           <DatePicker
-            disableDateChange={change}
+            //disableDateChange={change}
             style={[type==="date"&&styles.date,styles.monthYear]}
             options={{
               mainColor:"#A1DADC",
               selectedTextColor:"black",
               defaultFont:"K2D-Regular",
               textHeaderFontSize:20,
+              borderColor:"transparent",
+              //backgroundColor:"purple"
 
             }}
             mode={type}
