@@ -9,26 +9,25 @@ import { format } from 'date-fns';
 import Modal from "react-native-modal";
 import { da } from 'date-fns/locale';
 
+const INITIAL_DATE = new Date();
 export default function CalendarB({multiple="week"}){
-  console.log(multiple,"test index!!");
   const maxDate = new Date();
   const [selectedValue, setSelectedValue] = useState(new Date());
-  const [dateString, setdateString] = useState("");
   const [selectedDate,setSelectedDate] = useState(new Date());
-  const [selected, setSelected] = useState(new Date());
-  const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [selected, setSelected] = useState(INITIAL_DATE);
   const onDayPress = useCallback((day) => {
     setSelected(day.dateString);
   }, []);
 
   const getNewSelectedDate = useCallback(
     (date, shouldAdd) => {
+      //console.log(date,"testing!!!")
       const newMonth = new Date(date).getMonth();
       const month = shouldAdd ? newMonth + 1 : newMonth - 1;
       const newDate = new Date(selectedValue.setMonth(month));
-      //const cur = selectedDate.day;
-      //console.log("test selected", typeof(selectedDate));
-      const newSelected = new Date(newDate.setDate(1));
+      const newSelected = new Date(newDate.setDate(date.getDate()));
+      setSelectedDate(newSelected);
+      // console.log("selected new",newSelected,selectedDate);
       return newSelected;
     },
     [selectedValue]
@@ -37,6 +36,7 @@ export default function CalendarB({multiple="week"}){
     (subtract, month) => {
       const newDate = getNewSelectedDate(month, false);
       setSelectedValue(newDate);
+      setSelected(newDate);
       subtract();
     },
     [getNewSelectedDate]
@@ -45,32 +45,34 @@ export default function CalendarB({multiple="week"}){
   const onPressArrowRight = useCallback(
     (add, month) => {
       const newDate = getNewSelectedDate(month, true);
+      setSelected(newDate);
       setSelectedValue(newDate);
-      console.log(newDate,"fuck");
-      setSelectedDate(newDate);
       add();
+      //console.log("test",selectedDate);
     },
     [getNewSelectedDate]
   );
- function getDate (date,count){
-   const string = date.dateString;
-   const ret =  (moment(string).add(count, 'days')).format('YYYY-MM-DD');
-   //console.log(ret);
+ function getDate (count){
+   const str= selectedDate;
+   const ret =  (moment(str).add(count, 'days')).format('YYYY-MM-DD');
+   console.log(str,ret,"marked")
    return ret;
    //return CalendarUtils.getCalendarDateString(ret);
   };
 
-  const CustomHeaderTitle = (
-    <TouchableOpacity style={styles.customTitleContainer} onPress={() => console.warn('Tapped!')}>
-      <Text style={styles.customTitle}>{format((selectedValue.getMonth() + 1),'MMMM')} {selectedValue.getFullYear()}</Text>
-    </TouchableOpacity>
-  );
+// Maybe Later we need
+  // const CustomHeaderTitle = (
+  //   <TouchableOpacity style={styles.customTitleContainer} onPress={() => console.warn('Tapped!')}>
+  //     <Text style={styles.customTitle}>{format((selected.getMonth() + 1),'MMMM')} {selected.getFullYear()}</Text>
+  //   </TouchableOpacity>
+  // );
 
   const [isModalVisible, setModalVisible] = useState(false);
 //console.log("test modal",isModalVisible);
 
 const toggleModal = () => {
   setModalVisible(!isModalVisible);
+  console.log("confirm",selectedDate);
 };
 
   return (
@@ -93,26 +95,22 @@ const toggleModal = () => {
 
       }}
         onDayPress={
-          //onDayPress
           day => {
-          setSelectedDate(day);
-
-          //setSelectedValue(new Date(day));
-          //onDayPress;
-          console.log('selected day', typeof(new Date()));
+          setSelectedDate(day.dateString);
+          //console.log(day);
+          onDayPress;
        }
       }
-         initialDate = {selectedDate}
+        initialDate={selectedDate}
          maxDate = {maxDate}
         markedDates={multiple==="week"&&{
-          [getDate(selectedDate)]: {selected: true, selectedColor: '#A1DADC'},
-          [getDate(selectedDate,-1)]: {selected: true, selectedColor: '#A1DADC'},
-          [getDate(selectedDate,-2)]: {selected: true,  selectedColor: '#A1DADC'},
-          [getDate(selectedDate,-3)]: {selected: true,  selectedColor: '#A1DADC'},
-          [getDate(selectedDate,-4)]: {selected: true,  selectedColor: '#A1DADC'},
-          [getDate(selectedDate,-5)]: {selected: true,  selectedColor: '#A1DADC'},
-          [getDate(selectedDate,-6)]: {selected: true, selectedColor: '#A1DADC'},
-          
+          [getDate(0)]: {selected: true, selectedColor: '#A1DADC'},
+          [getDate(1)]: {selected: true, selectedColor: '#A1DADC'},
+          [getDate(2)]: {selected: true, selectedColor: '#A1DADC'},
+          [getDate(3)]: {selected: true, selectedColor: '#A1DADC'},
+          [getDate(4)]: {selected: true, selectedColor: '#A1DADC'},
+          [getDate(5)]: {selected: true, selectedColor: '#A1DADC'},
+          [getDate(6)]: {selected: true, selectedColor: '#A1DADC'},
         }}
         monthFormat={'MMMM yyyy'}
         style={styles.calendar}
@@ -131,7 +129,6 @@ const toggleModal = () => {
         </View>
     {/* </Fragment>       */}
     </Modal>
-
       </View>
   );
 };
@@ -141,7 +138,7 @@ const styles = StyleSheet.create({
     zIndex:10,
     // transform:[{translateY:-10}],
     backgroundColor:"white",
-    marginTop:"40%",
+    marginTop:"30%",
     alignSelf:"center",
     width:"40%",
     borderRadius:15,
