@@ -184,3 +184,11 @@ Oct.20 7 hrs
 new library
 1.https://github.com/wix/react-native-calendars/blob/9b52caf0a98bdcfdd317894512fd4b38eb3e346d/example/src/screens/calendarScreen.tsx#L12
 2. https://github.com/wix/react-native-calendars
+
+Oct.24/25 2.7 hrs
+1. Fixing Week_Calendar View,
+Now it can automatically colored next 7 days if we swipe to next month or previous month.
+eg. Current: Nov.7 colored: Nov.7-Nov.13
+    Move to previous Month: selectedDate: Oct.7 colored: Oct.7-Oct.13
+Reason: the selected date type is varied, sometimes it is type Date, 
+        sometimes it is a string which cause the wrong type for marked dates.
