@@ -6,6 +6,8 @@ import DropdownBox from "../components/UI/DropdownBox";
 import { useState,React,Component } from "react";
 import { useNavigation } from "@react-navigation/native";
 import Button from "../components/UI/Button";
+import ModalAlert from "../components/UI/ModalAlert";
+import Swiper from "react-native-swiper";
 import { ScrollableComponent } from "react-native-keyboard-aware-scroll-view";
 
 function CapturedImage() {
@@ -21,8 +23,8 @@ function CapturedImage() {
   ];
 
   const info={alert:"Braking",
-  happen:"08:35:10",
-  start:"08:35:00",
+  happen:"08:35:11",
+  start:"08:35:01",
   end:"08:35:20",
   position:"Price Edward",
   speedBefore: "73 km/h",
@@ -96,13 +98,72 @@ function CapturedImage() {
         </View>
 
         <View>
-          <Text style={[styles.title,{marginRight:"60%"}]}>Before the alert - {info["alertTime"]}</Text>
+          <Text style={[styles.title,{marginRight:"60%"},{marginTop:"5%"}]}>Before the alert - {info["alertTime"]}</Text>
         </View>
 
-        {/* <View style={styles.bottomContainer}>
-        <AlertCard style={styles.card}></AlertCard>
-        <AlertCard style={styles.card}></AlertCard>
-        </View> */}
+        <Swiper style={styles.wrapper}
+      dotStyle={{
+        backgroundColor: 'white',
+        margin:3,
+        marginTop:"-300%"
+      }}
+      activeDotStyle={
+        {backgroundColor: '#A1DADC', 
+        width: 19, height: 6,  
+        margin:3,
+        marginTop:"-300%"
+        // marginLeft: "2.5%", marginRight: "2.5%", marginTop: "2.5%", marginBottom: "2.5%",
+      }}
+      >
+        <View style={styles.slide1}>
+          {/* <Text style={styles.text}>Hello Swiper</Text> */}
+          <Image source={require("../assets/Images/swiperImage1.png")}></Image>
+        </View>
+        <View style={styles.slide1}>
+        <Image source={require("../assets/Images/swiperImage2.png")}></Image>
+        </View>
+        <View style={styles.slide1}>
+          <Text style={styles.text}>And simple</Text>
+        </View>
+      </Swiper>
+
+      <View style={[styles.lineB,{marginTop:"-150%"}]}></View>
+
+      <View>
+        <Text style={[styles.title,{marginRight:"60%"},{marginTop:"5%"}]}>After the alert - {info["alertTime"]}</Text>
+      </View>
+      <Swiper style={styles.wrapper}
+      dotStyle={{
+        backgroundColor: 'white',
+        margin:3,
+        marginTop:"-300%"
+      }}
+      activeDotStyle={
+        {backgroundColor: '#A1DADC', 
+        width: 19, height: 6,  
+        margin:3,
+        marginTop:"-300%"
+        // marginLeft: "2.5%", marginRight: "2.5%", marginTop: "2.5%", marginBottom: "2.5%",
+      }}
+      >
+        <View style={styles.slide1}>
+          {/* <Text style={styles.text}>Hello Swiper</Text> */}
+          <Text style={styles.cornerText}>{info["happen"]} - {info["speedBefore"]}</Text>
+          <Image source={require("../assets/Images/swiperImage1.png")}></Image>
+        </View>
+        <View style={styles.slide1}>
+        <Image source={require("../assets/Images/swiperImage2.png")}></Image>
+        </View>
+        <View style={styles.slide1}>
+          <Text style={styles.text}>And simple</Text>
+        </View>
+      </Swiper>
+
+      <View style={styles.alertButton}>
+          <ModalAlert></ModalAlert>
+        </View>
+
+
         </View>
         </ScrollView>
 
@@ -130,6 +191,26 @@ function CapturedImage() {
 export default CapturedImage;
 
 const styles = StyleSheet.create({
+  cornerText:{
+    color: "white",
+    fontFamily: "K2D-Regular",
+    fontWeight:"300",
+    fontSize:14,
+    zIndex:100,
+    marginTop:"-300%"
+
+  },
+  slide1: {
+    flex: 1,
+    marginTop:"5%",
+    //justifyContent: 'center',
+    alignItems: 'center',
+    // backgroundColor: '#9DD6EB'
+  },
+  alertButton:{
+    marginTop:"-150%",
+    alignSelf:"center"
+  },
   infoContainer:{
     marginRight:"42.5%"
   },
