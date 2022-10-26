@@ -192,3 +192,7 @@ eg. Current: Nov.7 colored: Nov.7-Nov.13
     Move to previous Month: selectedDate: Oct.7 colored: Oct.7-Oct.13
 Reason: the selected date type is varied, sometimes it is type Date, 
         sometimes it is a string which cause the wrong type for marked dates.
+
+Oct.26 1 hr
+1. Continuing on CapturedImage
+2. Fix small bug
