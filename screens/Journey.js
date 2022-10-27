@@ -10,12 +10,16 @@ import { ButtonGroup } from "@rneui/base";
 import { useState,React } from "react";
 import { useNavigation } from "@react-navigation/native";
 import AlertCard from "../components/UI/AlertCard";
+// import DateRange from "../components/UI/DateRange";
+// import CalendarController from "../components/UI/CalendarController";
+// import Test from "./testPage";
+import CalendarButton from "../components/UI/CalendarButton";
 
 function Journey() {
 
   const buttons = ['Day', 'Week', 'Month'];
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const calendarType = {2:"monthYear",0:"date",1:"date"};
+  const calendarType = {2:"monthYear",0:"day",1:"week"};
   const change = {2:false,0:true,1:true};
 
   const data = [{
@@ -28,7 +32,7 @@ function Journey() {
     navigation.navigate("DetailedJourney");
     console.log("debug")
   }
-  const [pressed,setPressed] = useState(0);
+  const [mode,setMode] = useState("day");
 
   const data2 = [
     { label: 'TC7391', value: '1' },
@@ -79,7 +83,8 @@ function Journey() {
             selectedIndex={selectedIndex}
             onPress={(value) => {
               setSelectedIndex(value);
-              console.log(calendarType[value]);
+              setMode(calendarType[value]);
+              console.log(value,calendarType[value]);
             }}
           />
         <View style={styles.CalendarConatiner}>
@@ -89,7 +94,11 @@ function Journey() {
             </Text>
             <Text style={styles.dateText}>July 15, 2022</Text>
           </View>
-          <Calendar type={calendarType[selectedIndex]} change={change[selectedIndex]}></Calendar>
+          {/* <DateRange mode={mode}></DateRange> */}
+          <CalendarButton type={calendarType[selectedIndex]}></CalendarButton>
+          {/* <Test multiple={calendarType[selectedIndex]}></Test> */}
+          {/* <CalendarController type={calendarType[selectedIndex]}></CalendarController> */}
+          {/* <Calendar type={calendarType[selectedIndex]} change={change[selectedIndex]}></Calendar> */}
           <TouchableOpacity style={styles.leftContainer}>
           <Image source={require("../assets/Images/left.png")}/>
           </TouchableOpacity>
@@ -213,7 +222,7 @@ const styles = StyleSheet.create({
     //position:"absolute",
     fontSize:18,
     fontWeight:700,
-    zIndex:100
+    zIndex:1
   },
   rectangleContainer:{
     // flex:-10,

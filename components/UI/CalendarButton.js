@@ -6,7 +6,6 @@ import moment from "moment";
 import DateRangePicker from "react-native-daterange-picker";
 import Modal from "react-native-modal";
 import Calendar from './Calendar';
-import DateRange from './DateRange';
 import CalendarB from './CalendarB';
 
 import Button from './Button';
