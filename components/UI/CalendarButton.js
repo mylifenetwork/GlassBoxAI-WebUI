@@ -14,7 +14,6 @@ import { height } from 'react-native-daterange-picker/src/modules';
 export default function CalendarButton({type}) {
     console.log(type,"test button!");
     if(type==="monthYear"){
-        console.log("fuck")
         return(
             <>
             <Calendar type={type}></Calendar>

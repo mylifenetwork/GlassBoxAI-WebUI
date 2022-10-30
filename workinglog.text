@@ -204,3 +204,11 @@ Oct.27 3.5 hrs
 Q:
 opt? email? used the previous opt or create new one?
 Previous opt cannot receive the msg.
+
+Oct. 30/31 1.8 hrs
+1. Learning the fire base OTP 
+since after we finished the email-password authentication, Tim told us that taxi driver
+may not have email. We need to re-do and discuss the OTP.
+2. Setting up OTP related library
+(Q: There something wrong with app.json plugins)
+2. Status Presentation Preparing 

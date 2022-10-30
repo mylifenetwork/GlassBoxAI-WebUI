@@ -147,7 +147,6 @@ function CapturedImage() {
       }}
       >
         <View style={styles.slide1}>
-          {/* <Text style={styles.text}>Hello Swiper</Text> */}
           <Text style={styles.cornerText}>{info["happen"]} - {info["speedBefore"]}</Text>
           <Image source={require("../assets/Images/swiperImage1.png")}></Image>
         </View>
