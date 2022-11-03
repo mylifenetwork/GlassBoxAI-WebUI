@@ -219,3 +219,21 @@ Oct. 31 3.5 hrs
 3. Adding reCaptcha
 4. fix the ui of 4-digit code to 6 digit code
 5. report and presentation
+
+Nov. 3 4hrs
+1. Debugging for sign-in issue
+2. Researching for checking wheteher is a returning user or not.
+3. Researching and studying how to store the data into firestore
+4. adding functionality of storing data into firestore
+5. Start thinking about other tables
+https://firebase.google.com/docs/reference/js/v8/firebase.auth.PhoneAuthProvider
+https://stackoverflow.com/questions/71670535/the-phone-auth-credential-was-created-with-an-empty-verification-id-with-attem
+https://stackoverflow.com/questions/50615308/how-to-check-if-a-user-already-exists-in-firebase-during-phone-auth
+
+Q:
+Issue for Phone Auth:
+1. Verification ID does not work after first time.
+https://github.com/invertase/react-native-firebase/issues/2465
+2. There is no function to check newuser or returning user for phone Auth
+https://github.com/invertase/react-native-firebase/issues/1064
+
