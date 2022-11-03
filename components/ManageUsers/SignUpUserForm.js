@@ -1,28 +1,40 @@
 import { View, Text, StyleSheet, Alert } from "react-native";
-import { useState } from "react";
+import { useState,useRef } from "react";
 import RadioButton from "../UI/RadioButton";
 import Input from "./Input";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Button from "../UI/Button";
 
 import SignUpFormValidation from "../../util/SignUpFormValidation";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { firebaseConfig } from "../../config";
+import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
+import firebase from "firebase/compat/app";
+import React from "react";
 
 function SignUpUserForm({ signUpOTPAuth }) {
   const [userName, setUserName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
-  const [vehicleLicense, setvehicleLicense] = useState("");
+  //const [vehicleLicense, setvehicleLicense] = useState("");
+  const [password,setPassword] = useState("");
 
   const [privateUser, setPrivateUser] = useState(false);
   const [commercialOwner, setCommercialOwner] = useState(false);
   const [commercialDriver, setCommercialDriver] = useState(false);
+
+  const [verificationId, setVerificationId]=useState("");
+  const [code,setCode]=useState("");
+  const recaptchaVerifier = useRef(null);
 
   function signUpFormSubmissionHandler() {
     const userData = {
       name: userName,
       phoneNumber: phoneNumber,
       email: email,
-      vehicleLicense: vehicleLicense,
+      //vehicleLicense: vehicleLicense,
+      verificationId:verificationId,
+      code:code,
       role: checkUserRole(),
     };
 
@@ -35,13 +47,39 @@ function SignUpUserForm({ signUpOTPAuth }) {
 
     resetInputs();
     signUpOTPAuth(userData);
+    // firebase.auth().settings.appVerificationDisabledForTesting = true;
+    // var appVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+    const phoneProvider = new firebase.auth.PhoneAuthProvider();
+    phoneProvider
+      .verifyPhoneNumber(phoneNumber,recaptchaVerifier.current)
+      .then(setVerificationId);
+      setPhoneNumber("");
+  
+
+    
+  }
+  const confirmCode=()=>{
+    const credential = firebase.auth.PhoneAuthProvider.credential(
+      verificationId,
+      code
+    );
+    firebase.auth().signInWithCredential(credential)
+    .then(()=>{
+      setCode ("");
+    })
+    .catch((error)=>{
+      //show an alert msg
+      alert(error);
+    })
+    Alert.alert("login successful!")
   }
 
   function resetInputs() {
     setUserName('');
     setPhoneNumber('');
     setEmail('');
-    setvehicleLicense('');
+    setPassword('');
+    //setvehicleLicense('');
     setPrivateUser(false);
     setCommercialDriver(false);
     setCommercialOwner(false);
@@ -87,10 +125,20 @@ function SignUpUserForm({ signUpOTPAuth }) {
   function vehicleLicenseChangedHandler(enteredLicenseNum) {
     setvehicleLicense(enteredLicenseNum);
   }
+  function passwordChangeHandler(enteredPassword){
+    //setPassword(enteredPassword);
+    setCode(enteredPassword);
+  }
 
   return (
     <KeyboardAwareScrollView>
       <View>
+        <FirebaseRecaptchaVerifierModal
+          ref={recaptchaVerifier}
+          firebaseConfig={firebaseConfig}
+        >
+
+        </FirebaseRecaptchaVerifierModal>
         <Input
           iconConfig={{
             name: "person-outline",
@@ -138,9 +186,10 @@ function SignUpUserForm({ signUpOTPAuth }) {
           }}
           textInputConfig={{
             placeholder: "Vehicle License Plate Number",
-            keyboardType: "email-address",
-            onChangeText: vehicleLicenseChangedHandler,
-            value: vehicleLicense,
+            //placeholder: "Code",
+           // keyboardType: "email-address",
+            onChangeText: passwordChangeHandler,
+            value: code,
           }}
         />
 
@@ -165,7 +214,8 @@ function SignUpUserForm({ signUpOTPAuth }) {
           </View>
         </View>
       </View>
-      <Button onPress={signUpFormSubmissionHandler}>Next</Button>
+      <Button onPress={signUpFormSubmissionHandler}>Send Verification Code</Button>
+      {/* <Button onPress={confirmCode}>Confirm Code</Button> */}
     </KeyboardAwareScrollView>
   );
 }

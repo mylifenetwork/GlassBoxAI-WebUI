@@ -2,7 +2,7 @@ export default  function validateUserInput({
   name,
   phoneNumber,
   email,
-  vehicleLicense,
+  password,
   role,
 }) {
   if (
@@ -11,11 +11,11 @@ export default  function validateUserInput({
     phoneNumber.length < 6 ||
     email === "" ||
     !email.includes("@") ||
-    vehicleLicense === "" ||
-    vehicleLicense > 6 ||
+    // password === "" ||
+    // vehicleLicense.length > 6 ||
     role === ""
   ) {
-    return false; 
+    return false;
   }else {
     return true;
   }

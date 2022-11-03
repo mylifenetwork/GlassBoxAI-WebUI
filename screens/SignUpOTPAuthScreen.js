@@ -1,14 +1,19 @@
-import { StatusBar, StyleSheet, Text, View, TextInput, Pressable, Keyboard } from "react-native";
+import { StatusBar, StyleSheet, Text, View, TextInput, Pressable, Keyboard,Alert } from "react-native";
 import { GlobalStyles } from "../styles/styles";
 import {useState, useRef, useEffect} from 'react'
 import OTPInputField from "../components/OTPInput.js/OTPInputField";
 import Button from "../components/UI/Button";
 import { storeUser } from "../http/http";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { firebaseConfig } from "../config";
+import firebase from "firebase/compat/app";
+import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
 
 function SignUpOTPAuthScreen({route, navigation }) {
+  console.log(route.params.verificationId);
 const [code, setCode] = useState("");
 const [pinReady, setPinReady] = useState(false);
-const MAX_CODE_LENGTH = 4;
+const MAX_CODE_LENGTH = 6;
 
 
 // this function will authenticate OTP that is generated from the backend 
@@ -27,6 +32,23 @@ function addNewUserHandler() {
   
 
 }
+const confirmCode=()=>{
+  const credential = firebase.auth.PhoneAuthProvider.credential(
+    route.params.verificationId,
+    code
+  );
+  firebase.auth().signInWithCredential(credential)
+  .then(()=>{
+    setCode ("");
+  })
+  .catch((error)=>{
+    //show an alert msg
+    alert(error);
+  })
+  Alert.alert("login successful!")
+  navigation.navigate("Overall");
+}
+
 
  
   return (
@@ -51,7 +73,7 @@ function addNewUserHandler() {
           
         </Pressable>
 
-        <Button onPress={addNewUserHandler} customStyle={styles.buttonStyle}>Done</Button>
+        <Button onPress={confirmCode} customStyle={styles.buttonStyle}>Done</Button>
       </View>
     </>
   );

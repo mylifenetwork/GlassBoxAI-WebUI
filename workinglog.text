@@ -212,3 +212,10 @@ may not have email. We need to re-do and discuss the OTP.
 2. Setting up OTP related library
 (Q: There something wrong with app.json plugins)
 2. Status Presentation Preparing 
+
+Oct. 31 3.5 hrs
+1. Setup the OTP signin
+2. Test the OTP signin
+3. Adding reCaptcha
+4. fix the ui of 4-digit code to 6 digit code
+5. report and presentation
