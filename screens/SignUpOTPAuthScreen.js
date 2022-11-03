@@ -5,8 +5,10 @@ import OTPInputField from "../components/OTPInput.js/OTPInputField";
 import Button from "../components/UI/Button";
 import { storeUser } from "../http/http";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { firebaseConfig } from "../config";
+import { firebaseConfig,db } from "../config";
+// import { doc, setDoc, Timestamp } from "firebase/firestore"; 
 import firebase from "firebase/compat/app";
+import { collection, addDoc,doc } from "firebase/firestore"; 
 import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
 
 function SignUpOTPAuthScreen({route, navigation }) {
@@ -27,16 +29,30 @@ function authenticateOTP() {
 function addNewUserHandler() {
   // if authentication is successful then add the user to the database 
   authenticateOTP(); 
-  console.log(route.params);
   storeUser(route.params);
   
 
 }
+
+
+const sendData=async ()=>{
+  await addDoc(collection(db,"users"),{
+      nname:route.params.name,
+      email:route.params.email,
+      role:route.params.role,
+      phoneNumber:route.params.phoneNumber,
+      liscense: route.params.vehicleLicense,
+  });
+
+}
+  
+
 const confirmCode=()=>{
   const credential = firebase.auth.PhoneAuthProvider.credential(
     route.params.verificationId,
     code
   );
+  console.log(route.params);
   firebase.auth().signInWithCredential(credential)
   .then(()=>{
     setCode ("");
@@ -45,6 +61,7 @@ const confirmCode=()=>{
     //show an alert msg
     alert(error);
   })
+  sendData();
   Alert.alert("login successful!")
   navigation.navigate("Overall");
 }

@@ -1,93 +1,118 @@
-import React from "react";
-import { StyleSheet, View, Text,Image } from "react-native";
-import moment from "moment";
-import DateRangePicker from "react-native-daterange-picker";
-import { patchWebProps } from "@rneui/base";
-import test from "../screens/test";
+import { StyleSheet, Text, View, Image } from "react-native";
+import Button from "../components/UI/Button";
+import { GlobalStyles } from "../styles/styles";
+import DonutPie from "../components/UI/DonutPie";
+// import Slider from "../components/UI/Slider";
+import React, { useState,useRef,Component} from "react";
+import { setStatusBarHidden } from 'expo-status-bar';
+import Swiper from "react-native-swiper";
+import { collection, addDoc,doc } from "firebase/firestore"; 
+import { db } from "../config";
 
-export default class testPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      mode:props.mode,
-      date:null,
-      startDate: null,
-      endDate: null,
-      displayedDate: moment(),
-    };
+function Home({ navigation }) {
+  function showSignUpFormHandler() {
+    navigation.navigate("SignUp");
   }
 
-  setDates = (dates) => {
-    this.setState({
-      ...dates,
-    });
-    console.log(this.state.mode);
-  };
-  setEndDate= (dates) => {
-    return (moment(dates).add(6, 'days'));
-  };
-
-  render() {
-    const { date,startDate, endDate, displayedDate } = this.state;
-    const now = new Date();
-    console.log("test mode",this.state.mode);
-    return (
-      <View style={styles.container}>
-        <DateRangePicker
-        //open={false}
-          onChange={this.setDates}
-          date={date && this.state.mode ==="day"}
-          endDate={this.setEndDate(startDate)}
-          startDate={startDate}
-          maxDate={now}
-         //dayTextStyle={styles.text}
-         dayHeaderTextStyle={styles.dayHeadertext}
-          displayedDate={displayedDate}
-          selectedTextStyle={styles.text}
-          selectedStyle={styles.selected}
-          dayTextStyle={styles.dayText}
-          headerTextStyle={styles.Header}
-          //range
-        >
-          <Image source={require("../assets/Images/calendar.png")}></Image>
-        </DateRangePicker>
-      </View>
-    );
+  function showLoginFormHandler() {
+    //navigation.navigate("Login");
+    navigation.navigate("Overall");
+    //navigation.navigate("Journey");
   }
+
+// Add a new document with a generated id.
+const sendData=async ()=>{
+  await addDoc(collection(db,"users"),{
+      name:"apple",
+      email:"apple@gmail.com"
+  });
+
+}
+//console.log("Document written with ID: ", docRef.id);
+
+  const [status, setStatus] = React.useState({});
+
+  return (
+    <View style={styles.container}>
+      <Button onPress={sendData}>
+        send data
+      </Button>
+    </View>
+  );
 }
 
+export default Home;
+
 const styles = StyleSheet.create({
+  wrapper: {},
+  slide1: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop:"100%"
+    // backgroundColor: '#9DD6EB'
+  },
+  slide2: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    // backgroundColor: '#97CAE5'
+  },
+  slide3: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#92BBD9'
+  },
+  Circle:{
+    height : 50,
+    width :50,
+    position:"absolute",
+    backgroundColor:'white',
+    borderRadius: 50/2,
+    // marginLeft:-7.5,
+},
   container: {
     flex: 1,
-    backgroundColor: "purple",
+    backgroundColor: GlobalStyles.colors.primary500,
+  },
+  imageContainer: {
+    flex: 1,
+    backgroundColor: GlobalStyles.colors.primary200,
+    alignItems: "center",
+    justifyContent: "center",
+    borderBottomLeftRadius: 80,
+    borderBottomRightRadius: 80,
+  },
+  buttonContainer: {
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
-  text:{
-    color:"black",
-    fontFamily: "K2D-Regular",
+
+  footerContainer: {
+    felx: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
-  Header:{
-    color:"black",
-    fontSize:20,
-    fontWeight:700,
+
+  text: {
+    color: "white",
     fontFamily: "K2D-Regular",
   },
 
-  dayHeadertext:{
-    fontFamily: "K2D-Regular",
-    fontSize:14
-
+  footerImage: {
+    width: 200,
+    height: 100,
   },
-  dayText:{
-    color:"black",
-    fontFamily: "K2D-Regular",
-    fontSize:14,
-    fontWeight:500
 
+  mainImage: {
+    width: 100,
+    height: 100,
   },
-  selected:{
-    backgroundColor:"#A1DADC",
-    borderRadius:8
-  }
+
+  button: {
+    minWidth: 150,
+  },
 });

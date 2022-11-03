@@ -6,7 +6,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import Button from "../UI/Button";
 
 import SignUpFormValidation from "../../util/SignUpFormValidation";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword,signOut } from "firebase/auth";
 import { firebaseConfig } from "../../config";
 import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
 import firebase from "firebase/compat/app";
@@ -16,7 +16,7 @@ function SignUpUserForm({ signUpOTPAuth }) {
   const [userName, setUserName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
-  //const [vehicleLicense, setvehicleLicense] = useState("");
+  const [vehicleLicense, setvehicleLicense] = useState("");
   const [password,setPassword] = useState("");
 
   const [privateUser, setPrivateUser] = useState(false);
@@ -32,9 +32,8 @@ function SignUpUserForm({ signUpOTPAuth }) {
       name: userName,
       phoneNumber: phoneNumber,
       email: email,
-      //vehicleLicense: vehicleLicense,
+      vehicleLicense: vehicleLicense,
       verificationId:verificationId,
-      code:code,
       role: checkUserRole(),
     };
 
@@ -45,8 +44,7 @@ function SignUpUserForm({ signUpOTPAuth }) {
       return;
     }
 
-    resetInputs();
-    signUpOTPAuth(userData);
+    
     // firebase.auth().settings.appVerificationDisabledForTesting = true;
     // var appVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
     const phoneProvider = new firebase.auth.PhoneAuthProvider();
@@ -54,8 +52,9 @@ function SignUpUserForm({ signUpOTPAuth }) {
       .verifyPhoneNumber(phoneNumber,recaptchaVerifier.current)
       .then(setVerificationId);
       setPhoneNumber("");
-  
-
+      console.log("vid",verificationId);
+      resetInputs();
+      signUpOTPAuth(userData);
     
   }
   const confirmCode=()=>{
@@ -63,6 +62,7 @@ function SignUpUserForm({ signUpOTPAuth }) {
       verificationId,
       code
     );
+    console.log("id",verificationId);
     firebase.auth().signInWithCredential(credential)
     .then(()=>{
       setCode ("");
@@ -79,7 +79,7 @@ function SignUpUserForm({ signUpOTPAuth }) {
     setPhoneNumber('');
     setEmail('');
     setPassword('');
-    //setvehicleLicense('');
+    setvehicleLicense('');
     setPrivateUser(false);
     setCommercialDriver(false);
     setCommercialOwner(false);
@@ -125,10 +125,10 @@ function SignUpUserForm({ signUpOTPAuth }) {
   function vehicleLicenseChangedHandler(enteredLicenseNum) {
     setvehicleLicense(enteredLicenseNum);
   }
-  function passwordChangeHandler(enteredPassword){
-    //setPassword(enteredPassword);
-    setCode(enteredPassword);
-  }
+  // function passwordChangeHandler(enteredPassword){
+  //   //setPassword(enteredPassword);
+  //   setCode(enteredPassword);
+  // }
 
   return (
     <KeyboardAwareScrollView>
@@ -188,8 +188,8 @@ function SignUpUserForm({ signUpOTPAuth }) {
             placeholder: "Vehicle License Plate Number",
             //placeholder: "Code",
            // keyboardType: "email-address",
-            onChangeText: passwordChangeHandler,
-            value: code,
+            onChangeText: vehicleLicenseChangedHandler,
+            value: vehicleLicense,
           }}
         />
 
