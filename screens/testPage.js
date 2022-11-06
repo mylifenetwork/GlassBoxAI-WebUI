@@ -6,7 +6,7 @@ import DonutPie from "../components/UI/DonutPie";
 import React, { useState,useRef,Component} from "react";
 import { setStatusBarHidden } from 'expo-status-bar';
 import Swiper from "react-native-swiper";
-import { collection, addDoc,doc } from "firebase/firestore"; 
+import { collection, addDoc,doc,getDoc } from "firebase/firestore"; 
 import { db } from "../config";
 
 function Home({ navigation }) {
@@ -26,6 +26,16 @@ const sendData=async ()=>{
       name:"apple",
       email:"apple@gmail.com"
   });
+}
+const checkExistedUder=async ()=>{
+  const docRef = doc(db, "users", "KhEKgrOxu9dL7EkgC8de2lZokp22");
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    console.log("Document data:", docSnap.data());
+  } else {
+    // doc.data() will be undefined in this case
+    console.log("No such document!");
+  }
 
 }
 //console.log("Document written with ID: ", docRef.id);
@@ -36,6 +46,9 @@ const sendData=async ()=>{
     <View style={styles.container}>
       <Button onPress={sendData}>
         send data
+      </Button>
+      <Button onPress={checkExistedUder}>
+        checkExistedUder
       </Button>
     </View>
   );
