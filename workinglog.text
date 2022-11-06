@@ -237,3 +237,8 @@ https://github.com/invertase/react-native-firebase/issues/2465
 2. There is no function to check newuser or returning user for phone Auth
 https://github.com/invertase/react-native-firebase/issues/1064
 
+Nov.6 1.5 hrs
+1. continuing working on empty verification id situation
+2. adding fiction phone number
+3. adding fucntion for checking whether this uid exist or not
+
