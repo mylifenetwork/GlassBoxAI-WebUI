@@ -10,13 +10,13 @@ import Button from "../components/UI/Button";
 import MapViewDirections from "react-native-maps-directions";
 import { ScrollableComponent } from "react-native-keyboard-aware-scroll-view";
 import { proc } from "react-native-reanimated";
-import {getAlertsInfo} from "../components/ManageUsers/controller"
+import Controller from "../components/ManageUsers/Controller"
 
 function DetailedJourney() {
   const [req,setReq]=useState("");
-  useEffect(()=>{
-    getAlertsInfo().then((res)=>{setReq(res["alerts"])})
-  },[req,setReq])
+  // useEffect(()=>{
+  //   getAlertsInfo().then((res)=>{setReq(res["alerts"])})
+  // },[req,setReq])
   // getAlertsInfo().then((res)=>{setReq(res["alerts"]);}).catch(error => console.log(error));
 
 
@@ -143,6 +143,7 @@ function DetailedJourney() {
         alertname = {k}
         scores={parseInt(req[k]["score"])}></AlertCard>
         )}
+        <Controller></Controller>
 
 {/* <AlertCard style={styles.card}></AlertCard> */}
         </View>
