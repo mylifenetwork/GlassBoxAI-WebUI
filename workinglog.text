@@ -242,3 +242,19 @@ Nov.6 1.5 hrs
 2. adding fiction phone number
 3. adding fucntion for checking whether this uid exist or not
 
+
+Nov.7 1 hrs
+1. design the table
+2. mock some fake datas
+
+Nov.10 5.5 hrs
+1. searching and learning for inner join of two tables in FireStore (Not valid)
+2. learn how to query or fetching the data by where conditions
+3.  Learn How to save the return values from Promise function
+4. Implement saving return values from Promise function, gives undefined error
+5. Try to use Usestate hooks to store the values, but it keeps continuing quering from firestore
+    And sometimes, it gives undefined error
+6. Searching for solving the bugs from #5, propoably need to use hook ("UseEffect"), so learn what is useEffect
+7. Find an youtube link to fetch data https://www.youtube.com/watch?v=evS7V2M1xq4
+8. Want to test it but the today's quota is running out.("Sad Story!!!")
+9. Need to try to implement an another way to fetching, tomorrow
