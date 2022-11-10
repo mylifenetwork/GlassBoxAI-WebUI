@@ -3,15 +3,25 @@ import { GlobalStyles } from "../styles/styles";
 import ScoreBoard from "../components/UI/ScoreBoard";
 import DropdownBox from "../components/UI/DropdownBox";
 import MapView, { PROVIDER_GOOGLE,Polyline,Marker, Callout } from 'react-native-maps';
-import { useState,React } from "react";
+import { useState,React,useEffect } from "react";
 import AlertCard from "../components/UI/AlertCard";
 import { useNavigation } from "@react-navigation/native";
 import Button from "../components/UI/Button";
 import MapViewDirections from "react-native-maps-directions";
 import { ScrollableComponent } from "react-native-keyboard-aware-scroll-view";
 import { proc } from "react-native-reanimated";
+import {getAlertsInfo} from "../components/ManageUsers/controller"
 
 function DetailedJourney() {
+  const [req,setReq]=useState("");
+  useEffect(()=>{
+    getAlertsInfo().then((res)=>{setReq(res["alerts"])})
+  },[req,setReq])
+  // getAlertsInfo().then((res)=>{setReq(res["alerts"]);}).catch(error => console.log(error));
+
+
+  //console.log(req)
+
   const data = [{
     percentage: 80,
     color: 'tomato',
@@ -40,7 +50,7 @@ function DetailedJourney() {
   const delta1 = Math.abs(origin.latitude - destination.latitude)/2;
   const delta2 = Math.abs(origin.longitude-destination.longitude)/2;
   //delta1/delta2;
-  console.log(delta1,delta2)
+  //console.log(delta1,delta2)
   const initial_position={
     latitude:(origin.latitude+destination.latitude)/2, 
     longitude: (origin.longitude+destination.longitude)/2,
@@ -128,8 +138,13 @@ function DetailedJourney() {
 
           </MapView>
         <View style={styles.bottomContainer}>
-        <AlertCard style={styles.card}></AlertCard>
-        <AlertCard style={styles.card}></AlertCard>
+        {Object.keys(req).map( k =>
+        <AlertCard style={styles.card} 
+        alertname = {k}
+        scores={parseInt(req[k]["score"])}></AlertCard>
+        )}
+
+{/* <AlertCard style={styles.card}></AlertCard> */}
         </View>
         </View>
         </ScrollView>

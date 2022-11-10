@@ -3,13 +3,14 @@ import Button from "../components/UI/Button";
 import { GlobalStyles } from "../styles/styles";
 import DonutPie from "../components/UI/DonutPie";
 // import Slider from "../components/UI/Slider";
-import React, { useState,useRef,Component} from "react";
+import React, { useState,useRef,Component,use} from "react";
 import { setStatusBarHidden } from 'expo-status-bar';
 import Swiper from "react-native-swiper";
-import { collection, addDoc,doc,getDoc } from "firebase/firestore"; 
+import { collection, addDoc,doc,getDoc,query,where } from "firebase/firestore"; 
 import { db } from "../config";
 
 function Home({ navigation }) {
+  const[test,setTest]=useState("");
   function showSignUpFormHandler() {
     navigation.navigate("SignUp");
   }
@@ -38,6 +39,32 @@ const checkExistedUder=async ()=>{
   }
 
 }
+
+  async function getAlertsInfo(){
+  const userID="KhEKgrOxu9dL7EkgC8de2lZokp22";
+  const journeyID="JKUe1lI72c2VlUc7AUeS";
+  const docRef = doc(db, "Journey", journeyID);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    const data = docSnap.data();
+    //console.log("Document data:", docSnap.data());
+    if(data["userid"]!=userID){
+      console.log("wrong USER ID")
+    }else{
+      console.log(data["alerts"])
+    }
+  } else {
+    // doc.data() will be undefined in this case
+    console.log("No such document!");
+  }
+
+
+
+}
+
+const apple = getAlertsInfo().then((res)=> {return res})
+
+console.log("test",apple)
 //console.log("Document written with ID: ", docRef.id);
 
   const [status, setStatus] = React.useState({});
@@ -49,6 +76,9 @@ const checkExistedUder=async ()=>{
       </Button>
       <Button onPress={checkExistedUder}>
         checkExistedUder
+      </Button>
+      <Button>
+        getAlertsInfo
       </Button>
     </View>
   );
