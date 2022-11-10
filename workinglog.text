@@ -258,3 +258,9 @@ Nov.10 5.5 hrs
 7. Find an youtube link to fetch data https://www.youtube.com/watch?v=evS7V2M1xq4
 8. Want to test it but the today's quota is running out.("Sad Story!!!")
 9. Need to try to implement an another way to fetching, tomorrow
+
+Nov. 11 1.5 hrs
+1. fetaching realTime data by using useeffect hook and onSnapShot
+2. Debugging
+3. No idea for quota exceeded
+4. Need to fix map view css
