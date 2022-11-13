@@ -7,12 +7,12 @@ import AlertCard from "../UI/AlertCard";
 const Controller=()=>{
   const [data,setData]=useState([]);
   const todoRef = collection(db,"Journey")
-  const dic = {"acceleration":["performance.png","Acceleration"],
-              "braking":["brake.png","Braking"],
-              "conering":["Coner.png","Conering"],
-              "distanceWithinCars":["distance.png","Distance between Cars"],
-              "obstructions":["obstruction.png","Obstructions"],
-               "withinLanes":["road.png","Staying within Lanes"]
+  const dic = {"acceleration":{"image":"performance.png","name":"Acceleration"},
+              "braking":{"image":"brake.png","name":"Braking"},
+              "conering":{"image":"Coner.png","name":"Conering"},
+              "distanceWithinCars":{"image":"distance.png","name":"Distance between Cars"},
+              "obstructions":{"image":"obstruction.png","name":"Obstructions"},
+               "withinLanes":{"image":"road.png","name":"Staying within Lanes"}
 
               }
   //const refdoc = doc((db,"Journey","JKUe1lI72c2VlUc7AUeS"));
@@ -38,10 +38,11 @@ const Controller=()=>{
     
     return(
       <View>
-        {console.log(data)}
-        {/* {Object.keys(data[0]).map(k=>
-        <AlertCard scores={data[0][k]["score"]} alertname={(dic[k][-1])[0]}></AlertCard>
-          )} */}
+        {console.log("data",data)}
+        {Object.keys(data[0]).map(k=>
+        // console.log(k)
+        <AlertCard scores={data[0][k]["score"]}  alertname={k} noAlert={data[0][k]["alert"]}></AlertCard>
+        )}
       </View>
 
     );

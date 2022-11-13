@@ -138,11 +138,6 @@ function DetailedJourney() {
 
           </MapView>
         <View style={styles.bottomContainer}>
-        {Object.keys(req).map( k =>
-        <AlertCard style={styles.card} 
-        alertname = {k}
-        scores={parseInt(req[k]["score"])}></AlertCard>
-        )}
         <Controller></Controller>
 
 {/* <AlertCard style={styles.card}></AlertCard> */}

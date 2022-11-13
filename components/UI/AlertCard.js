@@ -6,15 +6,32 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import { GlobalStyles } from "../../styles/styles";
 
 
-function ScoreCard(
+function AlertCard(
     {
-        scores = 5,
-        alertname="Speeding",
-        percentage = ((scores/100)*95),
+        scores = 0,
+        alertname="breaking",
+        percentage = ((scores/100)*96.25),
         imageName="speedometer.png",
         noAlert = 2,
         height = 10,
     }) {
+        console.log("scores",scores,alertname)
+    const dic = {"acceleration":"Acceleration",
+    "braking":"Braking",
+    "cornering":"Cornering",
+    "distanceWithinCars":"Distance between Cars",
+    "obstructions":"Obstructions",
+    "speeding":"Speeding",
+        "withinLanes":"Staying within Lanes"}
+    const path = {"acceleration": require("../../assets/Images/performance.png"),
+    "braking":require("../../assets/Images/brake.png"),
+    "cornering":require("../../assets/Images/Corner.png"),
+    "distanceWithinCars":require("../../assets/Images/distance.png"),
+    "obstructions":require("../../assets/Images/obstruction.png"),
+    "withinLanes":require("../../assets/Images/road.png"),
+    "speeding":require("../../assets/Images/speedometer.png")
+    }
+
     const data = [{
         percentage: 80,
         color: 'tomato',
@@ -24,17 +41,17 @@ function ScoreCard(
         font:14,
       }];
      // console.log(scores);
-
+    const img = "../../assets/Images/"+path[alertname];
   return (
     <View style={styles.boxContainer}>
             <View style={styles.topContainers}>
                 {/* <View style={styles.chart}> */}
                 <View style={styles.signContainer}>
-                    <Image source={require("../../assets/Images/speedometer.png")}/>
-                    <Text style={styles.topText}>{alertname}</Text>
+                    <Image source={path[alertname]}/>
+                    <Text style={styles.topText}>{dic[alertname]}</Text>
                     <ModalCard name="speeding"></ModalCard>
                 </View>
-                <View style={styles.topContainersB}>
+                <View style={[styles.topContainersB,{opacity:noAlert?1:0}]}>
                     <Image source={require("../../assets/Images/alertSmall.png")}/>
                     <Text style={styles.alertText}>{noAlert}</Text>
                 </View> 
@@ -69,7 +86,7 @@ function ScoreCard(
   );
 }
 
-export default ScoreCard;
+export default AlertCard;
 
 const styles = StyleSheet.create({
     bar:{
