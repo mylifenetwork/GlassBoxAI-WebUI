@@ -18,6 +18,8 @@ import { StyleSheet, View } from "react-native";
 import testPage from "./screens/testPage";
 import CapturedImage from "./screens/CapturedImage";
 import VideoPlayback from "./screens/VideoPlayback";
+import WrongAlert from "./screens/WrongAlert";
+import Account from "./screens/Account";
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
@@ -111,6 +113,20 @@ export default function App() {
               component={VideoPlayback}
               options={{
                 title:"Video playback",
+              }}
+            />
+            <Stack.Screen
+              name = "AccountPage"
+              component={Account}
+              options={{
+                title:"Account",
+              }}
+            />
+            <Stack.Screen
+              name = "WrongAlert"
+              component={WrongAlert}
+              options={{
+                title:"Wrong alert",
               }}
             />
           </Stack.Navigator>
