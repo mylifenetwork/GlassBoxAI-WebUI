@@ -272,3 +272,7 @@ Q:
 1. the first time it always get null for query,(cause by useEffect?)
 2. Map view css
 3. need to think about the data structure in db
+
+Nov.17 6 hrs
+1. Wrong alert page with navigation
+2. account page (need to adjust the css + functionality of each button)
