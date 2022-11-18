@@ -20,6 +20,7 @@ import CapturedImage from "./screens/CapturedImage";
 import VideoPlayback from "./screens/VideoPlayback";
 import WrongAlert from "./screens/WrongAlert";
 import Account from "./screens/Account";
+import PaireDevice from "./screens/PairDevice";
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
@@ -127,6 +128,13 @@ export default function App() {
               component={WrongAlert}
               options={{
                 title:"Wrong alert",
+              }}
+            />
+            <Stack.Screen
+              name = "PairDevice"
+              component={PaireDevice}
+              options={{
+                title:"Paired device",
               }}
             />
           </Stack.Navigator>
