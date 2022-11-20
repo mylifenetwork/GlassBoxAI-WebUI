@@ -82,13 +82,13 @@ const styles = StyleSheet.create({
     marginVertical: 30,
   },
   otpContainer: {
-    width: "70%",
+    width: "80%",
     flexDirection: "row",
     justifyContent: "space-around",
   },
   otpInput: {
     borderColor: "white",
-    minWidth: "15%",
+    minWidth: "10%",
     borderWidth: 2,
     borderRadius: 5,
     padding: 12,
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     color: "white",
   },
   otpInputFocused: {
-    minWidth: "15%",
+    minWidth: "10%",
     borderWidth: 2,
     borderRadius: 5,
     padding: 12,
