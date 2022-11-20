@@ -21,6 +21,7 @@ import VideoPlayback from "./screens/VideoPlayback";
 import WrongAlert from "./screens/WrongAlert";
 import Account from "./screens/Account";
 import PaireDevice from "./screens/PairDevice";
+import PaireNewDevice from "./screens/PairNewDevice";
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
@@ -135,6 +136,13 @@ export default function App() {
               component={PaireDevice}
               options={{
                 title:"Paired device",
+              }}
+            />
+            <Stack.Screen
+              name = "PairNewDevice"
+              component={PaireNewDevice}
+              options={{
+                title:"Pairing new device",
               }}
             />
           </Stack.Navigator>
