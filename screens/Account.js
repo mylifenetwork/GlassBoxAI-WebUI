@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         align: "center",
         alignContent:"center",
-        marginBottom:"5%",
+        marginBottom:"7.5%",
         zIndex:0,
     },
     homeContainer:{
