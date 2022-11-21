@@ -3,7 +3,7 @@ import Button from "../components/UI/Button";
 import { GlobalStyles } from "../styles/styles";
 import { useNavigation } from "@react-navigation/native";
 
-function PaireNewDevice({
+function PairedDeviceFailed({
     caseNo = 121,
     summarydata=[{
         date: "July 15,2022",
@@ -12,9 +12,9 @@ function PaireNewDevice({
       }],
     device_info="loT-device-no.132",
     status="Connected",
+    other_devices=["loT-device-no.141","LAPTOP-284BFEN"]
 }){
   const navigation = useNavigation();
-  const searched_devices=["loT-device-no.141","LAPTOP-284BFEN"]
   
 
   function showOverallPageHandler() {
@@ -43,30 +43,33 @@ function PaireNewDevice({
         {/* <ScrollView> */}
         <View style={styles.formHeader}>
             <View style={styles.iconContainer}>
-            <Image source={require("../assets/Images/bluetooth1.png")} style={styles.imageContainer}></Image>
+            <Image source={require("../assets/Images/link.png")} style={styles.imageContainer}></Image>
             </View>
+            <Text style={styles.titleText}>No device was paired</Text>
 
-            <Text  style={styles.titleText}>Pair your device</Text>
-            <Text style={styles.subTitleText}>Hold your device closer to the phone</Text>
-
-            <Text style={styles.hyperText}>Search result</Text>
+            <Text style={styles.subtitleText}>Other device</Text>
             
             {/* <View  styles={styles.boxContainer}> */}
               <FlatList
                 // style={{height:"40%"}}
-                data={searched_devices}
+                data={other_devices}
                 ItemSeparatorComponent={() => (
                   <View style={styles.lineSeperator} />
                 )}
                 renderItem={({item,index}) => <TouchableOpacity style={[styles.itemContainer,
                   index===0&&styles.upperBorder,
-                  index===(searched_devices.length-1)&&styles.bottomBorder
+                  index===(other_devices.length-1)&&styles.bottomBorder
                 ]}>
                   <Text style={[styles.deviceText,{marginRight:"40%"}]}>{item}</Text>
                   </TouchableOpacity>
                   }
               />
             {/* </View> */}
+            <TouchableOpacity style={{marginBottom:"30%"}}>
+              <Text style={styles.hyperText}>
+                Want to pair another device? 
+              </Text>
+            </TouchableOpacity>
 
 
 
@@ -96,15 +99,15 @@ function PaireNewDevice({
   );
 }
 
-export default PaireNewDevice;
+export default PairedDeviceFailed;
 
 const styles = StyleSheet.create({
     hyperText:{
       fontFamily: "K2D-Regular",
       color: "white",
-      fontSize: 14,
+      fontSize: 16,
       fontWeight:300,
-      marginRight:"50%"
+      textDecorationLine: 'underline',
     },
     lineSeperator:{
       backgroundColor: "white", 
@@ -135,8 +138,11 @@ const styles = StyleSheet.create({
       backgroundColor:"#5F616B"
     },
     iconContainer:{
-        marginTop:"15%",
-        marginBottom:"15%"
+        height : 107,
+        width :107,
+        backgroundColor:"#5F616B",
+        borderRadius: 107/2,
+        marginTop:"15%"
     },
     formHeader: {
         flex: 1,
@@ -151,12 +157,22 @@ const styles = StyleSheet.create({
         backgroundColor: "#353948",
         justifyContent:'flex-start'
     },
+    subtitleText:{
+        color:"#6A6C74",
+        fontFamily: "K2D-Regular",
+        fontWeight:"300",
+        marginLeft:"-50%",
+        marginTop:"15%",
+        fontSize:16,
+        marginBottom:"2.5%"
+    },
     titleText:{
+        alignSelf:"center",
         color:"white",
         fontFamily: "K2D-Regular",
         fontWeight:700,
         fontSize:20,
-        marginBottom:"2.5%"
+        marginTop:"15%",
     },
     form: {
         flex: 5,
@@ -169,12 +185,11 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight:300,
     },
-    subTitleText: {
+    statusText: {
         fontFamily: "K2D-Regular",
-        color: "white",
-        fontSize: 16,
-        fontWeight:300,
-        marginBottom:"30%"
+        color: "#8C8C8C",
+        fontSize: 13,
+        marginLeft:"30%"
     },
     footerContainer: {
         felx: 1,

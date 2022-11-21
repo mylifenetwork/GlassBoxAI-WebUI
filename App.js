@@ -22,6 +22,8 @@ import WrongAlert from "./screens/WrongAlert";
 import Account from "./screens/Account";
 import PaireDevice from "./screens/PairDevice";
 import PaireNewDevice from "./screens/PairNewDevice";
+import PairedNewDevice from "./screens/PairedNewDevice";
+import PairedDeviceFailed from "./screens/PairedDeviceFailed";
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
@@ -143,6 +145,20 @@ export default function App() {
               component={PaireNewDevice}
               options={{
                 title:"Pairing new device",
+              }}
+            />
+            <Stack.Screen
+              name = "PairedNewDevice"
+              component={PairedNewDevice}
+              options={{
+                title:"Pairing new device",
+              }}
+            />
+            <Stack.Screen
+              name = "PairedDeviceFailed"
+              component={PairedDeviceFailed}
+              options={{
+                title:"Paired device",
               }}
             />
           </Stack.Navigator>
