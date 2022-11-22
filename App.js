@@ -24,6 +24,7 @@ import PaireDevice from "./screens/PairDevice";
 import PaireNewDevice from "./screens/PairNewDevice";
 import PairedNewDevice from "./screens/PairedNewDevice";
 import PairedDeviceFailed from "./screens/PairedDeviceFailed";
+import DeviceInfo from "./screens/DeviceInfo";
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
@@ -159,6 +160,13 @@ export default function App() {
               component={PairedDeviceFailed}
               options={{
                 title:"Paired device",
+              }}
+            />
+            <Stack.Screen
+              name = "DeviceInfo"
+              component={DeviceInfo}
+              options={{
+                title:"Device Info",
               }}
             />
           </Stack.Navigator>
