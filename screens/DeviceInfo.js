@@ -1,6 +1,7 @@
 import { StatusBar, StyleSheet, Text, View,Image,TouchableOpacity, ScrollView,FlatList,Dimensions } from "react-native";
 import Button from "../components/UI/Button";
 import { GlobalStyles } from "../styles/styles";
+import ModalForget from "../components/UI/ModalForget";
 import { useNavigation } from "@react-navigation/native";
 
 function DeviceInfo({
@@ -29,8 +30,8 @@ function DeviceInfo({
     //navigation.navigate("Overall");
   }
 
-  function showCapturedImagePageHandler(){
-    navigation.navigate("CapturedImage");
+  function pressButton(){
+
   }
   
     // const location = Geolocation.getCurrentPosition();
@@ -64,13 +65,8 @@ function DeviceInfo({
                     {width:w*0.35}]}>{item}</Text>
                   </View>
                   }
-
               />
-              <TouchableOpacity>
-                <View style={[styles.forgetButton,{width:w*0.75}]}>
-                    <Text style={styles.buttonText}>Forget this device</Text>
-                </View>
-              </TouchableOpacity>
+              <ModalForget style={{marginBottom:w*0.5}}></ModalForget>
 
 
 
@@ -118,10 +114,11 @@ const styles = StyleSheet.create({
     },
     hyperText:{
       fontFamily: "K2D-Regular",
-      color: "white",
+      color: "#C1C1C1",
       fontSize: 14,
       fontWeight:300,
-      marginRight:"70%"
+      marginRight:"70%",
+      marginTop:"5%"
     },
     lineSeperator:{
       backgroundColor: "white", 
@@ -129,11 +126,6 @@ const styles = StyleSheet.create({
     },
     boxContainer:{
       flexDirection:"column",
-    //   justifyContent:"space-around",
-    //   width:"80%",
-    //   padding:"2.5%",
-    //   borderRadius:8,
-    //   backgroundColor:"#5F616B"
     },
     itemContainer:{
       padding:"2.5%",

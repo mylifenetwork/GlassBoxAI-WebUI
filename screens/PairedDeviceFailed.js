@@ -30,6 +30,10 @@ function PairedDeviceFailed({
   function showCapturedImagePageHandler(){
     navigation.navigate("CapturedImage");
   }
+
+  function handlePaireDevice(){
+    navigation.navigate("PairedNewDevice");
+  }
   
     // const location = Geolocation.getCurrentPosition();
   
@@ -65,7 +69,7 @@ function PairedDeviceFailed({
                   }
               />
             {/* </View> */}
-            <TouchableOpacity style={{marginBottom:"30%"}}>
+            <TouchableOpacity style={{marginBottom:"30%"}} onPress={handlePaireDevice}>
               <Text style={styles.hyperText}>
                 Want to pair another device? 
               </Text>

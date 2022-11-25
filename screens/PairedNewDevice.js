@@ -23,6 +23,11 @@ function PairedNewDevice({
   function showCapturedImagePageHandler(){
     navigation.navigate("CapturedImage");
   }
+
+
+  function handlePaireDevice(){
+    navigation.navigate("PairedNewDevice");
+  }
   
     // const location = Geolocation.getCurrentPosition();
   
@@ -60,7 +65,7 @@ function PairedNewDevice({
             
             {/* </View> */}
             <TouchableOpacity style={{marginBottom:"30%"}}>
-              <Text style={styles.hyperText}>
+              <Text style={styles.hyperText} onPress={handlePaireDevice}>
                 Want to pair another device? 
               </Text>
             </TouchableOpacity>
