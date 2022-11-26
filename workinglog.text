@@ -297,3 +297,15 @@ Nov.22 2 hrs
 1. device info page
 (speding much time on how to make one row has two items by using Flatlist)
 
+Nov.25-26 5 hrs
+1. Learn the expo image picker
+2. adjusting Input component 
+3. modal for delte account
+    a). two modal cards 
+    b). learn how to use countdown circle timer
+4. add edit profile page
+5. adding modal of forgeting device
+
+Installed library:
+image picker 
+react-native-countdown-circle-timer
