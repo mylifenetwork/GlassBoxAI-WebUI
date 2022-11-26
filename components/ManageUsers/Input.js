@@ -37,12 +37,10 @@ const styles = StyleSheet.create({
         marginVertical:10, 
         flexDirection:'row',
         alignItems:'center'
-
     },
     icon:{
         marginRight:8,
         marginLeft:8,
-
     }, 
     input:{
         marginLeft:18,

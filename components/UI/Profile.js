@@ -1,10 +1,7 @@
-import { firebaseConfig } from "../../config";
-import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
-import firebase from "firebase/compat/app";
-import RadioButton from "../UI/RadioButton";
 import Input from "../ManageUsers/Input"
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Button from "../UI/Button";
+import { useNavigation } from "@react-navigation/native";
 import { Image, View, Platform,TouchableOpacity,StyleSheet,Text} from 'react-native';
 import ModalDeleteAccount from "./ModalDeleteAccount";
 import React, { useState, useEffect } from 'react';
@@ -15,23 +12,16 @@ function Profile({userInfo={
     phone:"98857243",
     vehicle:["TC7391","TC7321"]
 }}) {
+  const navigation = useNavigation();
   const [phoneNumber,setPhoneNumber]=useState(userInfo.phone);
-
-
-
-  function resetInputs() {
-  }
-
-
-
 
   function phoneNumChangedHandler(enteredPhoneNum) {
     setPhoneNumber(enteredPhoneNum);
   }
-  // function passwordChangeHandler(enteredPassword){
-  //   //setPassword(enteredPassword);
-  //   setCode(enteredPassword);
-  // }
+
+  function handleDone(){
+    navigation.navigate("AccountPage");
+  }
 
   return (
     <KeyboardAwareScrollView>
@@ -72,13 +62,8 @@ function Profile({userInfo={
           id={"Phone\nNumber"} 
           input={false}
         />
-      <Button customStyle={styles.customButton}>Done</Button>
-      <ModalDeleteAccount></ModalDeleteAccount>
-      <TouchableOpacity style={{marginBottom:"30%"}}>
-              <Text style={styles.hyperText}>
-                Delete account 
-              </Text>
-            </TouchableOpacity>
+      <Button customStyle={styles.customButton} onPress={handleDone}>Done</Button>
+      <ModalDeleteAccount styles={styles.modalContainer}></ModalDeleteAccount>
       </View>
     </KeyboardAwareScrollView>
   );
@@ -87,11 +72,14 @@ function Profile({userInfo={
 export default Profile;
 
 const styles = StyleSheet.create({
+  modalContainer:{
+
+  },
   container: {
     marginTop: 8,
   },
   customButton:{
-    width:"30%",
+    width:"35%",
     marginTop:"30%",
     alignSelf:"center"
   },

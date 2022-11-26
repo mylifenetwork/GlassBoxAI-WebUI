@@ -3,7 +3,7 @@ import { Text, View,StyleSheet,TouchableOpacity,Image,Dimensions} from "react-na
 import Button from "../../components/UI/Button";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Modal from "react-native-modal";
-import ModalPending from "../UI/ModalPending";
+import ModalDeleted from "./ModalDeleted";
 
 function ModalDeleteAccount({case_number="121",name="braking"}) {
   const [isModalVisible, setModalVisible] = useState(false);
@@ -22,34 +22,6 @@ function ModalDeleteAccount({case_number="121",name="braking"}) {
 
   const w = Dimensions.get("window")["width"];
 
-  const dic={
-    speeding:
-    ["Speeding", require("../../assets/Images/speedometer2.png"),
-    "When you exceeds the road speed limits, we’ll show a speeding event."],
-
-    braking:["Braking",require("../../assets/Images/brake2.png"),
-    "When your speed is greatly reduced in a short amount of time, \
-    we’ll show a sudden braking event."],
-
-    acceleration:["Acceleration",require("../../assets/Images/performance2.png"),
-    "This implies that the your speed should never exceed 80km/h.\
-    Rapid increases in speed, sudden braking, and cornering at too \
-    high a speed can all count as acceleration."],
-
-    cornering:["Cornering",require("../../assets/Images/corner2.png"),
-    "Any sliding and rollover, we'll count and show as cornering event."],
-
-    distance:["Distance between cars",require("../../assets/Images/distance2.png"),
-    "When you are too close to cars in front, we’ll show a too close alert."],
-
-    obstructions:["Obstructions",require("../../assets/Images/obstruction2.png"),
-    "When we detected any obstructions, we’ll show a obstructions alert. "],
-
-    lane:["Staying within lanes",require("../../assets/Images/lane2.png"),
-    "When you’re not staying within the lane, we’ll show an alert to remind you to \
-    stay within the lanes. "]
-    
-    };
   // const sign = dic[name][0];
 
   return (
@@ -78,7 +50,7 @@ function ModalDeleteAccount({case_number="121",name="braking"}) {
                 Cancel
               </Button>
               <TouchableOpacity onPress={close}>
-                <ModalPending name={name} case_number={case_number} close={toggleModal}></ModalPending>
+                <ModalDeleted close={toggleModal}></ModalDeleted>
               </TouchableOpacity>
               
             </View>
@@ -99,6 +71,8 @@ export default ModalDeleteAccount;
         fontSize: 16,
         fontWeight:300,
         textDecorationLine: 'underline',
+        marginTop:"5%",
+        alignSelf:"center"
       },
     ButtonText:{
       fontSize:20,
