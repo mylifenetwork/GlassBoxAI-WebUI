@@ -25,6 +25,7 @@ import PaireNewDevice from "./screens/PairNewDevice";
 import PairedNewDevice from "./screens/PairedNewDevice";
 import PairedDeviceFailed from "./screens/PairedDeviceFailed";
 import DeviceInfo from "./screens/DeviceInfo";
+import EditProfile from "./screens/EditProfile";
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
@@ -167,6 +168,13 @@ export default function App() {
               component={DeviceInfo}
               options={{
                 title:"Device Info",
+              }}
+            />
+            <Stack.Screen
+              name = "EditProfile"
+              component={EditProfile}
+              options={{
+                title:"Edit Profile",
               }}
             />
           </Stack.Navigator>
