@@ -109,7 +109,8 @@ export default ModalDeleteAccount;
         shadowRadius: 3.84,
         elevation: 5,
         width:"80%",
-        marginLeft:"10%"
+        marginLeft:"10%",
+        height:"37.5%"
     },
     icon:{
         marginTop:"2.5%",

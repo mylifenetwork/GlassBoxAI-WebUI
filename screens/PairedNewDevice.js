@@ -3,6 +3,8 @@ import Button from "../components/UI/Button";
 import { GlobalStyles } from "../styles/styles";
 import { useNavigation } from "@react-navigation/native";
 
+// paired new device successfully
+
 function PairedNewDevice({
     device_info="loT-device-no.132",
     status="Connected",
@@ -17,7 +19,7 @@ function PairedNewDevice({
     navigation.navigate("Journey");
   }
   function showPersonalPageHandler() {
-    //navigation.navigate("Overall");
+    navigation.navigate("AccountPage");
   }
 
   function showCapturedImagePageHandler(){

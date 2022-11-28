@@ -9,8 +9,20 @@ function Home({ navigation }) {
 
   function showLoginFormHandler() {
     //navigation.navigate("Login");
-    //navigation.navigate("Overall");
-    navigation.navigate("Journey");
+   // navigation.navigate("Overall");
+   // navigation.navigate("CapturedImage");
+  //navigation.navigate("Journey");
+ //navigation.navigate("DetailedJourney");
+ //navigation.navigate("AccountPage");
+  //navigation.navigate("WrongAlert");
+    //navigation.navigate("PairNewDevice");
+    //navigation.navigate("PairedNewDevice");
+    //navigation.navigate("PairedDeviceFailed");
+    //navigation.navigate("PairDevice");
+    //navigation.navigate("DeviceInfo");
+   // navigation.navigate("testPage");
+   //navigation.navigate("VideoPlayback");
+     navigation.navigate("EditProfile");
   }
 
   return (

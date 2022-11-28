@@ -35,20 +35,12 @@ function ModalDeleted({close}) {
 
   return (
     <View>
-      <Button onPress={toggleModal} customStyle={[{width:"120%"}]}>
+      <Button onPress={toggleModal} customStyle={[{width:"100%"}]}>
         Delete
       </Button>
 
       <Modal isVisible={isModalVisible}>
         <View style={styles.window}>
-            <TouchableOpacity  onPress={toggleModal} >
-                <AntDesign
-                    style={styles.icon}
-                    color="black"
-                    name='close'
-                    size={30}
-                />
-            </TouchableOpacity>
             <Text style={styles.title}>Delete account</Text>
             <Image style={styles.imageContainer} source={require("../../assets/Images/tick1.png")}></Image>
             <Text style={styles.detail}>
@@ -123,7 +115,8 @@ export default ModalDeleted;
         fontWeight:"700",
         fontSize:22,
         marginBottom:"2.5%",
-        textAlign:"center"
+        textAlign:"center",
+        marginTop:"10%"
     },
     window:{
         // margin: 20,
@@ -140,8 +133,8 @@ export default ModalDeleted;
         shadowRadius: 3.84,
         elevation: 5,
         width:"90%",
-        marginLeft:"10%",
-        height:"35%"
+        marginLeft:"5%",
+        height:"37.5%",
     },
     icon:{
         marginTop:"2.5%",

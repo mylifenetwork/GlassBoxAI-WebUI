@@ -8,7 +8,7 @@ function WrongAlert({
     summarydata=[{
         date: "July 15,2022",
         time:"08:51 AM",
-        status: "Complete"
+        status: "Pending"
       }]
 }){
   const navigation = useNavigation();
@@ -21,7 +21,7 @@ function WrongAlert({
     navigation.navigate("Journey");
   }
   function showPersonalPageHandler() {
-    //navigation.navigate("Overall");
+    navigation.navigate("AccountPage");
   }
 
   function showCapturedImagePageHandler(){

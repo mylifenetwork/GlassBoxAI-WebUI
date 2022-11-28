@@ -3,6 +3,7 @@ import Button from "../components/UI/Button";
 import { GlobalStyles } from "../styles/styles";
 import { useNavigation } from "@react-navigation/native";
 
+// paired new device failed
 function PairedDeviceFailed({
     caseNo = 121,
     summarydata=[{
@@ -24,7 +25,7 @@ function PairedDeviceFailed({
     navigation.navigate("Journey");
   }
   function showPersonalPageHandler() {
-    //navigation.navigate("Overall");
+    navigation.navigate("AccountPage");
   }
 
   function showCapturedImagePageHandler(){

@@ -7,12 +7,21 @@ function Input({iconConfig, textInputConfig,input=true,id}) {
         if(id ==="Phone\nNumber"){
             return <View style={styles.inputContainer}>
                 <Ionicons style={styles.icon} {...iconConfig} />
-                <Text style={[styles.tag,{marginRight:"-2.5%"}]}>{id}</Text>
+                <Text style={[styles.tag,{marginRight:"-3.5%"}]}>{id}</Text>
                 <View style={styles.boxinput}>
                 <TextInput style={{color:"white"}} {...textInputConfig}  />
                 <Image source={require("../../assets/Images/edit3.png")} style={styles.image}></Image>
                 </View>
             </View>
+        }
+        if(id ==="Identity"){
+            return <View style={styles.inputContainer}>
+            <Image source={require("../../assets/Images/seatbelt1.png")} style={styles.idImage}></Image>
+            <Text style={[styles.tag,{marginRight:"-2.5%"}]} numberOfLines={2}>{id}</Text>
+            <Text style={styles.box}>{textInputConfig}</Text>
+        </View>
+
+
         }
         return <View style={styles.inputContainer}>
         <Ionicons style={styles.icon} {...iconConfig} />
@@ -32,6 +41,12 @@ export default Input;
 
 
 const styles = StyleSheet.create({
+    idImage:{
+        width:32,
+        height:32,
+        marginLeft:"2.5%"
+
+    },
     inputContainer: {
         marginHorizontal:4,
         marginVertical:10, 

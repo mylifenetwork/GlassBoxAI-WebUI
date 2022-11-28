@@ -3,6 +3,7 @@ import Button from "../components/UI/Button";
 import { GlobalStyles } from "../styles/styles";
 import { useNavigation } from "@react-navigation/native";
 
+// start pairing new device
 function PaireNewDevice({
     caseNo = 121,
     summarydata=[{
