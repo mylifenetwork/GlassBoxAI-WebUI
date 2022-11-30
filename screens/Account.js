@@ -72,28 +72,28 @@ function Account({
 
           <TouchableOpacity style={styles.buttonContainerB}>
           <View style={[styles.colContainer,{justifyContent:"center"}]}>
-             <Image source={require("../assets/Images/wrongAlert.png")} style={styles.iconContainer}/>
+             <Image source={require("../assets/Images/license2.png")} style={[styles.iconContainer,{marginLeft:"5%"}]}/>
                 <Text style={styles.buttonText}>View paired device</Text>
           </View>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.buttonContainerB}>
           <View style={[styles.colContainer,{justifyContent:"center"}]}>
-             <Image source={require("../assets/Images/wrongAlert.png")} style={styles.iconContainer}/>
+             <Image source={require("../assets/Images/upload.png")} style={[styles.iconContainer,{marginTop:"2.5%"}]}/>
                 <Text style={styles.buttonText}>Upload driving license</Text>
           </View>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.buttonContainerB}>
           <View style={[styles.colContainer,{justifyContent:"center"}]}>
-             <Image source={require("../assets/Images/license.png")} style={styles.iconContainer}/>
+             <Image source={require("../assets/Images/license.png")} style={[styles.iconContainer,{marginLeft:"-2.5%"}]}/>
                 <Text style={styles.buttonText}>View driving license</Text>
           </View>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.buttonContainerB}>
           <View style={[styles.colContainer,{justifyContent:"center"}]}>
-             <Image source={require("../assets/Images/edit.png")} style={styles.iconContainer}/>
+             <Image source={require("../assets/Images/edit.png")} style={[styles.iconContainer]}/>
                 <Text style={styles.buttonText}>Edit profile</Text>
           </View>
           </TouchableOpacity>
@@ -164,12 +164,11 @@ const styles = StyleSheet.create({
       },
       minorSummaryText:{
         color:"#B6B6B6",
-
         fontFamily: "K2D-Regular",
         alignSelf:"center",
         fontSize:14,
         fontWeight:400,
-        zIndex:1
+        zIndex:1,
       },
       SummaryText:{
         color:"white",

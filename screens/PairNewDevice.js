@@ -25,7 +25,7 @@ function PaireNewDevice({
     navigation.navigate("Journey");
   }
   function showPersonalPageHandler() {
-    //navigation.navigate("Overall");
+    navigation.navigate("AccountPage");
   }
 
   function showCapturedImagePageHandler(){
