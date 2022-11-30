@@ -84,20 +84,20 @@ npm ls --depth=0
 Others are easy to understand by the naming of the file. Only listed the complicated ones:
 
 1. Component: Calendar View 
-   1. [Calendar Component](./components/UI/CalnedarButton.js)
-      1. [WeekSelection+DaySelection](../components/UI/Calendar.js)
-      2. [YearSelection](../components/UI/CalendarB.js)
-2. Component: [Controller](../components/ManageUders/Controller.js)
-   1. It will fetch the backend data to list the selected journey's alert information, which includes 7 types of alerts. Each alert is rendered in [component_alertCard](../components/UI/AlertCard.js)
-3. Component: [ScoreBoard](../components/UI/ScoreBoard.js)
+   1. [Calendar Component](https://github.com/mylifenetwork/GlassBoxAI-WebUI/blob/student/components/UI/Button.js)
+      1. [WeekSelection+DaySelection](https://github.com/mylifenetwork/GlassBoxAI-WebUI/blob/student/components/UI/Calendar.js)
+      2. [YearSelection](https://github.com/mylifenetwork/GlassBoxAI-WebUI/blob/student/components/UI/CalendarB.js)
+2. Component: [Controller](https://github.com/mylifenetwork/GlassBoxAI-WebUI/blob/student/components/ManageUsers/Controller.js)
+   1. It will fetch the backend data to list the selected journey's alert information, which includes 7 types of alerts. Each alert is rendered in [component_alertCard](https://github.com/mylifenetwork/GlassBoxAI-WebUI/blob/student/components/UI/AlertCard.js)
+3. Component: [ScoreBoard](https://github.com/mylifenetwork/GlassBoxAI-WebUI/blob/student/components/UI/ScoreBoard.js)
    1. This component will list all. 
 4. Page: Edit Profile 
-   1. [Component_Profile](../components/UI/Profile.js)
+   1. [Component_Profile](https://github.com/mylifenetwork/GlassBoxAI-WebUI/blob/student/components/UI/Profile.js)
       1. This will list the driver's personal information by using the input component to display each row, such as name and phone.
 
 ## Part C
 
-1. The firebase connection is settled in the [firebase.js](/firebase.js)
+1. The firebase connection is settled in the [https://github.com/mylifenetwork/GlassBoxAI-WebUI/blob/student/firebase.js](/firebase.js)
 
 2. Table structures
 
