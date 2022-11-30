@@ -87,7 +87,7 @@ Others are easy to understand by the naming of the file. Only listed the complic
    1. [Calendar Component](https://github.com/mylifenetwork/GlassBoxAI-WebUI/blob/student/components/UI/Button.js)
       1. [WeekSelection+DaySelection](https://github.com/mylifenetwork/GlassBoxAI-WebUI/blob/student/components/UI/Calendar.js)
       2. [YearSelection](https://github.com/mylifenetwork/GlassBoxAI-WebUI/blob/student/components/UI/CalendarB.js)
-2. Component: [Controller](https://github.com/mylifenetwork/GlassBoxAI-WebUI/blob/student/components/ManageUsers/Controller.js)
+2. Component: [Controller](https://github.com/mylifenetwork/GlassBoxAI-WebUI/blob/student/components/ManageUsers/controller.js)
    1. It will fetch the backend data to list the selected journey's alert information, which includes 7 types of alerts. Each alert is rendered in [component_alertCard](https://github.com/mylifenetwork/GlassBoxAI-WebUI/blob/student/components/UI/AlertCard.js)
 3. Component: [ScoreBoard](https://github.com/mylifenetwork/GlassBoxAI-WebUI/blob/student/components/UI/ScoreBoard.js)
    1. This component will list all. 
