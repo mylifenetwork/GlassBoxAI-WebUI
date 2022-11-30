@@ -84,7 +84,7 @@ npm ls --depth=0
 Others are easy to understand by the naming of the file. Only listed the complicated ones:
 
 1. Component: Calendar View 
-   1. [Calendar Component](GlassBoxAI-WebUI/tree/student/components/UI/CalnedarButton.js)
+   1. [Calendar Component](./components/UI/CalnedarButton.js)
       1. [WeekSelection+DaySelection](../components/UI/Calendar.js)
       2. [YearSelection](../components/UI/CalendarB.js)
 2. Component: [Controller](../components/ManageUders/Controller.js)
