@@ -204,7 +204,7 @@ customTitleContainer: {
 },
 customTitle: {
   fontSize: 16,
-  fontWeight: 'bold',
+  /*fontWeight: 'bold',*/
   color: '#00BBF2'
 }
 });

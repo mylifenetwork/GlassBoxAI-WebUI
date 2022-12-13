@@ -20,20 +20,28 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier":"com.example.GlassboxAIWeb-UI",
-      "config":{
-        "googleMapsApiKey":"AIzaSyBQS9yHLvLPhOyNTLQ179LkCci5XlZ-RS4"
-      }
-
+      "config": {
+        "googleMapsApiKey": "AIzaSyBQS9yHLvLPhOyNTLQ179LkCci5XlZ-RS4"
+      },
+      "bundleIdentifier": "com.ndz.glassboxAI"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "config": {
+        "googleMaps":{"apiKey": "AIzaSyCvTqnIFQjxd-6wXSHHkEmFUFC0mgBLCfY"}
+      },
+      "package": "com.ndz.glassboxAI"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b23b3e2e-6a0c-4940-ad57-e3d19d789592"
+      }
     }
   }
 }

@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
   titleText:{
     textAlign:"center",
     fontFamily: "K2D-Regular",
-    fontWeight:"300",
+    /*fontWeight:"300",*/
     fontSize:12,
 
   },
@@ -269,7 +269,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row', 
     color: "white",
     fontFamily: "K2D-Regular",
-    fontWeight:"700",
+    /*fontWeight:"700",*/
     fontSize:18,
   },
   card:{

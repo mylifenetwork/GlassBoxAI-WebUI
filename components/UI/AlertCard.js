@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
         //padding:5,
         position:"absolute",
         color: '#A1DADC',
-        fontWeight: 'bold',
+        /*fontWeight: 'bold',*/
         bottom:"150%",
         // marginRight:"25%",
         fontSize:16,
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
         paddingLeft:"32.5%",
         fontSize:14,
         fontFamily: "K2D-Regular",
-        fontWeight:700,
+        /*fontWeight:700,*/
     },
     bottomText:{
         textAlign:"center",
@@ -165,14 +165,14 @@ const styles = StyleSheet.create({
         paddingLeft:"2.5%",
         fontSize:14,
         fontFamily: "K2D-Regular",
-        fontWeight:700,
+        /*fontWeight:700,*/
     },
     container: {
         marginTop: 8,
     },
     buttonContainers:{
         felx: 1,
-        flexDirection: "col",
+        /*flexDirection: "col",*/
         alignContent:"space-between",
     },
     bottomContainers:{
@@ -186,14 +186,14 @@ const styles = StyleSheet.create({
         felx: 5,
         width: 37.25,
         height:37.25,
-        alignItems:"left",
+        /*alignItems:"left",*/
         marginBottom:"2.5%",
     },
     boxContainer:{
         felx: 1,
         width:345,
         height:156,
-        flexDirection:"col",
+        /*flexDirection:"col",*/
         // alignContent:"center",
         backgroundColor:"#5F616B",
         borderRadius:"8",
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
         marginRight:"2.5%",
         fontFamily: "K2D-Regular",
         color: "white",
-        fontWeight: 300,
+        /*fontWeight: 300,*/
         fontSize: 14,
         // alignContent:"center"
     },

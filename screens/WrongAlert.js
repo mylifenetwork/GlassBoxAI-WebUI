@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
         fontFamily: "K2D-Regular",
         fontSize:14,
         textAlign:"center",
-        fontWeight:300,
+        /*fontWeight:300,*/
         marginBottom:"5%"
       },
     verticalContainer:{
@@ -143,26 +143,26 @@ const styles = StyleSheet.create({
         color:"white",
         fontFamily: "K2D-Regular",
         fontSize:12,
-        fontWeight:300,
+        /*fontWeight:300,*/
       },
       SummaryTextA:{
         color:"#F6C142",
         fontFamily: "K2D-Regular",
         fontSize:12,
-        fontWeight:300,
+        /*fontWeight:300,*/
       },
       SummaryTextB:{
         color:"#EE404C",
         fontFamily: "K2D-Regular",
         fontSize:12,
-        fontWeight:300,
+        /*fontWeight:300,*/
       },
       caseText:{
         color:"white",
         fontFamily: "K2D-Regular",
         //position:"absolute",
         fontSize:18,
-        fontWeight:300,
+        /*fontWeight:300,*/
         zIndex:1
       },
       rectangleContainer:{
@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
     // textAlign:"left",
     marginLeft:"5%",
     marginBottom:"2.5%",
-    fontWeight:"700",
+    /*fontWeight:"700",*/
     fontSize:18,
   },
   location: {

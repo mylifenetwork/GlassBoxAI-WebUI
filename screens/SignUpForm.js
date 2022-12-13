@@ -8,6 +8,10 @@ function SignUpForm({navigation}) {
         navigation.navigate("signUp-OTP-Auth", userData);
 
     }
+    function navigatetoOverall(uid)
+    {
+      navigation.navigate("Overall");
+    }
 
 
   return (
@@ -25,7 +29,7 @@ function SignUpForm({navigation}) {
         
         <View style={styles.form}>
           {/* <Text style={styles.formInfo}>User Information</Text> */}
-          <SignUpUserForm signUpOTPAuth={signUpOTPAuthHandler}/>
+          <SignUpUserForm signUpOTPAuth={signUpOTPAuthHandler} navigatetoOverall={navigatetoOverall}/>
         </View>
       </View>
     </>

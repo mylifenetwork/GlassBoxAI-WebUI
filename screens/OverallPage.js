@@ -8,29 +8,175 @@ import MapComponent from "../components/UI/MapComponent";
 import DonutPie from "../components/UI/DonutPie";
 import MapView,{PROVIDER_GOOGLE,Polyline,Marker } from 'react-native-maps';
 import { ScrollableComponent } from "react-native-keyboard-aware-scroll-view";
+import { getDate } from "date-fns";
+import { getApp } from 'firebase/app';
+import { getAuth } from "firebase/auth";
+import { firebaseConfig, db } from "../config";
+import { collection, addDoc, doc, getDoc, getDocs, setDoc, query, where, orderBy, onSnapshot } from "firebase/firestore";
+import { useState, React, useEffect } from "react";
+import moment from 'moment';
+import * as Location from 'expo-location';
+import { useNavigation } from "@react-navigation/native";
+var cardlist=[]
+var summarydata = [{
+  trips: 0,
+  distances: 0,
+  time: 0,
+  alert: 0,
+  score:0,
+}]
+var refreshinterval=null;
+function OverallPage(){
 
-function OverallPage({navigation}){
-  const data = [{
-    percentage: 80,
-    color: 'tomato',
-    max: 100
-  }]
-  
+  const [summaryupdate, setsummaryupdate] = useState(0);
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+  const navigation = useNavigation();
 
-  function showOverallPageHandler() {
-    navigation.navigate("Overall");
-  }
-  function showMiddleButtonHandler() {
-    navigation.navigate("Journey");
-  }
-  function showPersonalPageHandler() {
-    //navigation.navigate("Overall");
-  }
+
+ 
   
     // const location = Geolocation.getCurrentPosition();
-  
-  
+     useEffect(() => {
+      (async () => {
+       
+        
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== 'granted') {
+          setErrorMsg('Permission to access location was denied');
+          return;
+        }
+        let location = await Location.getCurrentPositionAsync({});
+        console.log(location);
+        setLocation(location);
+        refreshinterval=setInterval(async() => {
+          let location = await Location.getCurrentPositionAsync({});
+          console.log(location)
+          setLocation(location);
+        }, 1000);
+       
+          navigation.addListener("blur", payload => {
+          console.log("overall blur");
+          clearInterval(refreshinterval);
+        });
+        navigation.addListener("focus", payload => {
+          console.log("overall focus");
+          clearInterval(refreshinterval);
+          refreshinterval=setInterval(async() => {
+            let location = await Location.getCurrentPositionAsync({});
+            console.log(location)
+            setLocation(location);
+          }, 1000);
+        });
+        getData();
+        
+      })();
+    }, []);
+    function showOverallPageHandler() {
+      navigation.navigate("Overall");
+    }
+    function showMiddleButtonHandler() {
+      navigation.navigate("Journey");
+    }
+    function showPersonalPageHandler() {
+      navigation.navigate("AccountPage");
+    }
+    const data = [{
+      percentage: 80,
+      color: 'tomato',
+      max: 100
+    }]
+  async function getData(){
+    cardlist=[]
+    const app = getApp();
+    const auth = getAuth(app);
+    const user = auth.currentUser;
+    var userid="";
+    if (user) {
+      console.log(user.uid);
+      //setUserid(user.uid);
+      userid=user.uid;
+    }
+    else {
+      console.log("not login");
+      return;
+    }
+
+    const docRef = doc(db, "users", userid);
+    const docSnap = await getDoc(docRef);
+    var license = ""
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+      license = docSnap.data().liscense
+      console.log(license);
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+    }
+    const journeyRef = collection(db, "Journey");
+    // Create a query against the collection.
+    const q = query(journeyRef, where("license", "==", license));
+    const querySnapshot = await getDocs(q);
+    var hasrunning= false;
+    var alltrip=0
+    var alltime=0;
+    var alldistance=0
+    var allalerts=0
+    var allscore=0
+    var index=0;
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      //console.log(doc.id, " => ", doc.data());
+      index++;
+      var item=doc.data();
+      var score=parseInt(item.score);
+      allscore+=score;
+      if(score>0&&score<60)
+        item.color="red";
+      else if(score>60&&score<80)
+        item.color="yellow";
+      else
+        item.color="green";
+      console.log(item.startTime)
+      item.alertnum=0;
+      item.alertnum+=item.alerts.acceleration.alert;
+      item.alertnum+=item.alerts.barking.alert;
+      item.alertnum+=item.alerts.cornering.alert;
+      item.alertnum+=item.alerts.distanceWithinCars.alert;
+      item.alertnum+=item.alerts.speeding.alert;
+      item.alertnum+=item.alerts.withinLanes.alert;
+      var timedelta=0;
+      if(item.endTime!=null)
+      timedelta=((item.endTime.seconds-item.startTime.seconds)/60).toFixed(2).toString();
+    
+      alltrip++;
+      
+      if(item.distance!=null)
+      alldistance+=(item.distance/1000)
+      allalerts+=item.alertnum
+      if(item.endTime!=0)
+      item.during=((item.endTime.seconds-item.startTime.seconds)/3600);
+      else
+      item.during=0;
+      alltime+=item.during;
+      cardlist.push(item);
+    }
+    );
+    if(cardlist.length>0)
+    {
+      cardlist.sort((a, b) => b.startTime.seconds-a.startTime.seconds)
+      console.log(cardlist[0])
+      alldistance=alldistance.toFixed(2).toString();
+      summarydata[0].trips=alltrip;
+      summarydata[0].distances=alldistance;
+      summarydata[0].time=alltime.toFixed(2).toString();
+      summarydata[0].alert=allalerts;
+      summarydata[0].score=allscore/index;
+    }
+    setsummaryupdate(summaryupdate+1);
+  }
   return (
+    
     <> 
       <StatusBar barStyle="light-content" />
        
@@ -38,7 +184,7 @@ function OverallPage({navigation}){
         
         <ScrollView>
 <View style={styles.chart}>
-          <DonutPie></DonutPie>
+          <DonutPie scores={summarydata[0].score.toFixed(2).toString()}></DonutPie>
         </View>
         <View style={styles.formHeader}>
         
@@ -50,15 +196,47 @@ function OverallPage({navigation}){
         </View>
         <View style={styles.locationContainer}>
           <Text style={styles.text}>Current Location</Text>
-          <Text style={styles.location}>2km Wah · Chai Car Park</Text>
-          <MapView
+          <Text style={styles.location}>LOCATING.....</Text>
+          {!location?null: <MapView
             provider={PROVIDER_GOOGLE} // remove if not using Google Maps
             style={styles.mapContainer}
-            initialRegion={{
-                latitude:22.279909,
-                longitude:114.173729}}
+            region={ !location
+              ? {
+                latitude: 22.279909,
+                  longitude: 114.173729,
+                  latitudeDelta: 0.005,
+                  longitudeDelta: 0.005,
+                  
+                }
+              : {
+                  latitude: location.coords.latitude,
+                  longitude: location.coords.longitude,
+                  latitudeDelta: 0.025,
+                  longitudeDelta: 0.025,
+                }}
           >
-            <Marker coordinate = {{latitude: 22.279909,longitude: 114.173729}}
+            <Marker
+          coordinate={
+            !location
+              ? {
+                latitude: 22.279909,
+                  longitude: 114.173729,
+                  latitudeDelta: 0.0922,
+                  longitudeDelta: 0.0421,
+                  
+                }
+              : {
+                  latitude: location.coords.latitude,
+                  longitude: location.coords.longitude,
+                
+                }
+                
+          } pinColor = {"black"} // any color
+          title={"title"}
+          description={"description"}>
+             <Image style={styles.marker} source={require("../assets/Images/location-pin.png")}></Image>
+             </Marker>
+            {/* <Marker coordinate = {{latitude: 22.279909,longitude: 114.173729}}
 
             pinColor = {"black"} // any color
             title={"title"}
@@ -66,16 +244,18 @@ function OverallPage({navigation}){
             >
               <Image style={styles.marker} source={require("../assets/Images/location-pin.png")}></Image>
 
-            </Marker>
+            </Marker> */}
 
           
-          </MapView>
-
+          </MapView>}
+        
             <View style={styles.totalContainer}>
-           <Text style={styles.text}>Total journey: 10</Text>
-            <TotalTime></TotalTime>
-            <LastJourney></LastJourney>
+           <Text style={styles.text}>Total journey: {summarydata[0].trips.toString()}</Text>
+            <TotalTime  hours={summarydata[0].time.toString()} distance={summarydata[0].distances.toString()}></TotalTime>
+            <LastJourney startDate={cardlist.length>0?moment(cardlist[0].startTime.seconds*1000).format("YYYY MM DD | HH:mm"):null} endDate={cardlist.length>0?moment(cardlist[0].endTime.seconds*1000).format("YYYY MM DD | HH:mm"):null} 
+            duration={cardlist.length>0?cardlist[0].during.toFixed(2).toString()+" hour":null} distance={cardlist.length>0?((cardlist[0].distance)/1000).toFixed(2).toString()+" km":null}></LastJourney>
            </View>
+           
 
 
         </View>
@@ -113,8 +293,8 @@ const styles = StyleSheet.create({
   },
   mapContainer:{
     //width:317,
-    marginBottom:"85%",
-    transform:[{scaleX:0.9},{scaleY:0.5}],
+    height:"40%",
+    transform:[{scaleX:1},{scaleY:1}],
     borderRadius:12,
     ...StyleSheet.absoluteFillObject,
 
@@ -122,7 +302,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#353948",
-    justifyContent:'flex-start'
+    justifyContent:'flex-start',
   },
   formHeader: {
     flex: 1,
@@ -142,7 +322,7 @@ const styles = StyleSheet.create({
   totalContainer:{
     flex:1,
     justifyContent:"flex-start",
-    marginTop:"45%"
+    marginTop:"60%"
   },
   form: {
     flex: 5,
@@ -197,7 +377,7 @@ const styles = StyleSheet.create({
     // textAlign:"left",
     marginLeft:"5%",
     marginBottom:"2.5%",
-    fontWeight:"700",
+   
     fontSize:18,
   },
   location: {
@@ -206,7 +386,7 @@ const styles = StyleSheet.create({
     fontFamily: "K2D-Regular",
     // textAlign:"left",
     marginLeft:"5%",
-    fontSize:14,
+    fontSize:28,
   },
   signContainer:{
     felx: 1,

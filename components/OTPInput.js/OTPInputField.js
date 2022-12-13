@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   },
   otpInputText: {
     fontSize: 22,
-    fontWeight: "bold",
+    /*fontWeight: "bold",*/
     textAlign: "center",
     color: "white",
   },

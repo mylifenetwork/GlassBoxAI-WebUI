@@ -1,6 +1,7 @@
 import { View, StyleSheet, Alert,Image,Text } from "react-native";
 import { useState } from "react";
 import { GlobalStyles } from "../../styles/styles";
+import { width } from "react-native-daterange-picker/src/modules";
 
 function TotalTime({journey=10,hours=4.2,distance=105}) {
   return (
@@ -45,7 +46,8 @@ const styles = StyleSheet.create({
         //justifyContent: 'space-between',
         alignItems: "center",
         backgroundColor:"#5F616B",
-        borderRadius:"8"
+        borderRadius:8,
+        width:"45%"
     },
     titleContainer:{
         marginBottom:"5%",
@@ -54,7 +56,7 @@ const styles = StyleSheet.create({
         marginRight:"5%",
         fontFamily: "K2D-Regular",
         color: "white",
-        fontWeight: 700,
+        /*fontWeight: 700,*/
         fontSize: 18,
     },
     roleContainer: {

@@ -96,7 +96,7 @@ export default ScoreCard;
 const styles = StyleSheet.create({
     middleContainer:{
         flex:1,
-        flexDirection:"col",
+        /*flexDirection:"col",*/
         alignItems:"flex-start",
         marginLeft:"5%"
     },
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
         marginLeft:"5%",
         fontFamily: "K2D-Regular",
         color: "white",
-        fontWeight: 500,
+        /*fontWeight: 500,*/
         fontSize: 16,
         width:"25%",
     },
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
         marginLeft:"5%",
         fontFamily: "K2D-Regular",
         color: "white",
-        fontWeight: 300,
+        /*fontWeight: 300,*/
         fontSize: 13,
         
     }

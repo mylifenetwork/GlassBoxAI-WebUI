@@ -28,9 +28,9 @@ const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
 export default function App() {
-  const [fontsLoaded] = useFonts({
-    "K2D-Regular": require("./assets/fonts/K2D-Regular.ttf"),
-    "K2D-Bold": require("./assets/fonts/K2D-Bold.ttf"),
+  const  [fontsLoaded] = useFonts({
+    'K2D-Regular': require("./assets/fonts/K2D-Regular.ttf"),
+    'K2D-Bold': require("./assets/fonts/K2D-Bold.ttf"),
   });
 
   if (!fontsLoaded) {

@@ -3,12 +3,13 @@ import { useState,React } from "react";
 import { GlobalStyles } from "../../styles/styles";
 import Button from "./Button";
 import { useNavigation } from "@react-navigation/native";
+import { width } from "react-native-daterange-picker/src/modules";
 
 function TotalTime(
     {startDate="15 JUL, 2022",
     endDate="15 JUL, 2022",
-    startTime="15:35",
-    endTime="16:28",
+    //startTime="15:35",
+    //endTime="16:28",
     duration="00:53:10",
     distance="39"
     }) {
@@ -31,11 +32,13 @@ function TotalTime(
             <View style={styles.colContainer}>
                 <View style={styles.rowContainer}>
                     <Text style={styles.text}>Start</Text>
-                    <Text style={styles.detailText}>{startDate} | {startTime}</Text>
+                    {/* <Text style={styles.detailText}>{startDate} | {startTime}</Text> */}
+                    <Text style={styles.detailText}>{startDate}</Text>
                 </View>
-                <View style={styles.rowContainer}>
+                <View style={styles.rowContainer} >
                     <Text style={styles.text}>End</Text>
-                    <Text style={styles.detailText}>{endDate} | {endTime}</Text> 
+                    {/* <Text style={styles.detailText}>{endDate} | {endTime}</Text>  */}
+                    <Text style={styles.detailText}>{endDate}</Text>
                 </View>
 
                 <View style={styles.rowContainer}>
@@ -60,6 +63,7 @@ function TotalTime(
                 <Text style={styles.text}></Text>
                 <Text style={styles.text}></Text> 
             </View>
+           
             <View style={styles.colContainer}>
                 <Text style={styles.text}></Text>
                 <Text style={styles.text}></Text> 
@@ -88,7 +92,7 @@ const styles = StyleSheet.create({
         //justifyContent: "space-evenly",
         alignItems: "flex-start",
         marginLeft:"5%",
-        width:"120%",
+        width:"100%",
         position:"relative",
         // marginLeft:"10%",
         // marginRight:"10%",
@@ -98,7 +102,8 @@ const styles = StyleSheet.create({
         //justifyContent: 'space-between',
         //alignItems: "center",
         backgroundColor:"#5F616B",
-        borderRadius:"8"
+        borderRadius:8,
+        width:"90%"
     },
     titleContainer:{
         marginBottom:"2.5%",
@@ -107,7 +112,7 @@ const styles = StyleSheet.create({
         marginRight:"2.5%",
         fontFamily: "K2D-Regular",
         color: "white",
-        fontWeight: 700,
+        /*fontWeight: 700,*/
         fontSize: 18,
     },
     text:{
@@ -117,15 +122,15 @@ const styles = StyleSheet.create({
         marginRight:"5%",
         fontFamily: "K2D-Regular",
         color: "white",
-        fontWeight: 300,
+        /*fontWeight: 300,*/
         fontSize: 14,
     },
     detailText:{
         fontFamily: "K2D-Regular",
         marginTop:"5%",
         color: "white",
-        marginLeft:"5%",
-        fontWeight: 300,
+        marginLeft:"0%",
+        fontWeight: "300",
         fontSize: 14,
         left:"100%",
         position:"absolute",
@@ -135,6 +140,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         // justifyContent:"space-",
         alignContent:"stretch",
+        
     },
     colContainer: {
         flexDirection: "column",

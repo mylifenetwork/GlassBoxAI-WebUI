@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
       fontFamily: "K2D-Regular",
       color: "white",
       fontSize: 16,
-      fontWeight:300,
+      /*fontWeight:300,*/
       textDecorationLine: 'underline',
       marginTop:"5%"
     },
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
         alignSelf:"center",
         color:"white",
         fontFamily: "K2D-Regular",
-        fontWeight:700,
+        /*fontWeight:700,*/
         fontSize:20,
         marginTop:"15%",
     },
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
         fontFamily: "K2D-Regular",
         color: "white",
         fontSize: 14,
-        fontWeight:300,
+        /*fontWeight:300,*/
     },
     statusText: {
         fontFamily: "K2D-Regular",
@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
         // textAlign:"left",
         marginLeft:"5%",
         marginBottom:"2.5%",
-        fontWeight:"700",
+        /*fontWeight:"700",*/
         fontSize:18,
     },
     signContainer:{
@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
     subtitleText:{
         color:"#6A6C74",
         fontFamily: "K2D-Regular",
-        fontWeight:"300",
+        /*fontWeight:"300",*/
         marginLeft:"-50%",
         marginTop:"15%",
         fontSize:16,

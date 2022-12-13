@@ -1,15 +1,40 @@
 import { View, StyleSheet, Alert } from "react-native";
-import { useState } from "react";
+import { useState ,useRef} from "react";
 import Input from "./Input";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Button from "../UI/Button";
-
-function LoginUserForm() {
+import { initializeApp, getApp } from 'firebase/app';
+import { getAuth, createUserWithEmailAndPassword,signOut ,RecaptchaVerifier,PhoneAuthProvider} from "firebase/auth";
+import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
+import { firebaseConfig } from "../../config";
+const app = getApp();
+const auth = getAuth(app);
+function LoginUserForm({ signUpOTPAuth}) {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [vehicleLicense, setvehicleLicense] = useState("");
-
-  function loginUserHandler() {
-
+  const [verificationId, setVerificationId]=useState("");
+  const recaptchaVerifier = useRef(null);
+  async function loginUserHandler() {
+    const userData={
+      phoneNumber:phoneNumber,
+      forlogin:1,
+      verificationId:verificationId,
+    }
+    try {
+      console.log("send")
+      const phoneProvider = new PhoneAuthProvider(auth);
+      const verificationId = await phoneProvider.verifyPhoneNumber(
+        phoneNumber,
+        recaptchaVerifier.current
+      );
+      console.log("vid:"+verificationId)
+      //setVerificationId(verificationId);
+      userData.verificationId=verificationId;
+      alert('Verification code has been sent to your phone.')
+      signUpOTPAuth(userData)
+    } catch (err) {
+      alert(`Error: ${err.message}`);
+    }
   }; 
 
   
@@ -24,6 +49,12 @@ function LoginUserForm() {
   return (
     <KeyboardAwareScrollView>
       <View>
+      <FirebaseRecaptchaVerifierModal
+          ref={recaptchaVerifier}
+          firebaseConfig={firebaseConfig}
+        >
+
+        </FirebaseRecaptchaVerifierModal>
        
         <Input
           iconConfig={{
@@ -38,7 +69,7 @@ function LoginUserForm() {
             value: phoneNumber,
           }}
         />
-        
+{/*         
         <Input
           iconConfig={{
             name: "car-outline",
@@ -51,7 +82,7 @@ function LoginUserForm() {
             onChangeText: vehicleLicenseChangedHandler,
             value: vehicleLicense,
           }}
-        />
+        /> */}
 
        
       </View>

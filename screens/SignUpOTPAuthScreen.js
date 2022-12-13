@@ -4,19 +4,27 @@ import {useState, useRef, useEffect} from 'react'
 import OTPInputField from "../components/OTPInput.js/OTPInputField";
 import Button from "../components/UI/Button";
 import { storeUser } from "../http/http";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged} from "firebase/auth";
 import { firebaseConfig,db } from "../config";
 // import { doc, setDoc, Timestamp } from "firebase/firestore"; 
 import firebase from "firebase/compat/app";
-import { collection, addDoc,doc } from "firebase/firestore"; 
+import { collection, addDoc,doc ,getDoc, setDoc} from "firebase/firestore"; 
 import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
 
 function SignUpOTPAuthScreen({route, navigation }) {
-  console.log(route.params.verificationId);
+console.log(route.params.verificationId);
 const [code, setCode] = useState("");
 const [pinReady, setPinReady] = useState(false);
+const [uid, setUid] = useState("");
+const [forlogin, setforlogin] = useState(0);
 const MAX_CODE_LENGTH = 6;
-
+useEffect(() => {
+  if(route.params.login!=null&&route.params.login==1)
+  {
+    setforlogin(1)
+    console.log("for login")
+  }
+});
 
 // this function will authenticate OTP that is generated from the backend 
 function authenticateOTP() {
@@ -35,36 +43,120 @@ function addNewUserHandler() {
 }
 
 
-const sendData=async ()=>{
-  await addDoc(collection(db,"users"),{
-      nname:route.params.name,
-      email:route.params.email,
-      role:route.params.role,
-      phoneNumber:route.params.phoneNumber,
-      liscense: route.params.vehicleLicense,
-  });
+const sendData=async (uid)=>{
+  // await addDoc(collection(db,"users"),{
+  //     nname:route.params.name,
+  //     email:route.params.email,
+  //     role:route.params.role,
+  //     phoneNumber:route.params.phoneNumber,
+  //     liscense: route.params.vehicleLicense,
+  // });
+const docRef = doc(db,"users",uid);
+const docSnap = await getDoc(docRef);
+
+if (docSnap.exists()) {
+  console.log("Document data:", docSnap.data());
+} else {
+  // doc.data() will be undefined in this case
+  console.log("No such document!");
+  var docData={
+    nname:route.params.name,
+    email:route.params.email,
+    role:route.params.role,
+    phoneNumber:route.params.phoneNumber,
+    liscense: route.params.vehicleLicense,
+  }
+  await setDoc(doc(db,"users",uid), docData);
+}
 
 }
   
 
-const confirmCode=()=>{
+const confirmCode=async ()=>{
   const credential = firebase.auth.PhoneAuthProvider.credential(
     route.params.verificationId,
     code
   );
   console.log(route.params);
-  firebase.auth().signInWithCredential(credential)
-  .then(()=>{
-    setCode ("");
+  await firebase.auth().signInWithCredential(credential)
+  .then(async ()=>{
+    console.log("login")
   })
   .catch((error)=>{
     //show an alert msg
     alert(error);
   })
-  sendData();
-  Alert.alert("login successful!")
-  navigation.navigate("Overall");
+  const auth = getAuth();
+  var goon=0;
+  onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
+    const uid = user.uid;
+    if (uid!=""&&goon==0) {
+      goon=1
+      // User is signed in.
+      setUid(uid)
+    
+      console.log("sign in uid:"+uid)
+      setCode ("");
+      sendData(uid);
+      Alert.alert("login successful!");
+      navigation.navigate("Overall");
+      return;
+     
+    }
+   
+    // ...
+  } else {
+    // User is signed out
+    // ...
+    console.log("sign out");
+  }
+});
 }
+const confirmCodelogin=async ()=>{
+  const credential = firebase.auth.PhoneAuthProvider.credential(
+    route.params.verificationId,
+    code
+  );
+  console.log(route.params);
+  await firebase.auth().signInWithCredential(credential)
+  .then(async ()=>{
+    console.log("login")
+  })
+  .catch((error)=>{
+    //show an alert msg
+    alert(error);
+  })
+  const auth = getAuth();
+  var goon=0;
+  onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
+    const uid = user.uid;
+    if (uid!=""&&goon==0) {
+      goon=1
+      // User is signed in.
+      setUid(user.uid)
+      Alert.alert("login successful!");
+      navigation.navigate("Overall");
+      return;
+     
+    }
+   
+    // ...
+  } else {
+    // User is signed out
+    // ...
+    console.log("sign out");
+  }
+});
+}
+
+  
+
 
 
  
@@ -90,7 +182,7 @@ const confirmCode=()=>{
           
         </Pressable>
 
-        <Button onPress={confirmCode} customStyle={styles.buttonStyle}>Done</Button>
+        <Button onPress={forlogin?confirmCodelogin:confirmCode} customStyle={styles.buttonStyle}>Done</Button>
       </View>
     </>
   );

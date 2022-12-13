@@ -101,7 +101,7 @@ export default ModalPending;
     title:{
         color: "black",
         fontFamily: "K2D-Regular",
-        fontWeight:"700",
+        /*fontWeight:"700",*/
         fontSize:22,
         marginBottom:"2.5%",
         textAlign:"center"
@@ -133,13 +133,13 @@ export default ModalPending;
     },
     signContainer:{
         fontFamily: "K2D-Regular",
-        fontWeight:"500",
+        /*fontWeight:"500",*/
         fontSize:20,
         marginTop:"2.5%"
     },
     detail:{
         fontFamily: "K2D-Regular",
-        fontWeight:"300",
+        /*fontWeight:"300",*/
         fontSize:14,
         marginTop:"2.5%",
         marginLeft:"20%",

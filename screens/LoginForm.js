@@ -4,7 +4,10 @@ import { GlobalStyles } from "../styles/styles";
 
 function LoginForm({ navigation }) {
   
+  function signUpOTPAuthHandler(userData) {
+    navigation.navigate("signUp-OTP-Auth", userData);
 
+}
   return (
     <>
       <StatusBar barStyle="light-content" />
@@ -20,7 +23,7 @@ function LoginForm({ navigation }) {
 
         <View style={styles.form}>
           <Text style={styles.formInfo}>Login</Text>
-          <LoginUserForm/>
+          <LoginUserForm signUpOTPAuth={signUpOTPAuthHandler}/>
         </View>
       </View>
     </>

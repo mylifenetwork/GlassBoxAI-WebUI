@@ -137,13 +137,13 @@ export default function Donut({
 
 const styles = StyleSheet.create({
   text: { 
-    fontWeight: '900', 
+    /*fontWeight: 900,*/ 
     textAlign: 'center' 
   },
   scores:{
     textAlign:'center',
     color:'white',
     fontFamily: "K2D-Regular",
-    fontWeight:'700',
+    /*fontWeight:700,*/
   },
 });

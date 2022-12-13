@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
   cornerText:{
     color: "white",
     fontFamily: "K2D-Regular",
-    fontWeight:"300",
+    /*fontWeight:"300",*/
     fontSize:14,
     zIndex:100,
     marginTop:"-300%"
@@ -216,14 +216,14 @@ const styles = StyleSheet.create({
   content:{
     color: "white",
     fontFamily: "K2D-Regular",
-    fontWeight:"300",
+    /*fontWeight:"300",*/
     fontSize:14,
     marginLeft:"2.5%"
   },
   title:{
     color: "white",
     fontFamily: "K2D-Regular",
-    fontWeight:"700",
+    /*fontWeight:"700",*/
     fontSize:14,
     // marginLeft:"2.5%"
   },
@@ -296,7 +296,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row', 
     color: "white",
     fontFamily: "K2D-Regular",
-    fontWeight:"700",
+    /*fontWeight:"700",*/
     fontSize:18,
   },
   card:{

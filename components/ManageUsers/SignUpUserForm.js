@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Alert } from "react-native";
+import { View, Text, StyleSheet, Alert,TouchableOpacity } from "react-native";
 import { useState,useRef } from "react";
 import RadioButton from "../UI/RadioButton";
 import Input from "./Input";
@@ -6,13 +6,17 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import Button from "../UI/Button";
 
 import SignUpFormValidation from "../../util/SignUpFormValidation";
-import { getAuth, createUserWithEmailAndPassword,signOut } from "firebase/auth";
-import { firebaseConfig } from "../../config";
+import { getAuth, createUserWithEmailAndPassword,signOut ,RecaptchaVerifier,PhoneAuthProvider} from "firebase/auth";
+import { firebaseConfig ,db} from "../../config";
 import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
 import firebase from "firebase/compat/app";
 import React from "react";
-
-function SignUpUserForm({ signUpOTPAuth }) {
+import { signInWithPhoneNumber } from "firebase/auth";
+import { initializeApp, getApp } from 'firebase/app';
+import { collection, addDoc,doc ,getDoc,getDocs, setDoc,query, where} from "firebase/firestore"; 
+const app = getApp();
+const auth = getAuth(app);
+function SignUpUserForm({ signUpOTPAuth ,navigatetoOverall}) {
   const [userName, setUserName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
@@ -22,39 +26,91 @@ function SignUpUserForm({ signUpOTPAuth }) {
   const [privateUser, setPrivateUser] = useState(false);
   const [commercialOwner, setCommercialOwner] = useState(false);
   const [commercialDriver, setCommercialDriver] = useState(false);
+  const [message, showMessage] = React.useState();
 
   const [verificationId, setVerificationId]=useState("");
   const [code,setCode]=useState("");
   const recaptchaVerifier = useRef(null);
-
-  function signUpFormSubmissionHandler() {
+  //const auth = getAuth();
+  const user = auth.currentUser;
+  if(user)
+  {
+    console.log("have login");
+    alert("you have already login");
+    console.log(user.uid)
+    navigatetoOverall(user.uid)
+  }
+  else
+  {
+    console.log("not login");
+  }
+  async function signUpFormSubmissionHandler() {
     const userData = {
       name: userName,
       phoneNumber: phoneNumber,
       email: email,
       vehicleLicense: vehicleLicense,
       verificationId:verificationId,
+      //confirmationResult:confirmationResult,
       role: checkUserRole(),
     };
-
     const formInputsAreValid = SignUpFormValidation(userData);
 
     if (!formInputsAreValid) {
       Alert.alert("Inavlid Inputs", "Please check your inputs");
       return;
     }
-
+    const userRef = collection(db, "users");
+    // Create a query against the collection.
+    const q = query(userRef, where("liscense", "==", vehicleLicense));
+    const querySnapshot = await getDocs(q);
+    var isused=false;
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, " => ", doc.data());
+      isused=true;
+      
+    });
+    if(isused)
+    {
+      alert("license has been used");
+      return;
+    }
+    //const auth = getAuth();
+    // const appVerifier = recaptchaVerifier;
+    // signInWithPhoneNumber(auth, phoneNumber, appVerifier)
+    //     .then((confirmationResult) => {
+    //       // SMS sent. Prompt user to type the code from the message, then sign the
+    //       // user in with confirmationResult.confirm(code).
+    //       //window.confirmationResult = confirmationResult;
+    //       var verificationId=confirmationResult.verificationId;
+    //       console.log("vid:"+verificationId);
+    //       setVerificationId(verificationId);
+    //       // ...
+    //     }).catch((error) => {
+    //       // Error; SMS not sent
+    //       // ...
+    //     }).then(()=>{signUpOTPAuth(userData)})
     
     // firebase.auth().settings.appVerificationDisabledForTesting = true;
     // var appVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
-    const phoneProvider = new firebase.auth.PhoneAuthProvider();
-    phoneProvider
-      .verifyPhoneNumber(phoneNumber,recaptchaVerifier.current)
-      .then(setVerificationId);
-      setPhoneNumber("");
-      console.log("vid",verificationId);
-      resetInputs();
-      signUpOTPAuth(userData);
+    try {
+      console.log("send")
+      const phoneProvider = new PhoneAuthProvider(auth);
+      const verificationId = await phoneProvider.verifyPhoneNumber(
+        phoneNumber,
+        recaptchaVerifier.current
+      );
+      console.log("vid:"+verificationId)
+      //setVerificationId(verificationId);
+      userData.verificationId=verificationId;
+      showMessage({
+        text: 'Verification code has been sent to your phone.',
+      })
+      signUpOTPAuth(userData)
+    } catch (err) {
+      showMessage({ text: `Error: ${err.message}`, color: 'red' });
+    }
     
   }
   const confirmCode=()=>{
@@ -122,7 +178,8 @@ function SignUpUserForm({ signUpOTPAuth }) {
   function emailChangedHandler(enteredEmail) {
     setEmail(enteredEmail);
   }
-  function vehicleLicenseChangedHandler(enteredLicenseNum) {
+  async function vehicleLicenseChangedHandler(enteredLicenseNum) {
+    
     setvehicleLicense(enteredLicenseNum);
   }
   // function passwordChangeHandler(enteredPassword){
@@ -133,6 +190,7 @@ function SignUpUserForm({ signUpOTPAuth }) {
   return (
     <KeyboardAwareScrollView>
       <View>
+      
         <FirebaseRecaptchaVerifierModal
           ref={recaptchaVerifier}
           firebaseConfig={firebaseConfig}
@@ -192,6 +250,7 @@ function SignUpUserForm({ signUpOTPAuth }) {
             value: vehicleLicense,
           }}
         />
+       
 
         <View style={styles.container}>
           <Text style={styles.roleContainer}>Select your role</Text>
@@ -216,7 +275,26 @@ function SignUpUserForm({ signUpOTPAuth }) {
       </View>
       <Button onPress={signUpFormSubmissionHandler}>Send Verification Code</Button>
       {/* <Button onPress={confirmCode}>Confirm Code</Button> */}
+      {message ? (
+        <TouchableOpacity
+          style={[
+            StyleSheet.absoluteFill,
+            { backgroundColor: 0xffffffee, justifyContent: 'center' },
+          ]}
+          onPress={() => showMessage(undefined)}>
+          <Text
+            style={{
+              color: message.color || 'blue',
+              fontSize: 17,
+              textAlign: 'center',
+              margin: 20,
+            }}>
+            {message.text}
+          </Text>
+        </TouchableOpacity>
+      ) : undefined}
     </KeyboardAwareScrollView>
+    
   );
 }
 

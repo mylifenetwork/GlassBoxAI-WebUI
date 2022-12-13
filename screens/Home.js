@@ -1,16 +1,64 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import Button from "../components/UI/Button";
 import { GlobalStyles } from "../styles/styles";
+import { initializeApp, getApp } from 'firebase/app';
+import { getAuth, onAuthStateChanged} from "firebase/auth";
+import { useState } from "react";
+import { useEffect } from "react";
+
 
 function Home({ navigation }) {
+  const [isLogin,setIsLOgin]=useState(-1)
+  const auth = getAuth();
+ 
+  useEffect(() => {
+    const auth = getAuth();
+    var goon=0;
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        const uid = user.uid;
+        if (uid!=""&&goon==0) {
+          goon=1
+          // User is signed in.
+          if(user)
+    {
+      console.log("have login");
+      setIsLOgin(1);
+    }
+    else
+    {
+      console.log("not login");
+      setIsLOgin(0)
+    }
+          return;
+         
+        }
+       
+        // ...
+      } else {
+        // User is signed out
+        // ...
+        console.log("sign out");
+        setIsLOgin(0)
+      }
+    });
+   
+   
+  });
+
   function showSignUpFormHandler() {
     navigation.navigate("SignUp");
   }
 
   function showLoginFormHandler() {
-    //navigation.navigate("Login");
+    if(isLogin==1)
+    navigation.navigate("Overall");
+    else if(isLogin==0)
+    navigation.navigate("Login");
     //navigation.navigate("Overall");
-    navigation.navigate("Journey");
+   
   }
 
   return (
@@ -30,7 +78,8 @@ function Home({ navigation }) {
           onPress={showLoginFormHandler}
           mode="flat"
         >
-          Returning User
+          {isLogin!=-1?isLogin?"Returning User":"Login":"loading"}
+          
         </Button>
       </View>
       <View style={styles.footerContainer}>

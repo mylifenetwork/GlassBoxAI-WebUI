@@ -44,8 +44,9 @@ export default function DonutPie({
      endAngle= {ending}>
       <View style = {styles.textContainer}>
          <Text style={styles.text}>{scores}</Text>
-         <Text style={styles.infoText}>Lastest update</Text>
-         <Text style={styles.infoText}>{date}</Text>
+         <Text style={styles.infoText}>overall score</Text>
+         {/* <Text style={styles.infoText}>Lastest update</Text>
+         <Text style={styles.infoText}>{date}</Text> */}
       </View>
      </PieChart>
     </>
@@ -67,19 +68,19 @@ const styles = StyleSheet.create({
     fontSize:45,
     color:'white',
     fontFamily: "K2D-Regular",
-    fontWeight:700,
+    /*fontWeight:700,*/
   },
   scores:{
     textAlign:'center',
     color:'white',
     fontFamily: "K2D-Regular",
-    fontWeight:'700',
+    /*fontWeight:700,*/
   },
   infoText:{
     fontSize:14,
     color:'white',
     fontFamily: "K2D-Regular",
-    fontWeight:300,
+    /*fontWeight:300,*/
 
   }
 });
